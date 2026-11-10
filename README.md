@@ -7,7 +7,18 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 - `index.html` — estructura y contenido del sitio.
 - `style.css` — estilos, paleta institucional y diseño adaptable.
 - `main.js` — interactividad (menú móvil, evangelio del día, galería, formularios y modales).
-- `img/` — fotografías, logo parroquial, logo de Comunicaciones y favicon.
+- `manifest.webmanifest` — configuración de la aplicación web instalable (PWA).
+- `img/` — fotografías, logo parroquial, logo de Comunicaciones, favicon e iconos PWA.
+
+## Accesibilidad y navegación
+
+- Enlace “Saltar al contenido principal”, foco visible y soporte para movimiento reducido.
+- Menú móvil y modales operables con teclado (Escape, tabulación contenida y retorno del foco).
+- Navegación con la sección activa resaltada automáticamente.
+
+## Formularios
+
+Los formularios de contacto y de intenciones de misa preparan un correo dirigido al despacho parroquial con los datos ingresados. Al enviarlos, se abre la aplicación de correo del usuario para completar el envío; el sitio no almacena datos en un servidor.
 
 ## Ejecutar localmente
 

@@ -4,23 +4,76 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parroquia San Isidro Labrador | Maimón - Diócesis de La Vega</title>
-  <meta name="description" content="Sitio Oficial de la Parroquia San Isidro Labrador, Maimón, Monseñor Nouel, República Dominicana. Inspirado en la sobriedad y solemnidad de la Santa Sede Vaticana.">
+  <meta name="description" content="Sitio oficial de la Parroquia San Isidro Labrador, Maimón, Provincia Monseñor Nouel, República Dominicana. Horarios de misa, evangelio del día, sacramentos, galería y contacto del despacho parroquial.">
+  <meta name="keywords" content="Parroquia San Isidro Labrador, Maimón, Monseñor Nouel, Diócesis de La Vega, misa, evangelio, sacramentos, República Dominicana">
+  <meta name="author" content="Parroquia San Isidro Labrador de Maimón">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#06466f">
   <link rel="icon" type="image/png" href="img/favicon-parroquia.png">
   <link rel="apple-touch-icon" href="img/favicon-parroquia.png">
+  <link rel="manifest" href="manifest.webmanifest">
+
+  <!-- Open Graph / Redes sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Parroquia San Isidro Labrador de Maimón">
+  <meta property="og:locale" content="es_DO">
+  <meta property="og:title" content="Parroquia San Isidro Labrador | Maimón - Diócesis de La Vega">
+  <meta property="og:description" content="Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón. Horarios de misa, evangelio del día, sacramentos y contacto.">
+  <meta property="og:image" content="img/logo-parroquia.png">
+  <meta property="og:image:alt" content="Logo de la Parroquia San Isidro Labrador">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Parroquia San Isidro Labrador | Maimón">
+  <meta name="twitter:description" content="Horarios de misa, evangelio del día, sacramentos y contacto del despacho parroquial de Maimón.">
+  <meta name="twitter:image" content="img/logo-parroquia.png">
 
   <!-- Fuentes Tipográficas Clásicas Pontificias -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome para Iconografía Sacra y Heraldica -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <!-- Datos estructurados para buscadores -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Church",
+    "name": "Parroquia San Isidro Labrador",
+    "alternateName": "Parroquia San Isidro Labrador de Maimón",
+    "description": "Parroquia católica de la Diócesis de La Vega, al servicio del pueblo de Maimón, Provincia Monseñor Nouel, República Dominicana.",
+    "email": "parroquiasanisidromaimon@diocesisdelavega.do",
+    "image": "img/logo-parroquia.png",
+    "logo": "img/logo-parroquia.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Calle Principal frente al Parque Central",
+      "addressLocality": "Maimón",
+      "addressRegion": "Provincia Monseñor Nouel",
+      "addressCountry": "DO"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:30",
+        "closes": "17:00"
+      }
+    ],
+    "parentOrganization": {
+      "@type": "Organization",
+      "name": "Diócesis de La Vega"
+    }
+  }
+  </script>
+
   <!-- Estilos Vatican Style -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
 
   <!-- BARRA INSTITUCIONAL SUPERIOR (Estilo Santa Sede / Vatican.va) -->
   <div class="topbar-institutional">
@@ -40,7 +93,7 @@
     <div class="container header-content">
       <div class="brand-wrapper">
         <a href="#inicio" class="parish-logo" title="Parroquia San Isidro Labrador" aria-label="Ir al inicio">
-          <img src="img/logo-parroquia.png" alt="Logo de la Parroquia San Isidro Labrador" class="parish-logo-img" width="964" height="652">
+          <img src="img/logo-parroquia.png" alt="Logo de la Parroquia San Isidro Labrador" class="parish-logo-img" width="480" height="325" fetchpriority="high" decoding="async">
         </a>
         <div class="brand-text">
           <h1>Parroquia San Isidro Labrador</h1>
@@ -54,15 +107,15 @@
           <span class="liturgical-dot"></span>
           <span id="liturgicalSeason">Tiempo Ordinario</span>
         </div>
-        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir Menú">
-          <i class="fas fa-bars"></i>
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mainNav">
+          <i class="fas fa-bars" aria-hidden="true"></i>
         </button>
       </div>
     </div>
   </header>
 
   <!-- NAVEGACIÓN PRINCIPAL (BARRAS SACRAS DE NAVEGACIÓN) -->
-  <nav class="main-nav" id="mainNav">
+  <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
     <div class="container">
       <ul class="nav-list">
         <li class="nav-item"><a href="#inicio" class="nav-link active"><i class="fas fa-church"></i> Inicio</a></li>
@@ -73,10 +126,12 @@
         <li class="nav-item"><a href="#galeria" class="nav-link"><i class="fas fa-images"></i> Galería</a></li>
         <li class="nav-item"><a href="#noticias" class="nav-link"><i class="fas fa-newspaper"></i> Comunicados</a></li>
         <li class="nav-item"><a href="#despacho" class="nav-link"><i class="fas fa-envelope-open-text"></i> Despacho</a></li>
-        <li class="nav-item"><a href="#donaciones" class="nav-link open-modal-intention" style="color:var(--color-gold-light);"><i class="fas fa-hand-holding-heart"></i> Intenciones</a></li>
+        <li class="nav-item"><a href="#despacho" class="nav-link open-modal-intention" style="color:var(--color-gold-light);"><i class="fas fa-hand-holding-heart"></i> Intenciones</a></li>
       </ul>
     </div>
   </nav>
+
+  <main id="contenido" tabindex="-1">
 
   <!-- SECCIÓN HERO (ESTILO PORTAL SOLEMNE VATICANO) -->
   <section class="hero-vatican" id="inicio">
@@ -303,7 +358,7 @@
       <div class="patron-grid">
         <div class="patron-visual">
           <div class="patron-image-frame">
-            <img src="img/san-isidro-labrador.jpg" alt="Venerada imagen de San Isidro Labrador en la Parroquia de Maimón" loading="lazy">
+            <img src="img/san-isidro-labrador.jpg" alt="Venerada imagen de San Isidro Labrador en la Parroquia de Maimón" loading="lazy" decoding="async">
             <div class="patron-caption">Sanctus Isidorus Agricola &bull; Imagen Patronal de Maimón</div>
           </div>
         </div>
@@ -430,7 +485,7 @@
         <article class="news-card">
           <div class="news-thumb">
             <span class="news-category-badge">Pastoral</span>
-            <img src="img/eucaristia.jpg" alt="Celebración de la Santa Eucaristía en la parroquia" loading="lazy">
+            <img src="img/eucaristia.jpg" alt="Celebración de la Santa Eucaristía en la parroquia" loading="lazy" decoding="async">
           </div>
           <div class="news-body">
             <div class="news-meta">
@@ -448,7 +503,7 @@
         <article class="news-card">
           <div class="news-thumb">
             <span class="news-category-badge">Liturgia</span>
-            <img src="img/templo-jardin.jpg" alt="Templo y jardines de la Parroquia San Isidro Labrador" loading="lazy">
+            <img src="img/templo-jardin.jpg" alt="Templo y jardines de la Parroquia San Isidro Labrador" loading="lazy" decoding="async">
           </div>
           <div class="news-body">
             <div class="news-meta">
@@ -466,7 +521,7 @@
         <article class="news-card">
           <div class="news-thumb">
             <span class="news-category-badge">Caritas</span>
-            <img src="img/vigilia-cirios.jpg" alt="Vigilia de oración con cirios en el templo parroquial" loading="lazy">
+            <img src="img/vigilia-cirios.jpg" alt="Vigilia de oración con cirios en el templo parroquial" loading="lazy" decoding="async">
           </div>
           <div class="news-body">
             <div class="news-meta">
@@ -476,7 +531,7 @@
             <p class="news-excerpt">
               Invitamos a depositar alimentos no perecederos al pie del presbiterio durante las misas dominicales para asistir a nuestros hermanos enfermos.
             </p>
-            <a href="#donaciones" class="news-link open-modal-intention">Cómo apoyar <i class="fas fa-arrow-right"></i></a>
+            <a href="#despacho" class="news-link open-modal-intention">Cómo apoyar <i class="fas fa-arrow-right"></i></a>
           </div>
         </article>
       </div>
@@ -499,7 +554,7 @@
 
       <div class="gallery-grid">
         <button type="button" class="gallery-item portrait" data-full="img/templo-atardecer.jpg" data-caption="Templo Parroquial al atardecer &bull; Maimón">
-          <img src="img/templo-atardecer.jpg" alt="Templo parroquial de San Isidro Labrador al atardecer" loading="lazy">
+          <img src="img/templo-atardecer.jpg" alt="Templo parroquial de San Isidro Labrador al atardecer" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Templo al atardecer</span>
@@ -507,7 +562,7 @@
         </button>
 
         <button type="button" class="gallery-item landscape" data-full="img/interior-templo.jpg" data-caption="Interior del templo durante la oración comunitaria">
-          <img src="img/interior-templo.jpg" alt="Interior del templo iluminado durante una celebración" loading="lazy">
+          <img src="img/interior-templo.jpg" alt="Interior del templo iluminado durante una celebración" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Interior del templo</span>
@@ -515,7 +570,7 @@
         </button>
 
         <button type="button" class="gallery-item landscape" data-full="img/vigilia-cirios.jpg" data-caption="Vigilia de luz y oración de la comunidad parroquial">
-          <img src="img/vigilia-cirios.jpg" alt="Feligreses reunidos en vigilia con cirios encendidos" loading="lazy">
+          <img src="img/vigilia-cirios.jpg" alt="Feligreses reunidos en vigilia con cirios encendidos" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Vigilia de luz y oración</span>
@@ -523,7 +578,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/adoracion-santisimo.jpg" data-caption="Adoración al Santísimo Sacramento del Altar">
-          <img src="img/adoracion-santisimo.jpg" alt="Custodia dorada en la adoración al Santísimo" loading="lazy">
+          <img src="img/adoracion-santisimo.jpg" alt="Custodia dorada en la adoración al Santísimo" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Adoración al Santísimo</span>
@@ -531,7 +586,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/custodia-atardecer.jpg" data-caption="La custodia eucarística bajo la luz del atardecer">
-          <img src="img/custodia-atardecer.jpg" alt="Sacerdote sosteniendo la custodia eucarística al atardecer" loading="lazy">
+          <img src="img/custodia-atardecer.jpg" alt="Sacerdote sosteniendo la custodia eucarística al atardecer" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Custodia al atardecer</span>
@@ -539,7 +594,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/eucaristia.jpg" data-caption="Celebración de la Santa Eucaristía en Maimón">
-          <img src="img/eucaristia.jpg" alt="Sacerdote elevando la hostia durante la consagración" loading="lazy">
+          <img src="img/eucaristia.jpg" alt="Sacerdote elevando la hostia durante la consagración" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Santa Eucaristía</span>
@@ -547,7 +602,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/templo-dia.jpg" data-caption="El templo parroquial a plena luz del día">
-          <img src="img/templo-dia.jpg" alt="Fachada del templo parroquial durante el día" loading="lazy">
+          <img src="img/templo-dia.jpg" alt="Fachada del templo parroquial durante el día" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">El templo a plena luz</span>
@@ -555,7 +610,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/templo-jardin.jpg" data-caption="Jardines y entorno del templo parroquial">
-          <img src="img/templo-jardin.jpg" alt="Templo parroquial rodeado de sus jardines" loading="lazy">
+          <img src="img/templo-jardin.jpg" alt="Templo parroquial rodeado de sus jardines" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Jardines parroquiales</span>
@@ -563,7 +618,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/virgen-dolorosa.jpg" data-caption="Nuestra Señora de los Dolores &bull; Templo de Maimón">
-          <img src="img/virgen-dolorosa.jpg" alt="Imagen de la Virgen Dolorosa en el templo" loading="lazy">
+          <img src="img/virgen-dolorosa.jpg" alt="Imagen de la Virgen Dolorosa en el templo" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Nuestra Señora de los Dolores</span>
@@ -571,7 +626,7 @@
         </button>
 
         <button type="button" class="gallery-item portrait" data-full="img/templo-fachada.jpg" data-caption="Fachada del templo de San Isidro Labrador &bull; Maimón">
-          <img src="img/templo-fachada.jpg" alt="Fachada principal del templo parroquial" loading="lazy">
+          <img src="img/templo-fachada.jpg" alt="Fachada principal del templo parroquial" loading="lazy" decoding="async">
           <span class="gallery-overlay">
             <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
             <span class="gallery-title">Fachada del templo</span>
@@ -580,7 +635,7 @@
       </div>
 
       <div class="gallery-credit-bar">
-        <img src="img/logo-comunicaciones.png" alt="Comunicaciones de la Parroquia San Isidro Labrador" class="pc-logo-small" width="1200" height="555" loading="lazy">
+        <img src="img/logo-comunicaciones.png" alt="Comunicaciones de la Parroquia San Isidro Labrador" class="pc-logo-small" width="520" height="240" loading="lazy" decoding="async">
         <p>
           Registro fotográfico y comunicación parroquial a cargo de la
           <strong>Pastoral de Comunicación</strong> de la Parroquia San Isidro Labrador.
@@ -603,28 +658,30 @@
 
           <ul class="contact-info-list">
             <li>
-              <i class="fas fa-location-dot"></i>
+              <i class="fas fa-location-dot" aria-hidden="true"></i>
               <div>
                 <strong>Ubicación del Templo y Despacho:</strong><br>
-                Calle Principal frente al Parque Central, Maimón, Provincia Monseñor Nouel, República Dominicana.
+                <a class="contact-link" href="https://www.google.com/maps/search/?api=1&amp;query=Parroquia%20San%20Isidro%20Labrador%20Maim%C3%B3n%20Monse%C3%B1or%20Nouel%20Rep%C3%BAblica%20Dominicana" target="_blank" rel="noopener">
+                  Calle Principal frente al Parque Central, Maimón, Provincia Monseñor Nouel, República Dominicana.
+                </a>
               </div>
             </li>
             <li>
-              <i class="fas fa-cross"></i>
+              <i class="fas fa-cross" aria-hidden="true"></i>
               <div>
                 <strong>Jurisdicción Canónica:</strong><br>
                 Diócesis de La Vega (S.E.R. Obispo Diocesano).
               </div>
             </li>
             <li>
-              <i class="fas fa-envelope"></i>
+              <i class="fas fa-envelope" aria-hidden="true"></i>
               <div>
                 <strong>Correo Electrónico Parroquial:</strong><br>
-                parroquiasanisidromaimon@diocesisdelavega.do
+                <a class="contact-link" href="mailto:parroquiasanisidromaimon@diocesisdelavega.do">parroquiasanisidromaimon@diocesisdelavega.do</a>
               </div>
             </li>
             <li>
-              <i class="fas fa-clock"></i>
+              <i class="fas fa-clock" aria-hidden="true"></i>
               <div>
                 <strong>Horario de Secretaría:</strong><br>
                 Lunes a Viernes: 8:30 AM &ndash; 12:00 M y 2:00 PM &ndash; 5:00 PM
@@ -639,54 +696,57 @@
             <i class="fas fa-feather-pointed"></i> Mensaje al Despacho Parroquial
           </h4>
 
-          <div id="formSuccessAlert" style="display:none; background:#e8f5e9; border:1px solid #a5d6a7; color:#2e7d32; padding:12px; margin-bottom:15px; font-size:0.95rem;">
-            <i class="fas fa-check-circle"></i> Su mensaje ha sido remitido con éxito. ¡Paz y Bien!
-          </div>
+          <div id="formStatus" class="form-status" role="status" aria-live="polite" hidden></div>
 
           <form id="contactForm">
             <div class="form-group">
               <label for="contactName">Nombre Completo del Feligrés</label>
-              <input type="text" id="contactName" class="form-control" placeholder="Ej. Juan de Jesús Pérez" required>
+              <input type="text" id="contactName" name="nombre" class="form-control" placeholder="Ej. Juan de Jesús Pérez" autocomplete="name" required>
             </div>
 
             <div class="form-group">
               <label for="contactEmail">Correo Electrónico o Teléfono</label>
-              <input type="text" id="contactEmail" class="form-control" placeholder="Ej. correo@ejemplo.com o 809-xxx-xxxx" required>
+              <input type="text" id="contactEmail" name="contacto" class="form-control" placeholder="Ej. correo@ejemplo.com o 809-xxx-xxxx" autocomplete="email" required>
             </div>
 
             <div class="form-group">
               <label for="contactReason">Motivo de la Consulta</label>
-              <select id="contactReason" class="form-control" required>
+              <select id="contactReason" name="motivo" class="form-control" required>
                 <option value="">Seleccione el asunto...</option>
-                <option value="sacramento">Trámite de Bautismo / Boda</option>
-                <option value="certificado">Certificado de Fe y Bautismo</option>
-                <option value="intencion">Intención de Santa Misa</option>
-                <option value="catequesis">Inscripción en Catequesis</option>
-                <option value="pastoral">Cita con el Señor Cura Párroco</option>
-                <option value="otro">Otro asunto eclesial</option>
+                <option value="Trámite de Bautismo / Boda">Trámite de Bautismo / Boda</option>
+                <option value="Certificado de Fe y Bautismo">Certificado de Fe y Bautismo</option>
+                <option value="Intención de Santa Misa">Intención de Santa Misa</option>
+                <option value="Inscripción en Catequesis">Inscripción en Catequesis</option>
+                <option value="Cita con el Señor Cura Párroco">Cita con el Señor Cura Párroco</option>
+                <option value="Otro asunto eclesial">Otro asunto eclesial</option>
               </select>
             </div>
 
             <div class="form-group">
               <label for="contactMessage">Petición o Consulta Detallada</label>
-              <textarea id="contactMessage" class="form-control" placeholder="Escriba aquí respetuosamente los pormenores de su solicitud..." required></textarea>
+              <textarea id="contactMessage" name="mensaje" class="form-control" placeholder="Escriba aquí respetuosamente los pormenores de su solicitud..." required></textarea>
             </div>
 
             <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">
-              <i class="fas fa-paper-plane"></i> Enviar al Despacho Parroquial
+              <i class="fas fa-paper-plane" aria-hidden="true"></i> Enviar al Despacho Parroquial
             </button>
+            <p class="form-note">
+              Al enviar, se abrirá su aplicación de correo con el mensaje preparado para remitirlo al despacho parroquial.
+            </p>
           </form>
         </div>
       </div>
     </div>
   </section>
 
+  </main>
+
   <!-- MODAL PARA REGISTRO DE INTENCIONES DE MISA / ACCIÓN DE GRACIAS -->
-  <div class="modal" id="intentionModal">
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal">&times;</button>
-      <h3 style="font-family:var(--font-serif); color:var(--color-primary); margin-bottom:10px;">
-        <i class="fas fa-hands-praying"></i> Registro de Intención para la Santa Misa
+  <div class="modal" id="intentionModal" role="dialog" aria-modal="true" aria-labelledby="intentionModalTitle" aria-hidden="true">
+    <div class="modal-content" tabindex="-1">
+      <button type="button" class="modal-close" id="closeModal" aria-label="Cerrar formulario">&times;</button>
+      <h3 id="intentionModalTitle" style="font-family:var(--font-serif); color:var(--color-primary); margin-bottom:10px;">
+        <i class="fas fa-hands-praying" aria-hidden="true"></i> Registro de Intención para la Santa Misa
       </h3>
       <p style="font-size:0.95rem; color:var(--color-text-muted); margin-bottom:18px;">
         Ofrezca la Santa Eucaristía en sufragio por los fieles difuntos, en acción de gracias o por la salud de los enfermos.
@@ -694,33 +754,38 @@
 
       <form id="modalIntentionForm">
         <div class="form-group">
-          <label>Tipo de Intención</label>
-          <select class="form-control" required>
-            <option value="sufragio">Por el Eterno Descanso de un Fiel Difunto</option>
-            <option value="gracias">Acción de Gracias (Cumpleaños, Aniversario, Salud)</option>
-            <option value="salud">Por la Salud y Sanación de un Enfermo</option>
-            <option value="especial">Intención Especial y Petición al Señor</option>
+          <label for="intentionType">Tipo de Intención</label>
+          <select id="intentionType" name="tipo" class="form-control" required>
+            <option value="Por el Eterno Descanso de un Fiel Difunto">Por el Eterno Descanso de un Fiel Difunto</option>
+            <option value="Acción de Gracias (Cumpleaños, Aniversario, Salud)">Acción de Gracias (Cumpleaños, Aniversario, Salud)</option>
+            <option value="Por la Salud y Sanación de un Enfermo">Por la Salud y Sanación de un Enfermo</option>
+            <option value="Intención Especial y Petición al Señor">Intención Especial y Petición al Señor</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Nombre(s) por quien(es) se ofrece</label>
-          <input type="text" class="form-control" placeholder="Ej. Almas del purgatorio / Familia Gómez" required>
+          <label for="intentionNames">Nombre(s) por quien(es) se ofrece</label>
+          <input type="text" id="intentionNames" name="por_quien" class="form-control" placeholder="Ej. Almas del purgatorio / Familia Gómez" required>
         </div>
 
         <div class="form-group">
-          <label>Fecha Deseada para la Eucaristía</label>
-          <input type="date" class="form-control" required>
+          <label for="intentionDate">Fecha Deseada para la Eucaristía</label>
+          <input type="date" id="intentionDate" name="fecha" class="form-control" required>
         </div>
 
         <div class="form-group">
-          <label>Nombre y Teléfono del Solicitante</label>
-          <input type="text" class="form-control" placeholder="Para confirmación de la secretaría" required>
+          <label for="intentionRequester">Nombre y Teléfono del Solicitante</label>
+          <input type="text" id="intentionRequester" name="solicitante" class="form-control" placeholder="Para confirmación de la secretaría" autocomplete="name" required>
         </div>
+
+        <div id="intentionStatus" class="form-status" role="status" aria-live="polite" hidden></div>
 
         <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">
-          <i class="fas fa-bookmark"></i> Asentar Intención en el Libro Parroquial
+          <i class="fas fa-bookmark" aria-hidden="true"></i> Enviar Intención al Despacho
         </button>
+        <p class="form-note">
+          Al enviar, se abrirá su aplicación de correo con los datos de la intención para remitirlos al despacho parroquial.
+        </p>
       </form>
     </div>
   </div>
@@ -745,7 +810,7 @@
     <div class="container footer-top">
       <div class="footer-col">
         <div class="footer-brand">
-          <img src="img/logo-parroquia.png" alt="Logo de la Parroquia San Isidro Labrador" class="footer-logo" width="964" height="652" loading="lazy">
+          <img src="img/logo-parroquia.png" alt="Logo de la Parroquia San Isidro Labrador" class="footer-logo" width="480" height="325" loading="lazy" decoding="async">
           <span class="footer-brand-location">Maimón &bull; República Dominicana</span>
         </div>
         <p style="font-size:0.95rem; line-height:1.6; margin-bottom:15px;">
@@ -773,8 +838,8 @@
         <ul class="footer-links">
           <li><a href="https://www.vatican.va" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> La Santa Sede (Vatican.va)</a></li>
           <li><a href="https://www.vaticannews.va/es.html" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Vatican News en Español</a></li>
-          <li><a href="#"><i class="fas fa-angle-right"></i> Conferencia del Episcopado Dominicano</a></li>
-          <li><a href="#"><i class="fas fa-angle-right"></i> Diócesis de La Vega</a></li>
+          <li><a href="https://www.ced.org.do/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Conferencia del Episcopado Dominicano</a></li>
+          <li><a href="https://es.wikipedia.org/wiki/Di%C3%B3cesis_de_La_Vega" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Diócesis de La Vega</a></li>
           <li><a href="#despacho"><i class="fas fa-angle-right"></i> Horarios de Atención</a></li>
         </ul>
       </div>
@@ -785,11 +850,12 @@
           <em>Ad maiorem Dei gloriam</em>. En comunión fraterna con el Santo Padre y la Cátedra de San Pedro en Roma.
         </p>
         <p style="font-size:0.92rem; color:var(--color-gold);">
-          <i class="fas fa-phone"></i> Despacho Parroquial Maimón
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <a href="mailto:parroquiasanisidromaimon@diocesisdelavega.do" style="color:inherit; text-decoration:underline;">Despacho Parroquial de Maimón</a>
         </p>
 
         <div class="footer-pc-credit">
-          <img src="img/logo-comunicaciones.png" alt="Comunicaciones de la Parroquia San Isidro Labrador" class="footer-pc-logo" width="1200" height="555" loading="lazy">
+          <img src="img/logo-comunicaciones.png" alt="Comunicaciones de la Parroquia San Isidro Labrador" class="footer-pc-logo" width="520" height="240" loading="lazy" decoding="async">
           <p>Comunicación parroquial al servicio del Evangelio y de nuestra comunidad.</p>
         </div>
       </div>

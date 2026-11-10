@@ -4,32 +4,83 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Menú Móvil Hamburguesa
+  const PARISH_EMAIL = 'parroquiasanisidromaimon@diocesisdelavega.do';
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const getFocusable = (container) => Array.from(
+    container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
+  ).filter(el => el.offsetParent !== null || el === document.activeElement);
+
+  const trapFocus = (event, container) => {
+    if (event.key !== 'Tab') return;
+    const focusable = getFocusable(container);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  const setStatus = (el, message, type) => {
+    if (!el) return;
+    el.textContent = message;
+    el.classList.remove('is-info', 'is-success', 'is-error');
+    if (type) el.classList.add(`is-${type}`);
+    el.hidden = false;
+  };
+
+  const buildMailto = (subject, lines) => {
+    const body = lines.join('\r\n');
+    return `mailto:${PARISH_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  // 1. Menú Móvil Hamburguesa accesible
   const mobileMenuBtn = document.getElementById('mobileMenuToggle');
   const mainNav = document.getElementById('mainNav');
 
   if (mobileMenuBtn && mainNav) {
+    const menuIcon = mobileMenuBtn.querySelector('i');
+
+    const setMenuState = (open) => {
+      mainNav.classList.toggle('active', open);
+      mobileMenuBtn.setAttribute('aria-expanded', String(open));
+      mobileMenuBtn.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      if (menuIcon) menuIcon.className = open ? 'fas fa-times' : 'fas fa-bars';
+    };
+
     mobileMenuBtn.addEventListener('click', () => {
-      mainNav.classList.toggle('active');
-      const icon = mobileMenuBtn.querySelector('i');
-      if (icon) {
-        if (mainNav.classList.contains('active')) {
-          icon.className = 'fas fa-times';
-        } else {
-          icon.className = 'fas fa-bars';
-        }
+      setMenuState(!mainNav.classList.contains('active'));
+    });
+
+    mainNav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) setMenuState(false);
+      });
+    });
+
+    // Cerrar al tocar fuera del menú
+    document.addEventListener('click', (e) => {
+      if (!mainNav.classList.contains('active')) return;
+      if (mainNav.contains(e.target) || mobileMenuBtn.contains(e.target)) return;
+      setMenuState(false);
+    });
+
+    // Cerrar con Escape y devolver el foco al botón
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+        setMenuState(false);
+        mobileMenuBtn.focus();
       }
     });
 
-    const navLinks = mainNav.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          mainNav.classList.remove('active');
-          const icon = mobileMenuBtn.querySelector('i');
-          if (icon) icon.className = 'fas fa-bars';
-        }
-      });
+    // Si se amplía la ventana, el menú vuelve a su estado normal
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) setMenuState(false);
     });
   }
 
@@ -159,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function animateTransition(callback) {
     const gospelCard = document.querySelector('.gospel-body');
-    if (!gospelCard) {
+    if (!gospelCard || prefersReducedMotion) {
       callback();
       return;
     }
@@ -171,89 +222,181 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 220);
   }
 
-  // 4. Modal de Intenciones y Ofrendas
+  // 4. Modal de Intenciones y Ofrendas con gestión de foco
   const modal = document.getElementById('intentionModal');
+  const modalContent = modal ? modal.querySelector('.modal-content') : null;
   const openModalBtns = document.querySelectorAll('.open-modal-intention');
   const closeModalBtn = document.getElementById('closeModal');
+  let lastModalTrigger = null;
+
+  function openModal(trigger) {
+    if (!modal) return;
+    lastModalTrigger = trigger || document.activeElement;
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    const firstField = modal.querySelector('select, input, textarea');
+    if (firstField) firstField.focus();
+    else if (modalContent) modalContent.focus();
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+    if (lastModalTrigger && typeof lastModalTrigger.focus === 'function') lastModalTrigger.focus();
+    lastModalTrigger = null;
+  }
 
   if (modal && closeModalBtn) {
     openModalBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        modal.classList.add('active');
+        openModal(btn);
       });
     });
 
-    closeModalBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
+    closeModalBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
     });
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeModal();
+      } else {
+        trapFocus(e, modal);
       }
     });
   }
 
-  // 5. Manejo del Formulario de Contacto
+  // 5. Formulario de contacto real (abre el correo del feligrés)
   const contactForm = document.getElementById('contactForm');
-  const formSuccessAlert = document.getElementById('formSuccessAlert');
+  const formStatus = document.getElementById('formStatus');
 
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Remitiendo al Despacho...';
+      if (!contactForm.reportValidity()) return;
 
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        contactForm.reset();
+      const name = document.getElementById('contactName').value.trim();
+      const contact = document.getElementById('contactEmail').value.trim();
+      const reason = document.getElementById('contactReason').value;
+      const message = document.getElementById('contactMessage').value.trim();
 
-        if (formSuccessAlert) {
-          formSuccessAlert.style.display = 'block';
-          setTimeout(() => {
-            formSuccessAlert.style.display = 'none';
-          }, 6000);
-        } else {
-          alert('Pax Christi. Su solicitud ha sido enviada al Despacho Parroquial.');
-        }
-      }, 900);
+      const subject = `Consulta parroquial: ${reason}`;
+      const lines = [
+        'Pax Christi.',
+        '',
+        `Nombre: ${name}`,
+        `Contacto: ${contact}`,
+        `Motivo: ${reason}`,
+        '',
+        'Mensaje:',
+        message,
+        '',
+        'Enviado desde el sitio web de la Parroquia San Isidro Labrador.'
+      ];
+
+      setStatus(formStatus, 'Abriendo su aplicación de correo con el mensaje preparado…', 'info');
+      window.location.href = buildMailto(subject, lines);
+
+      window.setTimeout(() => {
+        setStatus(formStatus, `Si su aplicación de correo no se abrió, escriba directamente a ${PARISH_EMAIL}.`, 'info');
+      }, 1500);
     });
   }
 
-  // 6. Formulario del modal de intenciones
+  // 6. Formulario del modal de intenciones (abre el correo del feligrés)
   const modalForm = document.getElementById('modalIntentionForm');
+  const intentionStatus = document.getElementById('intentionStatus');
+
   if (modalForm) {
     modalForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Bendiciones. Su intención de Misa ha sido registrada en el libro parroquial de San Isidro.');
-      modalForm.reset();
-      modal.classList.remove('active');
+      if (!modalForm.reportValidity()) return;
+
+      const tipo = document.getElementById('intentionType').value;
+      const porQuien = document.getElementById('intentionNames').value.trim();
+      const fecha = document.getElementById('intentionDate').value;
+      const solicitante = document.getElementById('intentionRequester').value.trim();
+
+      const subject = 'Intención de Santa Misa';
+      const lines = [
+        'Pax Christi.',
+        '',
+        `Tipo de intención: ${tipo}`,
+        `Se ofrece por: ${porQuien}`,
+        `Fecha deseada: ${fecha}`,
+        `Solicitante y teléfono: ${solicitante}`,
+        '',
+        'Enviado desde el sitio web de la Parroquia San Isidro Labrador.'
+      ];
+
+      setStatus(intentionStatus, 'Abriendo su aplicación de correo con los datos de la intención…', 'info');
+      window.location.href = buildMailto(subject, lines);
+
+      window.setTimeout(() => {
+        setStatus(intentionStatus, `Si su aplicación de correo no se abrió, escriba a ${PARISH_EMAIL}.`, 'info');
+      }, 1500);
     });
   }
 
-  // 7. Navegación activa con scroll
-  const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    const scrollY = window.pageYOffset;
-    sections.forEach(current => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop - 120;
-      const sectionId = current.getAttribute('id');
-      const navLink = document.querySelector(`.nav-list a[href*="${sectionId}"]`);
+  // 7. Navegación activa con IntersectionObserver
+  const navLinks = Array.from(document.querySelectorAll('.nav-list a[href^="#"]'));
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
 
-      if (navLink) {
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-          navLink.classList.add('active');
-        } else {
-          navLink.classList.remove('active');
-        }
+  const setActiveNav = (id) => {
+    navLinks.forEach(link => {
+      if (link.classList.contains('open-modal-intention')) {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+        return;
       }
+      const isActive = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
     });
-  });
+  };
+
+  if (sections.length && navLinks.length) {
+    if ('IntersectionObserver' in window) {
+      const visibleSections = new Set();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) visibleSections.add(entry.target.id);
+          else visibleSections.delete(entry.target.id);
+        });
+
+        const current = sections.find(section => visibleSections.has(section.id));
+        if (current) setActiveNav(current.id);
+      }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
+
+      sections.forEach(section => observer.observe(section));
+    } else {
+      // Respaldo para navegadores sin IntersectionObserver
+      window.addEventListener('scroll', () => {
+        const scrollY = window.pageYOffset + 140;
+        let currentId = sections[0].id;
+        sections.forEach(section => {
+          if (section.offsetTop <= scrollY) currentId = section.id;
+        });
+        setActiveNav(currentId);
+      }, { passive: true });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (link.classList.contains('open-modal-intention')) return;
+        const target = link.getAttribute('href');
+        if (target && target.length > 1) setActiveNav(target.slice(1));
+      });
+    });
+  }
 
   // 8. Visor de la galería fotográfica (lightbox)
   const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
@@ -264,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
   let activePhotoIndex = 0;
+  let lastLightboxTrigger = null;
 
   function showPhoto(index) {
     if (!galleryItems.length) return;
@@ -276,8 +420,9 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxCaption.textContent = item.dataset.caption || '';
   }
 
-  function openLightbox(index) {
+  function openLightbox(index, trigger) {
     if (!photoLightbox) return;
+    lastLightboxTrigger = trigger || document.activeElement;
     showPhoto(index);
     photoLightbox.classList.add('active');
     photoLightbox.setAttribute('aria-hidden', 'false');
@@ -290,11 +435,13 @@ document.addEventListener('DOMContentLoaded', () => {
     photoLightbox.classList.remove('active');
     photoLightbox.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('lightbox-open');
+    if (lastLightboxTrigger && typeof lastLightboxTrigger.focus === 'function') lastLightboxTrigger.focus();
+    lastLightboxTrigger = null;
   }
 
   if (photoLightbox && lightboxImage && galleryItems.length) {
     galleryItems.forEach((item, index) => {
-      item.addEventListener('click', () => openLightbox(index));
+      item.addEventListener('click', () => openLightbox(index, item));
     });
 
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
@@ -307,9 +454,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', (e) => {
       if (!photoLightbox.classList.contains('active')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') showPhoto(activePhotoIndex - 1);
-      if (e.key === 'ArrowRight') showPhoto(activePhotoIndex + 1);
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        showPhoto(activePhotoIndex - 1);
+      } else if (e.key === 'ArrowRight') {
+        showPhoto(activePhotoIndex + 1);
+      } else {
+        trapFocus(e, photoLightbox);
+      }
     });
   }
 });
