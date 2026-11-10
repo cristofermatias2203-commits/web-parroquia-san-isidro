@@ -1,0 +1,1845 @@
+/* ==========================================================================
+   ESTILOS GENERALES Y VARIABLES
+   Paleta institucional inspirada en el logo de la Parroquia San Isidro Labrador:
+   Azul #085BA6, Dorado #DEA619, blanco marfil y acentos de cielo.
+   ========================================================================== */
+
+:root {
+  --color-primary: #0a6ba8;        /* Azul Pastoral de Comunicación */
+  --color-primary-dark: #06466f;
+  --color-primary-light: #1689c9;
+  --color-logo-blue: #085ba6;      /* Azul exacto del logo parroquial */
+  --color-gold: #f0c010;           /* Dorado institucional */
+  --color-gold-light: #ffdb54;
+  --color-gold-dark: #a87a00;
+  --color-accent-amber: #f7a11a;
+  --color-clay: #b06a45;           /* Terracota del techo del templo */
+  --color-bg-ivory: #fbfdff;       /* Blanco cielo cálido */
+  --color-bg-card: #ffffff;
+  --color-bg-subtle: #eef4f8;
+  --color-text-main: #1e2a33;      /* Azul carbón cálido */
+  --color-text-muted: #5c6b77;
+  --color-border: #dbe5ec;
+  --color-border-gold: #ecd488;
+
+  --font-serif: 'Cinzel', 'Times New Roman', Times, serif;
+  --font-body: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
+
+  --shadow-sm: 0 2px 6px rgba(6, 70, 111, 0.06);
+  --shadow-md: 0 6px 18px rgba(6, 70, 111, 0.10);
+  --shadow-lg: 0 12px 30px rgba(6, 70, 111, 0.16);
+  --transition: all 0.28s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Se respeta el tamaño de texto configurado por el usuario en su navegador */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg-ivory);
+  color: var(--color-text-main);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  /* Permite partir palabras largas (correos, nombres) sin desbordar
+     el ancho disponible, incluso con el texto ampliado por el usuario. */
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+}
+
+/* Enlaces y utilidades */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--color-gold-dark);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  width: calc(100% - 48px);
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+/* Márgenes laterales ajustados en pantallas estrechas para dar más
+   espacio al texto y evitar que las letras se corten. */
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 32px);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 22px);
+  }
+}
+
+/* ==========================================================================
+   BARRA SUPERIOR INSTITUCIONAL (ESTILO SANTA SEDE)
+   ========================================================================== */
+.topbar-institutional {
+  background-color: #062c47;
+  color: #cfe0ec;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid var(--color-gold);
+  padding: 7px 0;
+}
+
+.topbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.diocesis-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.diocesis-badge i {
+  color: var(--color-gold);
+}
+
+.topbar-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 18px;
+  min-width: 0;
+}
+
+.topbar-links span {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.topbar-links span i {
+  color: var(--color-gold);
+  margin-right: 4px;
+}
+
+.topbar-date {
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   CABECERA PRINCIPAL / ESCUDO
+   ========================================================================== */
+.main-header {
+  background: linear-gradient(to bottom, #ffffff, #f4f8fb);
+  border-bottom: 1px solid var(--color-border);
+  padding: clamp(18px, 2.2vw, 24px) 0 16px 0;
+  position: relative;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.brand-text {
+  min-width: 0;
+}
+
+.parish-logo {
+  display: block;
+  flex-shrink: 0;
+  height: clamp(72px, 8vw, 92px);
+}
+
+.parish-logo-img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.brand-text h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  line-height: 1.15;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.brand-text .subtext {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--color-gold-dark);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.brand-text .diocese-subtext {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  display: block;
+  margin-top: 2px;
+}
+
+.header-decor-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.liturgical-time-pill {
+  background: #eaf4fb;
+  border: 1px solid var(--color-border-gold);
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-primary-dark);
+  font-weight: 500;
+}
+
+.liturgical-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2e7d32; /* Verde Tiempo Ordinario */
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.25);
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--color-border-gold);
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   NAVEGACIÓN ESTILO BARRAS VATICANAS
+   ========================================================================== */
+.main-nav {
+  background-color: var(--color-primary);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 3px solid var(--color-gold);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 14px 13px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--transition);
+}
+
+.nav-item:first-child .nav-link {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background-color: var(--color-primary-dark);
+  color: var(--color-gold-light);
+}
+
+.nav-link i {
+  font-size: 0.8rem;
+  color: var(--color-gold-light);
+}
+
+/* ==========================================================================
+   HERO / BANNER PRINCIPAL PAPAL/PARROQUIAL
+   ========================================================================== */
+.hero-vatican {
+  position: relative;
+  background: radial-gradient(circle at center, #032f4d 0%, #011a2b 100%);
+  color: #fff;
+  padding: clamp(52px, 8vw, 78px) 0 clamp(66px, 9vw, 92px) 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-vatican::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(240, 192, 16, 0.20) 0%, transparent 58%),
+    linear-gradient(120deg, rgba(3, 47, 77, 0.92) 0%, rgba(6, 70, 111, 0.74) 48%, rgba(1, 26, 43, 0.58) 100%),
+    url('img/templo-atardecer.jpg');
+  background-size: cover;
+  background-position: center top, center, center 60%;
+  opacity: 0.95;
+  filter: saturate(108%);
+}
+
+.hero-vatican::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  background: linear-gradient(to top, var(--color-bg-ivory), transparent);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.latin-motto {
+  display: inline-block;
+  max-width: 100%;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.22em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding: 4px 18px;
+  border-top: 1px solid var(--color-gold-dark);
+  border-bottom: 1px solid var(--color-gold-dark);
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.2vw, 2.85rem);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+  margin-bottom: 12px;
+  line-height: 1.15;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: #d7e6f2;
+  margin-bottom: 24px;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 24px;
+}
+
+.hero-divider .line {
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-gold), transparent);
+}
+
+.hero-divider .cross {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 26px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, #f0c010 0%, #d9a800 100%);
+  color: #062c47;
+  border: 1px solid #ffdb54;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #ffd94a 0%, #e0b300 100%);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(197, 160, 89, 0.4);
+}
+
+.btn-outline-light {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.btn-outline-light:hover {
+  background: #ffffff;
+  color: var(--color-primary);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CINTILLO DE ACCESOS RÁPIDOS (ESTILO BOTONERAS DEL VATICANO)
+   ========================================================================== */
+.vatican-quick-strip {
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 10;
+  margin-top: -24px;
+  border-radius: 4px;
+}
+
+.strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  divide-x: 1px solid var(--color-border);
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-right: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  transition: var(--transition);
+}
+
+.strip-item:last-child {
+  border-right: none;
+}
+
+.strip-item:hover {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-primary);
+}
+
+.strip-icon {
+  width: 44px;
+  height: 44px;
+  background: #f4f9fd;
+  border: 1px solid var(--color-border-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gold-dark);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.strip-item:hover .strip-icon {
+  background: var(--color-primary);
+  color: var(--color-gold-light);
+  border-color: var(--color-primary);
+}
+
+.strip-text h4 {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.strip-text p {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ==========================================================================
+   SECCIONES Y TÍTULOS VATICANOS
+   ========================================================================== */
+.section {
+  padding: clamp(46px, 6vw, 76px) 0;
+}
+
+.section-bg-ivory {
+  background-color: var(--color-bg-ivory);
+}
+
+.section-bg-white {
+  background-color: #ffffff;
+}
+
+.section-header-vatican {
+  text-align: center;
+  margin-bottom: clamp(32px, 4vw, 45px);
+  position: relative;
+}
+
+.section-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.section-title-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.section-title-ornament .line {
+  width: 50px;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+
+.section-title-ornament i {
+  color: var(--color-gold);
+  font-size: 0.85rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.18rem;
+  color: var(--color-text-muted);
+  max-width: 680px;
+  margin: 10px auto 0 auto;
+}
+
+/* ==========================================================================
+   SECCIÓN EVANGELIO & PALABRA DEL DÍA (ESTILO MEDITACIÓN VATICANO)
+   ========================================================================== */
+.gospel-card-wrapper {
+  background: #ffffff;
+  border: 1px solid var(--color-border-gold);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  padding: clamp(22px, 3.2vw, 40px);
+  max-width: 980px;
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.gospel-card-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid #e6eef4;
+  pointer-events: none;
+}
+
+.gospel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gospel-liturgical-tag {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gospel-date {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.gospel-body {
+  text-align: center;
+  padding: 10px 15px;
+}
+
+.gospel-icon {
+  font-size: 2.2rem;
+  color: var(--color-gold);
+  margin-bottom: 12px;
+}
+
+.gospel-citation {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 15px;
+  letter-spacing: 0.04em;
+}
+
+.gospel-verse {
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: #2a3843;
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto 20px auto;
+}
+
+.gospel-verse::before,
+.gospel-verse::after {
+  content: "“";
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: var(--color-gold-light);
+  line-height: 0;
+  vertical-align: -0.4em;
+}
+.gospel-verse::after {
+  content: "”";
+}
+
+.gospel-reflection {
+  font-family: var(--font-body);
+  font-size: 1.12rem;
+  color: var(--color-text-muted);
+  max-width: 760px;
+  margin: 0 auto 25px auto;
+  border-top: 1px dashed var(--color-border);
+  padding-top: 18px;
+}
+
+.gospel-footer {
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  padding-top: 18px;
+}
+
+/* ==========================================================================
+   HORARIOS DE MISAS Y SACRAMENTOS (TABLA CLÁSICA IMPERIAL)
+   ========================================================================== */
+.schedules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 2.5vw, 30px);
+}
+
+.schedule-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-top: 4px solid var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(20px, 2.6vw, 30px);
+  transition: var(--transition);
+}
+
+.schedule-card {
+  min-width: 0;
+}
+
+.schedule-card:hover {
+  box-shadow: var(--shadow-md);
+  border-top-color: var(--color-gold);
+}
+
+.schedule-card-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--color-primary);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 12px;
+}
+
+.schedule-card-title i {
+  color: var(--color-gold);
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.schedule-table tr {
+  border-bottom: 1px solid #edf3f8;
+}
+
+.schedule-table tr:last-child {
+  border-bottom: none;
+}
+
+.schedule-table td {
+  padding: 12px 6px;
+  font-size: 1.05rem;
+}
+
+.schedule-table td.day {
+  font-weight: 600;
+  color: var(--color-text-main);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  width: 45%;
+}
+
+.schedule-table td.time {
+  font-family: var(--font-serif);
+  color: var(--color-primary-dark);
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.schedule-table td.details {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+.confession-box {
+  margin-top: 20px;
+  background-color: #f4f8fb;
+  border: 1px solid var(--color-border-gold);
+  padding: 16px;
+  border-radius: 2px;
+}
+
+.confession-box h5 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.confession-box p {
+  font-size: 0.98rem;
+  margin: 0;
+  color: #45545f;
+}
+
+/* ==========================================================================
+   SAN ISIDRO LABRADOR (PATRÓN DE MAIMÓN) & HISTORIA
+   ========================================================================== */
+.patron-section {
+  background: linear-gradient(to right, #ffffff, #eef6fb);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.patron-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(28px, 3.5vw, 45px);
+  align-items: center;
+}
+
+.patron-visual {
+  position: relative;
+  text-align: center;
+  min-width: 0;
+}
+
+.patron-info {
+  min-width: 0;
+}
+
+.patron-image-frame {
+  position: relative;
+  display: inline-block;
+  padding: 12px;
+  background: #ffffff;
+  border: 2px solid var(--color-gold);
+  box-shadow: var(--shadow-lg);
+  border-radius: 4px;
+}
+
+.patron-image-frame img {
+  width: 100%;
+  max-width: 420px;
+  height: 520px;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 2px;
+  filter: contrast(104%);
+}
+
+.patron-caption {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.patron-info h3 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.patron-quote {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-gold-dark);
+  font-style: italic;
+  border-left: 3px solid var(--color-gold);
+  padding-left: 16px;
+  margin: 18px 0;
+}
+
+.patron-bio-p {
+  margin-bottom: 16px;
+  text-align: justify;
+}
+
+.patron-attributes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.attribute-card {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  padding: 12px 14px;
+  text-align: center;
+  min-width: 0;
+}
+
+.attribute-card i {
+  color: var(--color-gold);
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.attribute-card span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+}
+
+/* ==========================================================================
+   ACTUALIDAD, COMUNICADOS Y BOLETINES (NOTICIAS VATICAN STYLE)
+   ========================================================================== */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(18px, 2.2vw, 28px);
+}
+
+.news-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-gold);
+}
+
+.news-thumb {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  background: #1e2a33;
+}
+
+.news-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-thumb img {
+  transform: scale(1.05);
+}
+
+.news-category-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  border: 1px solid var(--color-gold);
+}
+
+.news-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.news-meta {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.news-meta i {
+  color: var(--color-gold);
+}
+
+.news-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--color-primary-dark);
+  line-height: 1.3;
+  margin-bottom: 12px;
+}
+
+.news-excerpt {
+  font-size: 1rem;
+  color: #4e5d69;
+  line-height: 1.55;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.news-link {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.news-link:hover {
+  color: var(--color-gold-dark);
+  gap: 9px;
+}
+
+/* ==========================================================================
+   SACRAMENTOS Y PASTORAL
+   ========================================================================== */
+.sacraments-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.sacrament-item {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  padding: 28px 20px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.sacrament-item:hover {
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-sm);
+  background: #f7fbfe;
+}
+
+.sacrament-item .sacrament-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px auto;
+  border-radius: 50%;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  transition: var(--transition);
+}
+
+/* Cáliz de la Primera Comunión (SVG de línea dorada) */
+.sacrament-icon .communion-icon {
+  width: 36px;
+  height: 40px;
+  color: var(--color-gold-dark);
+  transition: var(--transition);
+}
+
+.sacrament-item:hover .sacrament-icon .communion-icon {
+  color: var(--color-gold-light);
+}
+
+.sacrament-item:hover .sacrament-icon {
+  background: var(--color-primary);
+  color: var(--color-gold-light);
+}
+
+.sacrament-item h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+}
+
+.sacrament-item p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   DESPACHO PARROQUIAL Y CONTACTO (MAIMÓN, MONSEÑOR NOUEL)
+   ========================================================================== */
+.contact-section-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: #fff;
+  border: 1px solid var(--color-border-gold);
+  padding: 38px;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-info-block h3 {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+}
+
+.contact-info-list {
+  list-style: none;
+  margin: 24px 0;
+}
+
+.contact-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  min-width: 0;
+}
+
+.contact-info-list li > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact-info-block,
+.contact-form {
+  min-width: 0;
+}
+
+.contact-info-list i {
+  color: var(--color-gold-dark);
+  font-size: 1.25rem;
+  margin-top: 4px;
+}
+
+.contact-form {
+  background: var(--color-bg-subtle);
+  padding: 26px;
+  border: 1px solid var(--color-border);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--color-text-main);
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(125, 17, 29, 0.15);
+}
+
+textarea.form-control {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* ==========================================================================
+   PIE DE PÁGINA (ESTILO VATICANO OFICIAL)
+   ========================================================================== */
+.footer-vatican {
+  background-color: #042338;
+  color: #cfe0ec;
+  border-top: 4px solid var(--color-gold);
+  padding: 55px 0 25px 0;
+  position: relative;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr 1.5fr;
+  gap: 35px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #0d3f60;
+}
+
+.footer-col h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.footer-col h4::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background-color: var(--color-gold);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.footer-logo {
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+  padding: 10px 14px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.footer-brand-location {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #b9d0e0;
+  font-size: 0.98rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-links a:hover {
+  color: var(--color-gold-light);
+  padding-left: 4px;
+}
+
+.footer-links a i {
+  color: var(--color-gold);
+  font-size: 0.75rem;
+}
+
+.prayer-intention-box {
+  background: #073252;
+  border: 1px solid #14547e;
+  padding: 16px;
+  border-left: 3px solid var(--color-gold);
+}
+
+.prayer-intention-box p {
+  font-size: 0.95rem;
+  font-style: italic;
+  margin: 0;
+  color: #d9e7f2;
+}
+
+.footer-bottom {
+  padding-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 0.88rem;
+  color: #8fb0c6;
+}
+
+.footer-bottom a {
+  color: #a9c4d6;
+}
+
+.footer-bottom a:hover {
+  color: var(--color-gold);
+}
+
+/* Modal de Donaciones / Intenciones */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(3px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: #ffffff;
+  max-width: 520px;
+  width: 100%;
+  border-top: 5px solid var(--color-primary);
+  border-bottom: 3px solid var(--color-gold);
+  padding: 30px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  border-radius: 2px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.modal-close:hover {
+  color: var(--color-primary);
+}
+
+/* ==========================================================================
+   GALERÍA FOTOGRÁFICA & LOGO PASTORAL DE COMUNICACIÓN
+   ========================================================================== */
+.gallery-grid {
+  columns: 3;
+  column-gap: 16px;
+}
+
+.gallery-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 0 16px 0;
+  padding: 0;
+  border: 3px solid #ffffff;
+  background: #062c47;
+  cursor: pointer;
+  overflow: hidden;
+  break-inside: avoid;
+  border-radius: 3px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  text-align: left;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.55s ease, filter 0.55s ease;
+}
+
+.gallery-item.portrait img {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.gallery-item.landscape img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.gallery-item:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gold);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.045);
+  filter: brightness(0.82);
+}
+
+.gallery-item:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+  background: linear-gradient(to top, rgba(3, 47, 77, 0.9) 0%, rgba(3, 47, 77, 0.28) 45%, transparent 75%);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.gallery-item:hover .gallery-overlay,
+.gallery-item:focus-visible .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-title {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.gallery-zoom {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  color: #062c47;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.gallery-credit-bar {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  justify-content: center;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-gold);
+  padding: 14px 22px;
+}
+
+.pc-logo-small {
+  width: 210px;
+  max-width: 100%;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.gallery-credit-bar p {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--color-text-muted);
+}
+
+.gallery-credit-bar strong {
+  color: var(--color-primary);
+}
+
+.footer-pc-credit {
+  margin-top: 16px;
+  background: #ffffff;
+  border-radius: 3px;
+  padding: 10px 12px;
+}
+
+.footer-pc-logo {
+  width: 100%;
+  max-width: 230px;
+  height: auto;
+  display: block;
+  margin: 0 auto 6px auto;
+}
+
+.footer-pc-credit p {
+  font-size: 0.78rem;
+  color: #5c6b77;
+  text-align: center;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Visor de fotografías (Lightbox) */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(2, 20, 33, 0.94);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-figure {
+  margin: 0;
+  max-width: min(1100px, 92vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-figure img {
+  max-width: 100%;
+  max-height: 78vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 3px solid rgba(240, 192, 16, 0.85);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-figure figcaption {
+  margin-top: 14px;
+  color: #eaf3fa;
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 2.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.lightbox-close:hover {
+  color: var(--color-gold);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(6, 70, 111, 0.55);
+  color: #ffffff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.lightbox-nav:hover {
+  background: var(--color-gold);
+  color: #062c47;
+  border-color: var(--color-gold);
+}
+
+.lightbox-prev {
+  left: 22px;
+}
+
+.lightbox-next {
+  right: 22px;
+}
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   CONTENEDORES FLEXIBLES
+   Permite que las columnas de rejilla se encojan y el texto se ajuste
+   sin desbordarse, respetando el tamaño de letra elegido por el usuario.
+   ========================================================================== */
+.news-grid > *,
+.strip-grid > *,
+.sacraments-grid > *,
+.schedules-grid > *,
+.patron-grid > *,
+.contact-section-inner > *,
+.footer-top > *,
+.news-body,
+.news-thumb,
+.strip-text,
+.prayer-intention-box,
+.footer-brand,
+.footer-pc-credit {
+  min-width: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD (Móviles y Tablets)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .strip-item:nth-child(2) {
+    border-right: none;
+  }
+  .schedules-grid,
+  .patron-grid,
+  .contact-section-inner {
+    grid-template-columns: 1fr;
+  }
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sacraments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+  .gallery-grid {
+    columns: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .topbar-institutional {
+    letter-spacing: 0.04em;
+  }
+  .topbar-inner {
+    justify-content: center;
+    text-align: center;
+  }
+  .topbar-links {
+    justify-content: center;
+    gap: 4px 12px;
+  }
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .brand-wrapper {
+    flex-direction: column;
+  }
+  .header-decor-right {
+    margin-top: 10px;
+  }
+  .mobile-menu-btn {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .main-nav {
+    display: none;
+  }
+  .main-nav.active {
+    display: block;
+  }
+  .nav-list {
+    flex-direction: column;
+  }
+  .nav-link {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 20px;
+  }
+  .hero-title {
+    font-size: 2.1rem;
+  }
+  .hero-subtitle {
+    font-size: 1.15rem;
+  }
+  .strip-grid {
+    grid-template-columns: 1fr;
+  }
+  .strip-item {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+  .sacraments-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .gallery-grid {
+    columns: 1;
+  }
+  .gallery-credit-bar {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px;
+  }
+  .pc-logo-small {
+    width: 190px;
+  }
+  .lightbox {
+    padding: 14px;
+  }
+  .lightbox-nav {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+  .lightbox-prev {
+    left: 8px;
+  }
+  .lightbox-next {
+    right: 8px;
+  }
+  .lightbox-close {
+    top: 10px;
+    right: 14px;
+    font-size: 2rem;
+  }
+  .hero-vatican::before {
+    background-position: center top, center, center 65%;
+  }
+  .contact-section-inner {
+    padding: 24px 20px;
+    gap: 28px;
+  }
+  .contact-form {
+    padding: 20px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-institutional {
+    letter-spacing: 0.02em;
+  }
+  .topbar-links {
+    gap: 4px 8px;
+  }
+  .brand-text h1 {
+    font-size: 1.35rem;
+    letter-spacing: 0.03em;
+  }
+  .brand-text .subtext {
+    letter-spacing: 0.08em;
+  }
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  .patron-attributes {
+    grid-template-columns: 1fr;
+  }
+  .schedule-card,
+  .contact-section-inner {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .schedule-card-title {
+    font-size: 1.15rem;
+  }
+  .schedule-table td {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  .schedule-table td.day {
+    width: 52%;
+    font-size: 0.86rem;
+  }
+  .schedule-table td.time {
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+  }
+  .footer-vatican {
+    padding-top: 40px;
+  }
+}
+

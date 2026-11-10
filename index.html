@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parroquia San Isidro Labrador | Maimón - Diócesis de La Vega</title>
+  <meta name="description" content="Sitio Oficial de la Parroquia San Isidro Labrador, Maimón, Monseñor Nouel, República Dominicana. Inspirado en la sobriedad y solemnidad de la Santa Sede Vaticana.">
+  <meta name="theme-color" content="#06466f">
+  <link rel="icon" type="image/png" href="img/favicon-parroquia.png">
+  <link rel="apple-touch-icon" href="img/favicon-parroquia.png">
+
+  <!-- Fuentes Tipográficas Clásicas Pontificias -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome para Iconografía Sacra y Heraldica -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Estilos Vatican Style -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- BARRA INSTITUCIONAL SUPERIOR (Estilo Santa Sede / Vatican.va) -->
+  <div class="topbar-institutional">
+    <div class="container topbar-inner">
+      <div class="diocesis-badge">
+        <i class="fas fa-cross"></i>
+        <span>Diócesis de La Vega &bull; República Dominicana</span>
+      </div>
+      <div class="topbar-links">
+        <span class="topbar-date"><i class="fas fa-calendar-day"></i> <span id="parishCurrentDate">Viernes, 6 de Noviembre de 2026</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CABECERA PRINCIPAL CON LOGO PARROQUIAL -->
+  <header class="main-header">
+    <div class="container header-content">
+      <div class="brand-wrapper">
+        <a href="#inicio" class="parish-logo" title="Parroquia San Isidro Labrador" aria-label="Ir al inicio">
+          <img src="img/logo-parroquia.png" alt="Logo de la Parroquia San Isidro Labrador" class="parish-logo-img" width="964" height="652">
+        </a>
+        <div class="brand-text">
+          <h1>Parroquia San Isidro Labrador</h1>
+          <div class="subtext">Municipio de Maimón &bull; Provincia Monseñor Nouel</div>
+          <span class="diocese-subtext">&ldquo;Labrando la Fe, Cosechando la Esperanza&rdquo;</span>
+        </div>
+      </div>
+
+      <div class="header-decor-right">
+        <div class="liturgical-time-pill">
+          <span class="liturgical-dot"></span>
+          <span id="liturgicalSeason">Tiempo Ordinario</span>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir Menú">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN PRINCIPAL (BARRAS SACRAS DE NAVEGACIÓN) -->
+  <nav class="main-nav" id="mainNav">
+    <div class="container">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#inicio" class="nav-link active"><i class="fas fa-church"></i> Inicio</a></li>
+        <li class="nav-item"><a href="#evangelio" class="nav-link"><i class="fas fa-book-bible"></i> Evangelio</a></li>
+        <li class="nav-item"><a href="#horarios" class="nav-link"><i class="fas fa-clock"></i> Santa Misa</a></li>
+        <li class="nav-item"><a href="#patron" class="nav-link"><i class="fas fa-seedling"></i> San Isidro</a></li>
+        <li class="nav-item"><a href="#sacramentos" class="nav-link"><i class="fas fa-hands-praying"></i> Sacramentos</a></li>
+        <li class="nav-item"><a href="#galeria" class="nav-link"><i class="fas fa-images"></i> Galería</a></li>
+        <li class="nav-item"><a href="#noticias" class="nav-link"><i class="fas fa-newspaper"></i> Comunicados</a></li>
+        <li class="nav-item"><a href="#despacho" class="nav-link"><i class="fas fa-envelope-open-text"></i> Despacho</a></li>
+        <li class="nav-item"><a href="#donaciones" class="nav-link open-modal-intention" style="color:var(--color-gold-light);"><i class="fas fa-hand-holding-heart"></i> Intenciones</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- SECCIÓN HERO (ESTILO PORTAL SOLEMNE VATICANO) -->
+  <section class="hero-vatican" id="inicio">
+    <div class="container hero-content">
+      <div class="latin-motto">SANCTA SEDES &bull; COMMUNITAS MAIMONENSIS</div>
+      <h2 class="hero-title">Parroquia San Isidro Labrador</h2>
+      <p class="hero-subtitle">Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.</p>
+      
+      <div class="hero-divider">
+        <span class="line"></span>
+        <span class="cross"><i class="fas fa-cross"></i></span>
+        <span class="line"></span>
+      </div>
+
+      <div class="hero-buttons">
+        <a href="#horarios" class="btn btn-gold">
+          <i class="fas fa-clock"></i> Horarios Litúrgicos
+        </a>
+        <a href="#evangelio" class="btn btn-outline-light">
+          <i class="fas fa-scroll"></i> Evangelio y Meditación
+        </a>
+        <a href="#despacho" class="btn btn-outline-light open-modal-intention">
+          <i class="fas fa-hands-praying"></i> Solicitar Intención
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CINTILLO INSTITUCIONAL DE ACCESO RÁPIDO (ESTILO PORTALES DE LA CURIA) -->
+  <div class="container">
+    <div class="vatican-quick-strip">
+      <div class="strip-grid">
+        <a href="#horarios" class="strip-item">
+          <div class="strip-icon"><i class="fas fa-bell"></i></div>
+          <div class="strip-text">
+            <h4>Sagradas Eucaristías</h4>
+            <p>Horarios semanales y dominicales</p>
+          </div>
+        </a>
+        <a href="#sacramentos" class="strip-item">
+          <div class="strip-icon"><i class="fas fa-water"></i></div>
+          <div class="strip-text">
+            <h4>Bautismos y Bodas</h4>
+            <p>Requisitos de la pastoral de iniciación</p>
+          </div>
+        </a>
+        <a href="#patron" class="strip-item">
+          <div class="strip-icon"><i class="fas fa-wheat-awn"></i></div>
+          <div class="strip-text">
+            <h4>Nuestro Santo Patrón</h4>
+            <p>Vida, milagros y devoción a San Isidro</p>
+          </div>
+        </a>
+        <a href="#despacho" class="strip-item">
+          <div class="strip-icon"><i class="fas fa-landmark"></i></div>
+          <div class="strip-text">
+            <h4>Oficina Parroquial</h4>
+            <p>Atención, certificados y consultas</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 1: EVANGELIO Y REFLEXIÓN (ESTILO VATICAN NEWS / MEDITACIONES) -->
+  <section class="section section-bg-ivory" id="evangelio">
+    <div class="container">
+      <div class="section-header-vatican">
+        <span class="section-eyebrow">Verbum Domini</span>
+        <h2 class="section-title">Palabra de Dios & Meditación</h2>
+        <div class="section-title-ornament">
+          <span class="line"></span>
+          <i class="fas fa-cross"></i>
+          <span class="line"></span>
+        </div>
+        <p class="section-subtitle">Alimento diario para la vida cristiana en comunión con la Iglesia universal.</p>
+      </div>
+
+      <div class="gospel-card-wrapper">
+        <div class="gospel-header">
+          <span class="gospel-liturgical-tag" id="gospelTag">
+            <i class="fas fa-book-bible"></i> Evangelio del Día
+          </span>
+          <span class="gospel-date" id="gospelDateFull"><i class="far fa-calendar-alt"></i> Hoy en el Calendario Litúrgico</span>
+        </div>
+
+        <div class="gospel-body">
+          <div class="gospel-icon"><i class="fas fa-bible"></i></div>
+          <div style="font-family:var(--font-sans); font-size:0.82rem; letter-spacing:0.12em; color:var(--color-gold-dark); text-transform:uppercase; margin-bottom:6px;" id="gospelLiturgicalTitle">
+            Viernes de la XXXI Semana del Tiempo Ordinario
+          </div>
+          <h3 class="gospel-citation" id="gospelCitation">Santo Evangelio según San Lucas (16, 1-8)</h3>
+          
+          <div id="gospelAcclamation" style="font-family:var(--font-body); font-style:italic; font-size:1.05rem; color:var(--color-primary); margin-bottom:18px;">
+            &laquo;Quien guarda la palabra de Cristo, ciertamente el amor de Dios ha llegado en él a su plenitud.&raquo;
+          </div>
+
+          <blockquote class="gospel-verse" id="gospelVerse" style="text-align:justify; font-size:1.15rem; line-height:1.9;">
+            En aquel tiempo, Jesús dijo a sus discípulos: «Había una vez un hombre rico que tenía un administrador, el cual fue acusado ante él de haberle malgastado sus bienes. Lo llamó y le dijo: "¿Qué es eso que me han dicho de ti? Dame cuenta de tu trabajo, porque en adelante ya no serás administrador."<br><br>
+            El administrador se puso a decir para sí: "¿Qué voy a hacer, pues mi señor me quita la administración? Para cavar no tengo fuerzas; mendigar me da vergüenza. Ya sé lo que voy a hacer para que, cuando me echen de la administración, encuentre quien me reciba en su casa."<br><br>
+            Entonces fue llamando uno por uno a los deudores de su amo. Al primero le preguntó: "¿Cuánto le debes a mi amo?" El hombre respondió: "Cien barriles de aceite." El administrador le dijo: "Toma tu recibo, date prisa y haz otro por cincuenta." Luego preguntó al siguiente: "Y tú, ¿cuánto debes?" Éste respondió: "Cien sacos de trigo." El administrador le dijo: "Toma tu recibo y haz otro por ochenta."<br><br>
+            El amo tuvo que reconocer que su mal administrador había procedido con habilidad. Pues los que pertenecen a este mundo son más hábiles en sus negocios que los que pertenecen a la luz».
+          </blockquote>
+
+          <div class="gospel-reflection" id="gospelReflection">
+            <strong>Palabra del Señor. &bull; Meditación Parroquial:</strong> El Señor no alaba la falta de honradez del mayordomo, sino su sagacidad y prontitud para asegurar su porvenir. Con mayor fervor e ingenio, los discípulos de Cristo en Maimón estamos llamados a poner todas nuestras capacidades, trabajo y recursos al servicio del Reino de los Cielos y de los más necesitados.
+          </div>
+        </div>
+
+        <div class="gospel-footer" style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+          <button class="btn btn-gold" id="btnTodayGospel">
+            <i class="fas fa-sun"></i> Evangelio de Hoy
+          </button>
+          <button class="btn btn-outline-light" id="btnNextReading" style="color:var(--color-primary); border-color:var(--color-border-gold); background:#f7fbfe;">
+            <i class="fas fa-arrows-rotate"></i> Lecturas de los Próximos Días
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 2: HORARIOS DE CELEBRACIONES Y CONFESIONES -->
+  <section class="section section-bg-white" id="horarios">
+    <div class="container">
+      <div class="section-header-vatican">
+        <span class="section-eyebrow">Ordo Celebrationum</span>
+        <h2 class="section-title">Horarios de Santa Misa & Confesiones</h2>
+        <div class="section-title-ornament">
+          <span class="line"></span>
+          <i class="fas fa-church"></i>
+          <span class="line"></span>
+        </div>
+        <p class="section-subtitle">Participa en el Santo Sacrificio del Altar en el Templo Parroquial de Maimón.</p>
+      </div>
+
+      <div class="schedules-grid">
+        <!-- Tarjeta de Misas -->
+        <div class="schedule-card">
+          <h3 class="schedule-card-title">
+            <i class="fas fa-calendar-days"></i> Santas Misas en el Templo
+          </h3>
+          <table class="schedule-table">
+            <tbody>
+              <tr>
+                <td class="day">Domingos (Día del Señor)
+                  <span class="details">Misa de la Mañana & Misa Mayor</span>
+                </td>
+                <td class="time">8:30 AM &bull; 6:30 PM</td>
+              </tr>
+              <tr>
+                <td class="day">Martes a Viernes
+                  <span class="details">Misa Comunitaria y Vísperas</span>
+                </td>
+                <td class="time">6:30 PM</td>
+              </tr>
+              <tr>
+                <td class="day">Sábados
+                  <span class="details">Misa Vespertina del Precepto</span>
+                </td>
+                <td class="time">7:00 PM</td>
+              </tr>
+              <tr>
+                <td class="day">Primer Viernes de Mes
+                  <span class="details">Hora Santa al Sagrado Corazón de Jesús</span>
+                </td>
+                <td class="time">5:30 PM</td>
+              </tr>
+              <tr>
+                <td class="day">15 de Mayo
+                  <span class="details">Fiesta Patronal Solemne de San Isidro</span>
+                </td>
+                <td class="time">10:00 AM &bull; 6:00 PM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tarjeta de Confesiones y Despacho -->
+        <div class="schedule-card">
+          <h3 class="schedule-card-title">
+            <i class="fas fa-key"></i> Sacramento del Perdón y Atención
+          </h3>
+          <table class="schedule-table">
+            <tbody>
+              <tr>
+                <td class="day">Confesiones Penitenciales
+                  <span class="details">Media hora antes de cada Misa vespertina</span>
+                </td>
+                <td class="time">6:00 PM - 6:30 PM</td>
+              </tr>
+              <tr>
+                <td class="day">Jueves Eucarísticos
+                  <span class="details">Exposición del Santísimo Sacramento</span>
+                </td>
+                <td class="time">5:00 PM - 6:30 PM</td>
+              </tr>
+              <tr>
+                <td class="day">Despacho Parroquial
+                  <span class="details">Lunes a Viernes (Atención al feligrés)</span>
+                </td>
+                <td class="time">8:30 AM - 12:00 M<br><span style="font-size:0.9rem; font-weight:normal;">2:00 PM - 5:00 PM</span></td>
+              </tr>
+              <tr>
+                <td class="day">Sábados Parroquiales
+                  <span class="details">Catequesis y trámites sacramentales</span>
+                </td>
+                <td class="time">9:00 AM - 12:00 M</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="confession-box">
+            <h5><i class="fas fa-crosshairs"></i> Unción de los Enfermos y Urgencias</h5>
+            <p>Para atender enfermos en hogares u hospitales del municipio de Maimón, favor contactar a la oficina parroquial de inmediato.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 3: NUESTRO SANTO PATRÓN (SAN ISIDRO LABRADOR Y MAIMÓN) -->
+  <section class="section patron-section" id="patron">
+    <div class="container">
+      <div class="patron-grid">
+        <div class="patron-visual">
+          <div class="patron-image-frame">
+            <img src="img/san-isidro-labrador.jpg" alt="Venerada imagen de San Isidro Labrador en la Parroquia de Maimón" loading="lazy">
+            <div class="patron-caption">Sanctus Isidorus Agricola &bull; Imagen Patronal de Maimón</div>
+          </div>
+        </div>
+
+        <div class="patron-info">
+          <span class="section-eyebrow">Patronus Noster</span>
+          <h3>San Isidro Labrador: Modelo de Fe y Trabajo</h3>
+          
+          <div class="patron-quote">
+            &ldquo;La oración antes que el arado: quien a Dios confía la semilla, cosecha bendición en abundancia.&rdquo;
+          </div>
+
+          <p class="patron-bio-p">
+            San Isidro Labrador (1080 - 1172), humilde campesino madrileño canonizado por la Santa Sede junto a Santa Teresa de Jesús y San Ignacio de Loyola, es el venerado patrono de nuestra comunidad de Maimón, provincia Monseñor Nouel.
+          </p>
+          <p class="patron-bio-p">
+            Su vida ejemplar nos recuerda que el trabajo honrado en el campo y en las faenas del pueblo es altar para la santificación personal. Cada 15 de mayo, Maimón se congrega en júbilo patronal para dar gracias por las cosechas, los frutos de la tierra y la protección providencial sobre nuestras familias.
+          </p>
+
+          <div class="patron-attributes">
+            <div class="attribute-card">
+              <i class="fas fa-wheat-awn"></i>
+              <span>Patrón de los Labradores</span>
+            </div>
+            <div class="attribute-card">
+              <i class="fas fa-hands-holding-circle"></i>
+              <span>Caridad con los Pobres</span>
+            </div>
+            <div class="attribute-card">
+              <i class="fas fa-dove"></i>
+              <span>Comunión y Oración</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 4: SACRAMENTOS Y PASTORAL (ESTILO CURIAL) -->
+  <section class="section section-bg-ivory" id="sacramentos">
+    <div class="container">
+      <div class="section-header-vatican">
+        <span class="section-eyebrow">Sacramenta Ecclesiae</span>
+        <h2 class="section-title">Vida Sacramental & Pastoral</h2>
+        <div class="section-title-ornament">
+          <span class="line"></span>
+          <i class="fas fa-cross"></i>
+          <span class="line"></span>
+        </div>
+        <p class="section-subtitle">Los signos eficaces de la gracia instituida por Jesucristo confiados a la Santa Iglesia.</p>
+      </div>
+
+      <div class="sacraments-grid">
+        <div class="sacrament-item">
+          <div class="sacrament-icon"><i class="fas fa-water"></i></div>
+          <h4>Santo Bautismo</h4>
+          <p>Puerta de entrada a la vida en el Espíritu. Celebraciones comunitarias mensuales previa catequesis de padres y padrinos.</p>
+        </div>
+
+        <div class="sacrament-item">
+          <div class="sacrament-icon">
+            <svg class="communion-icon" viewBox="0 0 100 110" role="img" aria-label="Cáliz con la Sagrada Hostia">
+              <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Rayos de luz -->
+                <line x1="68" y1="43" x2="77" y2="43"/>
+                <line x1="65.3" y1="40.1" x2="76.6" y2="38.3"/>
+                <line x1="66.9" y1="36.9" x2="75.4" y2="33.8"/>
+                <line x1="63.8" y1="31.5" x2="70.7" y2="25.6"/>
+                <line x1="59" y1="27.4" x2="63.5" y2="19.6"/>
+                <line x1="53.1" y1="25.3" x2="54.7" y2="16.4"/>
+                <line x1="46.9" y1="25.3" x2="45.3" y2="16.4"/>
+                <line x1="41" y1="27.4" x2="36.5" y2="19.6"/>
+                <line x1="36.2" y1="31.5" x2="29.3" y2="25.6"/>
+                <line x1="33.1" y1="36.9" x2="24.6" y2="33.8"/>
+                <line x1="34.7" y1="40.1" x2="23.4" y2="38.3"/>
+                <line x1="32" y1="43" x2="23" y2="43"/>
+                <!-- Sagrada Hostia -->
+                <path d="M37.4 52 A15.5 15.5 0 1 1 62.6 52"/>
+                <!-- Cáliz -->
+                <path d="M14 52 H86 C86 64 70 72 55 73 H45 C30 72 14 64 14 52 Z"/>
+                <path d="M45 73 C45 76 43 77 42 79 C38 81 38 86 43 88 H57 C62 86 62 81 58 79 C57 77 55 76 55 73"/>
+                <path d="M47 88 H53 L52.5 98 H47.5 Z"/>
+                <path d="M47.5 98 L30 105 H70 L52.5 98"/>
+                <!-- Cruz en la copa -->
+                <path d="M50 56 V66 M45 60 H55" stroke-width="1.6"/>
+              </g>
+            </svg>
+          </div>
+          <h4>Primera Comunión</h4>
+          <p>Preparación en la catequesis infantil para recibir dignamente el Cuerpo y la Sangre de Cristo en la Santa Eucaristía.</p>
+        </div>
+
+        <div class="sacrament-item">
+          <div class="sacrament-icon"><i class="fas fa-fire"></i></div>
+          <h4>Confirmación</h4>
+          <p>Consagración por la unción del Santo Crisma e imposición de manos por nuestro Obispo diocesano.</p>
+        </div>
+
+        <div class="sacrament-item">
+          <div class="sacrament-icon"><i class="fas fa-ring"></i></div>
+          <h4>Santo Matrimonio</h4>
+          <p>Alianza conyugal santa. Charla prematrimonial, edictos canónicos y asesoramiento con nuestro párroco.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 5: COMUNICADOS, NOTICIAS Y BOLETINES (ESTILO VATICAN NEWS) -->
+  <section class="section section-bg-white" id="noticias">
+    <div class="container">
+      <div class="section-header-vatican">
+        <span class="section-eyebrow">Acta Paroeciae</span>
+        <h2 class="section-title">Comunicados & Vida Comunitaria</h2>
+        <div class="section-title-ornament">
+          <span class="line"></span>
+          <i class="fas fa-bullhorn"></i>
+          <span class="line"></span>
+        </div>
+        <p class="section-subtitle">Avisos oficiales del párroco y eventos de la comunidad eclesial de Maimón.</p>
+      </div>
+
+      <div class="news-grid">
+        <!-- Noticia 1 -->
+        <article class="news-card">
+          <div class="news-thumb">
+            <span class="news-category-badge">Pastoral</span>
+            <img src="img/eucaristia.jpg" alt="Celebración de la Santa Eucaristía en la parroquia" loading="lazy">
+          </div>
+          <div class="news-body">
+            <div class="news-meta">
+              <i class="far fa-calendar"></i> 2 de Noviembre, 2026 &bull; Despacho
+            </div>
+            <h4 class="news-title">Apertura del Año de Catequesis Parroquial para Niños y Jóvenes</h4>
+            <p class="news-excerpt">
+              Se convoca a las familias del municipio de Maimón a inscribir a sus hijos en los programas de Primera Comunión y Confirmación en el templo sede.
+            </p>
+            <a href="#despacho" class="news-link">Más información <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Noticia 2 -->
+        <article class="news-card">
+          <div class="news-thumb">
+            <span class="news-category-badge">Liturgia</span>
+            <img src="img/templo-jardin.jpg" alt="Templo y jardines de la Parroquia San Isidro Labrador" loading="lazy">
+          </div>
+          <div class="news-body">
+            <div class="news-meta">
+              <i class="far fa-calendar"></i> 28 de Octubre, 2026 &bull; Pastoral Social
+            </div>
+            <h4 class="news-title">Jornada de Bendición de los Campos y Agricultores de Maimón</h4>
+            <p class="news-excerpt">
+              Encomendamos el trabajo de los hombres y mujeres que labran la tierra, pidiendo a San Isidro abundancia de lluvias y cosechas sanas.
+            </p>
+            <a href="#patron" class="news-link">Ver programa <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <!-- Noticia 3 -->
+        <article class="news-card">
+          <div class="news-thumb">
+            <span class="news-category-badge">Caritas</span>
+            <img src="img/vigilia-cirios.jpg" alt="Vigilia de oración con cirios en el templo parroquial" loading="lazy">
+          </div>
+          <div class="news-body">
+            <div class="news-meta">
+              <i class="far fa-calendar"></i> 20 de Octubre, 2026 &bull; Caritas
+            </div>
+            <h4 class="news-title">Campaña de Solidaridad y Canasta Fraterna para las Familias</h4>
+            <p class="news-excerpt">
+              Invitamos a depositar alimentos no perecederos al pie del presbiterio durante las misas dominicales para asistir a nuestros hermanos enfermos.
+            </p>
+            <a href="#donaciones" class="news-link open-modal-intention">Cómo apoyar <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 6: GALERÍA FOTOGRÁFICA DE LA VIDA PARROQUIAL -->
+  <section class="section section-bg-white" id="galeria">
+    <div class="container">
+      <div class="section-header-vatican">
+        <span class="section-eyebrow">Memoria Photographica</span>
+        <h2 class="section-title">Nuestra Vida en Imágenes</h2>
+        <div class="section-title-ornament">
+          <span class="line"></span>
+          <i class="fas fa-camera-retro"></i>
+          <span class="line"></span>
+        </div>
+        <p class="section-subtitle">El templo, la liturgia y la comunidad de Maimón reunidos en un mismo corazón.</p>
+      </div>
+
+      <div class="gallery-grid">
+        <button type="button" class="gallery-item portrait" data-full="img/templo-atardecer.jpg" data-caption="Templo Parroquial al atardecer &bull; Maimón">
+          <img src="img/templo-atardecer.jpg" alt="Templo parroquial de San Isidro Labrador al atardecer" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Templo al atardecer</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item landscape" data-full="img/interior-templo.jpg" data-caption="Interior del templo durante la oración comunitaria">
+          <img src="img/interior-templo.jpg" alt="Interior del templo iluminado durante una celebración" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Interior del templo</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item landscape" data-full="img/vigilia-cirios.jpg" data-caption="Vigilia de luz y oración de la comunidad parroquial">
+          <img src="img/vigilia-cirios.jpg" alt="Feligreses reunidos en vigilia con cirios encendidos" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Vigilia de luz y oración</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/adoracion-santisimo.jpg" data-caption="Adoración al Santísimo Sacramento del Altar">
+          <img src="img/adoracion-santisimo.jpg" alt="Custodia dorada en la adoración al Santísimo" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Adoración al Santísimo</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/custodia-atardecer.jpg" data-caption="La custodia eucarística bajo la luz del atardecer">
+          <img src="img/custodia-atardecer.jpg" alt="Sacerdote sosteniendo la custodia eucarística al atardecer" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Custodia al atardecer</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/eucaristia.jpg" data-caption="Celebración de la Santa Eucaristía en Maimón">
+          <img src="img/eucaristia.jpg" alt="Sacerdote elevando la hostia durante la consagración" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Santa Eucaristía</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/templo-dia.jpg" data-caption="El templo parroquial a plena luz del día">
+          <img src="img/templo-dia.jpg" alt="Fachada del templo parroquial durante el día" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">El templo a plena luz</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/templo-jardin.jpg" data-caption="Jardines y entorno del templo parroquial">
+          <img src="img/templo-jardin.jpg" alt="Templo parroquial rodeado de sus jardines" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Jardines parroquiales</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/virgen-dolorosa.jpg" data-caption="Nuestra Señora de los Dolores &bull; Templo de Maimón">
+          <img src="img/virgen-dolorosa.jpg" alt="Imagen de la Virgen Dolorosa en el templo" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Nuestra Señora de los Dolores</span>
+          </span>
+        </button>
+
+        <button type="button" class="gallery-item portrait" data-full="img/templo-fachada.jpg" data-caption="Fachada del templo de San Isidro Labrador &bull; Maimón">
+          <img src="img/templo-fachada.jpg" alt="Fachada principal del templo parroquial" loading="lazy">
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><i class="fas fa-expand"></i></span>
+            <span class="gallery-title">Fachada del templo</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="gallery-credit-bar">
+        <img src="img/logo-comunicaciones.png" alt="Comunicaciones de la Parroquia San Isidro Labrador" class="pc-logo-small" width="1200" height="555" loading="lazy">
+        <p>
+          Registro fotográfico y comunicación parroquial a cargo de la
+          <strong>Pastoral de Comunicación</strong> de la Parroquia San Isidro Labrador.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 7: DESPACHO PARROQUIAL Y CONTACTO -->
+  <section class="section section-bg-ivory" id="despacho">
+    <div class="container">
+      <div class="contact-section-inner">
+        <!-- Información Institucional -->
+        <div class="contact-info-block">
+          <span class="section-eyebrow">Curia Paroecialis</span>
+          <h3>Despacho & Secretaría Parroquial</h3>
+          <p>
+            Para solicitud de actas de bautismo, confirmación, intenciones para las Santas Misas y atención sacerdotal, estamos a su santa disposición en el centro de Maimón.
+          </p>
+
+          <ul class="contact-info-list">
+            <li>
+              <i class="fas fa-location-dot"></i>
+              <div>
+                <strong>Ubicación del Templo y Despacho:</strong><br>
+                Calle Principal frente al Parque Central, Maimón, Provincia Monseñor Nouel, República Dominicana.
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-cross"></i>
+              <div>
+                <strong>Jurisdicción Canónica:</strong><br>
+                Diócesis de La Vega (S.E.R. Obispo Diocesano).
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Correo Electrónico Parroquial:</strong><br>
+                parroquiasanisidromaimon@diocesisdelavega.do
+              </div>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <div>
+                <strong>Horario de Secretaría:</strong><br>
+                Lunes a Viernes: 8:30 AM &ndash; 12:00 M y 2:00 PM &ndash; 5:00 PM
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Formulario Canónico de Contacto -->
+        <div class="contact-form">
+          <h4 style="font-family:var(--font-serif); color:var(--color-primary); margin-bottom:14px; font-size:1.3rem;">
+            <i class="fas fa-feather-pointed"></i> Mensaje al Despacho Parroquial
+          </h4>
+
+          <div id="formSuccessAlert" style="display:none; background:#e8f5e9; border:1px solid #a5d6a7; color:#2e7d32; padding:12px; margin-bottom:15px; font-size:0.95rem;">
+            <i class="fas fa-check-circle"></i> Su mensaje ha sido remitido con éxito. ¡Paz y Bien!
+          </div>
+
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="contactName">Nombre Completo del Feligrés</label>
+              <input type="text" id="contactName" class="form-control" placeholder="Ej. Juan de Jesús Pérez" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Correo Electrónico o Teléfono</label>
+              <input type="text" id="contactEmail" class="form-control" placeholder="Ej. correo@ejemplo.com o 809-xxx-xxxx" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contactReason">Motivo de la Consulta</label>
+              <select id="contactReason" class="form-control" required>
+                <option value="">Seleccione el asunto...</option>
+                <option value="sacramento">Trámite de Bautismo / Boda</option>
+                <option value="certificado">Certificado de Fe y Bautismo</option>
+                <option value="intencion">Intención de Santa Misa</option>
+                <option value="catequesis">Inscripción en Catequesis</option>
+                <option value="pastoral">Cita con el Señor Cura Párroco</option>
+                <option value="otro">Otro asunto eclesial</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Petición o Consulta Detallada</label>
+              <textarea id="contactMessage" class="form-control" placeholder="Escriba aquí respetuosamente los pormenores de su solicitud..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">
+              <i class="fas fa-paper-plane"></i> Enviar al Despacho Parroquial
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL PARA REGISTRO DE INTENCIONES DE MISA / ACCIÓN DE GRACIAS -->
+  <div class="modal" id="intentionModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">&times;</button>
+      <h3 style="font-family:var(--font-serif); color:var(--color-primary); margin-bottom:10px;">
+        <i class="fas fa-hands-praying"></i> Registro de Intención para la Santa Misa
+      </h3>
+      <p style="font-size:0.95rem; color:var(--color-text-muted); margin-bottom:18px;">
+        Ofrezca la Santa Eucaristía en sufragio por los fieles difuntos, en acción de gracias o por la salud de los enfermos.
+      </p>
+
+      <form id="modalIntentionForm">
+        <div class="form-group">
+          <label>Tipo de Intención</label>
+          <select class="form-control" required>
+            <option value="sufragio">Por el Eterno Descanso de un Fiel Difunto</option>
+            <option value="gracias">Acción de Gracias (Cumpleaños, Aniversario, Salud)</option>
+            <option value="salud">Por la Salud y Sanación de un Enfermo</option>
+            <option value="especial">Intención Especial y Petición al Señor</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Nombre(s) por quien(es) se ofrece</label>
+          <input type="text" class="form-control" placeholder="Ej. Almas del purgatorio / Familia Gómez" required>
+        </div>
+
+        <div class="form-group">
+          <label>Fecha Deseada para la Eucaristía</label>
+          <input type="date" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label>Nombre y Teléfono del Solicitante</label>
+          <input type="text" class="form-control" placeholder="Para confirmación de la secretaría" required>
+        </div>
+
+        <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center; margin-top:10px;">
+          <i class="fas fa-bookmark"></i> Asentar Intención en el Libro Parroquial
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- VISOR DE GALERÍA FOTOGRÁFICA (LIGHTBOX) -->
+  <div class="lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-label="Galería fotográfica parroquial" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar galería">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Fotografía anterior">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <figure class="lightbox-figure">
+      <img id="lightboxImage" src="" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Fotografía siguiente">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+
+  <!-- PIE DE PÁGINA (ESTILO VATICANO PONTIFICIO) -->
+  <footer class="footer-vatican">
+    <div class="container footer-top">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo-parroquia.png" alt="Logo de la Parroquia San Isidro Labrador" class="footer-logo" width="964" height="652" loading="lazy">
+          <span class="footer-brand-location">Maimón &bull; República Dominicana</span>
+        </div>
+        <p style="font-size:0.95rem; line-height:1.6; margin-bottom:15px;">
+          Templo consagrado para la adoración de Dios Uno y Trino, bajo el patronazgo celestial de San Isidro Labrador, al servicio del pueblo creyente de Maimón.
+        </p>
+        <div class="prayer-intention-box">
+          <p>&ldquo;San Isidro bendito, ruega por nuestros campos y familias.&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#inicio"><i class="fas fa-angle-right"></i> Inicio</a></li>
+          <li><a href="#evangelio"><i class="fas fa-angle-right"></i> Evangelio del Día</a></li>
+          <li><a href="#horarios"><i class="fas fa-angle-right"></i> Misas y Confesiones</a></li>
+          <li><a href="#patron"><i class="fas fa-angle-right"></i> San Isidro Patrón</a></li>
+          <li><a href="#sacramentos"><i class="fas fa-angle-right"></i> Vida Sacramental</a></li>
+          <li><a href="#galeria"><i class="fas fa-angle-right"></i> Galería de Fotos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Comunión Eclesial</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.vatican.va" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> La Santa Sede (Vatican.va)</a></li>
+          <li><a href="https://www.vaticannews.va/es.html" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Vatican News en Español</a></li>
+          <li><a href="#"><i class="fas fa-angle-right"></i> Conferencia del Episcopado Dominicano</a></li>
+          <li><a href="#"><i class="fas fa-angle-right"></i> Diócesis de La Vega</a></li>
+          <li><a href="#despacho"><i class="fas fa-angle-right"></i> Horarios de Atención</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Lema y Consagración</h4>
+        <p style="font-size:0.92rem; margin-bottom:12px;">
+          <em>Ad maiorem Dei gloriam</em>. En comunión fraterna con el Santo Padre y la Cátedra de San Pedro en Roma.
+        </p>
+        <p style="font-size:0.92rem; color:var(--color-gold);">
+          <i class="fas fa-phone"></i> Despacho Parroquial Maimón
+        </p>
+
+        <div class="footer-pc-credit">
+          <img src="img/logo-comunicaciones.png" alt="Comunicaciones de la Parroquia San Isidro Labrador" class="footer-pc-logo" width="1200" height="555" loading="lazy">
+          <p>Comunicación parroquial al servicio del Evangelio y de nuestra comunidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>
+        &copy; 2026 Parroquia San Isidro Labrador de Maimón. Diócesis de La Vega. Todos los derechos canónicos reservados.
+      </div>
+      <div>
+        Fotografías y comunicación: <strong style="color:var(--color-gold);">Pastoral de Comunicación</strong>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="main.js"></script>
+</body>
+</html>
+

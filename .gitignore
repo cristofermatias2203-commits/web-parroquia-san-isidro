@@ -1,0 +1,13 @@
+# Archivos del sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/*
+!.vscode/launch.json
+*.code-workspace
+
+# Temporales y registros
+*.log
+*.tmp
