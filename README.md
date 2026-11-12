@@ -9,6 +9,32 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 - `main.js` — interactividad (menú móvil, evangelio del día, galería, formularios y modales).
 - `manifest.webmanifest` — configuración de la aplicación web instalable (PWA).
 - `img/` — fotografías, logo parroquial, logo de Comunicaciones, favicon e iconos PWA.
+- `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.json`), generadas con anticipación.
+- `scripts/generate-gospel.mjs` — genera los archivos de `data/evangelio/`.
+
+## Evangelio del día
+
+El bloque del Evangelio no usa textos escritos a mano: carga el archivo del mes en curso
+(`data/evangelio/YYYY-MM.json`) y muestra automáticamente la lectura correspondiente a la
+fecha actual, según la zona horaria de República Dominicana.
+
+- Los textos provienen de [Breviarium Core](https://breviarium.es), una librería de código
+  abierto (licencia MIT) con el calendario litúrgico y las lecturas completas en español.
+- El calendario generado cubre de 2026 a 2040; no hace falta editar nada cada día.
+- Si un día no estuviera en los archivos locales, el sitio consulta una API litúrgica de
+  respaldo y guarda el resultado en `localStorage` para consultas posteriores sin conexión.
+- Si no hay conexión y el día no está guardado, se muestra un aviso honesto en lugar de un
+  texto inventado.
+- El botón «Próximos Días» recorre los siete días siguientes y vuelve a «Evangelio de Hoy».
+
+Para regenerar los datos (por ejemplo, para ampliar los años cubiertos):
+
+```bash
+npm install
+npm run generate:gospel -- --from=2026 --to=2040
+```
+
+Los archivos se sobrescriben en `data/evangelio/` y deben publicarse junto con el sitio.
 
 ## Accesibilidad y navegación
 

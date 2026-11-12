@@ -1,0 +1,13 @@
+{
+  "name": "web-parroquia-san-isidro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sitio web de la Parroquia San Isidro Labrador de Maimón",
+  "scripts": {
+    "generate:gospel": "node scripts/generate-gospel.mjs"
+  },
+  "devDependencies": {
+    "breviarium": "3.1.8"
+  }
+}

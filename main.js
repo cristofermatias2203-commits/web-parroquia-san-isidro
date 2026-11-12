@@ -85,66 +85,51 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 3. Calendario Litúrgico y Evangelio del Día
-  // Base de datos del leccionario según el rito romano de la Santa Sede
+  // Los textos se generan con Breviarium Core (breviarium.es) en data/evangelio/.
+  // Si un día falta en los archivos locales se consulta la API de respaldo.
   const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-  const lecturasLiturgicas = [
-    {
-      diaIndex: 5, // Viernes
-      diaSemana: "Viernes",
-      tiempo: "Tiempo Ordinario (Semana XXXI)",
-      tituloLiturgico: "Viernes de la XXXI Semana del Tiempo Ordinario",
-      primeraLectura: "Flp 3, 17 — 4, 1",
-      salmo: "Salmo 121: «Vamos alegres a la casa del Señor»",
-      aclamacion: "«Quien guarda la palabra de Cristo, ciertamente el amor de Dios ha llegado en él a su plenitud. Aleluya.»",
-      cita: "Santo Evangelio según San Lucas (16, 1-8)",
-      versiculo: `En aquel tiempo, Jesús dijo a sus discípulos: «Había una vez un hombre rico que tenía un administrador, el cual fue acusado ante él de haberle malgastado sus bienes. Lo llamó y le dijo: "¿Qué es eso que me han dicho de ti? Dame cuenta de tu trabajo, porque en adelante ya no serás administrador."<br><br>
-      El administrador se puso a decir para sí: "¿Qué voy a hacer, pues mi señor me quita la administración? Para cavar no tengo fuerzas; mendigar me da vergüenza. Ya sé lo que voy a hacer para que, cuando me echen de la administración, encuentre quien me reciba en su casa."<br><br>
-      Entonces fue llamando uno por uno a los deudores de su amo. Al primero le preguntó: "¿Cuánto le debes a mi amo?" El hombre respondió: "Cien barriles de aceite." El administrador le dijo: "Toma tu recibo, date prisa y haz otro por cincuenta." Luego preguntó al siguiente: "Y tú, ¿cuánto debes?" Éste respondió: "Cien sacos de trigo." El administrador le dijo: "Toma tu recibo y haz otro por ochenta."<br><br>
-      El amo tuvo que reconocer que su mal administrador había procedido con habilidad. Pues los que pertenecen a este mundo son más hábiles en sus negocios que los que pertenecen a la luz».`,
-      reflexion: "Palabra del Señor. &bull; Meditación Parroquial: Cristo nos exhorta a poner todo nuestro ingenio, fervor y bienes terrenales no en ambiciones egoístas, sino con fidelidad y caridad al servicio de Dios y de los más necesitados de Maimón, asegurando así morada eterna en los Cielos."
-    },
-    {
-      diaIndex: 6, // Sábado
-      diaSemana: "Sábado",
-      tiempo: "Tiempo Ordinario (Semana XXXI)",
-      tituloLiturgico: "Sábado de la XXXI Semana del Tiempo Ordinario",
-      primeraLectura: "Flp 4, 10-19",
-      salmo: "Salmo 111: «Dichoso quien teme al Señor»",
-      aclamacion: "«Jesucristo siendo rico, se hizo pobre por nosotros, para enriquecernos con su pobreza.»",
-      cita: "Santo Evangelio según San Lucas (16, 9-15)",
-      versiculo: `En aquel tiempo, Jesús dijo a sus discípulos: «Gánense amigos con el dinero de iniquidad, para que cuando éste falte, los reciban a ustedes en las moradas eternas. El que es fiel en lo muy poco, también en lo más es fiel; y el que en lo muy poco es injusto, también en lo más es injusto.<br><br>
-      Ningún siervo puede servir a dos señores, porque o aborrecerá al uno y amará al otro, o se apegará al uno y despreciará al otro. No podéis servir a Dios y a las riquezas».`,
-      reflexion: "Palabra del Señor. &bull; Meditación Parroquial: La generosidad con los pobres transforma el dinero efímero en tesoro celestial. Que en nuestra parroquia reinen la honradez y la ayuda mutua."
-    },
-    {
-      diaIndex: 0, // Domingo
-      diaSemana: "Domingo",
-      tiempo: "XXXII Domingo del Tiempo Ordinario",
-      tituloLiturgico: "XXXII Domingo del Tiempo Ordinario - Día del Señor",
-      primeraLectura: "1 Re 17, 10-16",
-      salmo: "Salmo 145: «Alaba, alma mía, al Señor»",
-      aclamacion: "«Dichosos los pobres en el espíritu, porque de ellos es el Reino de los Cielos.»",
-      cita: "Santo Evangelio según San Marcos (12, 38-44)",
-      versiculo: `En aquel tiempo, Jesús, sentado enfrente del arca de las ofrendas, miraba cómo la multitud echaba monedas en ella; y muchos ricos echaban mucho. Llegó una viuda pobre y echó dos moneditas de muy poco valor.<br><br>
-      Jesús llamó a sus discípulos y les dijo: «En verdad os digo que esta viuda pobre ha echado más que todos los que echan en el arca; porque todos han echado de lo que les sobra, pero ella, en su indigencia, ha echado todo lo que tenía, todo su sustento».`,
-      reflexion: "Palabra del Señor. &bull; Meditación Parroquial: Dios no mide la cantidad de la ofrenda sino el amor y la entrega sincera del corazón humilde. San Isidro Labrador nos inspira a entregarlo todo con confianza en la Providencia divina."
-    },
-    {
-      diaIndex: 1, // Lunes
-      diaSemana: "Lunes",
-      tiempo: "Tiempo Ordinario (Semana XXXII)",
-      tituloLiturgico: "Lunes de la XXXII Semana del Tiempo Ordinario",
-      primeraLectura: "Tit 1, 1-9",
-      salmo: "Salmo 23: «Este es el linaje de los que buscan al Señor»",
-      aclamacion: "«Brilláis como lumbreras del mundo, sosteniendo firmemente la Palabra de Vida.»",
-      cita: "Santo Evangelio según San Lucas (17, 1-6)",
-      versiculo: `En aquel tiempo, Jesús dijo a sus discípulos: «Es imposible que no vengan escándalos; pero ¡ay de aquel por quien vienen! Más le valdría que le ataran al cuello una piedra de molino y le tiraran al mar, antes que escandalizar a uno de estos pequeños. Estad atentos.<br><br>
-      Si tu hermano peca, repréndelo; y si se arrepiente, perdónalo. Y si peca contra ti siete veces al día, y siete veces vuelve diciendo: "Me arrepiento", perdónalo». Los apóstoles dijeron al Señor: «Auméntanos la fe».`,
-      reflexion: "Palabra del Señor. &bull; Meditación Parroquial: El perdón fraternal y el testimonio intachable sostienen la concordia de nuestras familias y de nuestra comunidad en Maimón."
-    }
-  ];
+  const GOSPEL_DATA_PATH = 'data/evangelio';
+  const GOSPEL_API_URL = 'https://categpt.chat/api/v1/feast';
+  const GOSPEL_CACHE_PREFIX = 'parroquia:evangelio:v1:';
+  const GOSPEL_CACHE_TTL = 1000 * 60 * 60 * 24 * 60; // 60 días
+  const PARISH_TIME_ZONE = 'America/Santo_Domingo';
+  const MAX_NEXT_DAYS = 7;
+
+  const GOSPEL_BOOKS = {
+    Mt: 'San Mateo',
+    Mc: 'San Marcos',
+    Lc: 'San Lucas',
+    Jn: 'San Juan'
+  };
+
+  const SEASON_LABELS = {
+    ADVENT: 'Adviento',
+    CHRISTMAS_TIME: 'Navidad',
+    LENT: 'Cuaresma',
+    EASTER_TRIDUUM: 'Triduo Pascual',
+    EASTER_TIME: 'Pascua',
+    ORDINARY_TIME: 'Tiempo Ordinario'
+  };
+
+  const RANK_LABELS = {
+    SOLEMNITY: 'Solemnidad',
+    FEAST: 'Fiesta',
+    MEMORIAL: 'Memoria',
+    OPTIONAL_MEMORIAL: 'Memoria libre',
+    WEEKDAY: 'Feria',
+    SUNDAY: 'Domingo'
+  };
+
+  const MEDITACIONES = {
+    ADVENT: 'En este tiempo de espera, preparemos el camino del Señor con la oración, la caridad y una alegre conversión del corazón. Que nuestra comunidad de Maimón se mantenga vigilante y esperanzada.',
+    CHRISTMAS_TIME: 'Contemplamos el misterio de Dios hecho niño. Que la luz de Belén ilumine nuestros hogares y nos impulse a acoger al Señor en los más pequeños y necesitados.',
+    LENT: 'La Cuaresma nos invita a volver a Dios con sinceridad. Acojamos esta Palabra con espíritu de conversión, ayuno y misericordia, para renovar nuestra vida cristiana.',
+    EASTER_TRIDUUM: 'Nos unimos al misterio de la Pasión, Muerte y Resurrección del Señor. Que esta Palabra nos ayude a permanecer junto a la cruz y a esperar con confianza la victoria de la vida.',
+    EASTER_TIME: 'Cristo ha resucitado y vive entre nosotros. Que la alegría pascual fortalezca nuestra fe y nos haga testigos valientes de su amor en la familia y en la comunidad.',
+    ORDINARY_TIME: 'Acogamos esta Palabra con corazón abierto y pidamos al Espíritu Santo la gracia de vivirla hoy en nuestra familia, en nuestro trabajo y en nuestra comunidad de Maimón.'
+  };
 
   const gospelCitationEl = document.getElementById('gospelCitation');
   const gospelVerseEl = document.getElementById('gospelVerse');
@@ -154,58 +139,427 @@ document.addEventListener('DOMContentLoaded', () => {
   const gospelAcclamationEl = document.getElementById('gospelAcclamation');
   const gospelDateFullEl = document.getElementById('gospelDateFull');
   const parishDateEl = document.getElementById('parishCurrentDate');
+  const gospelCardEl = document.querySelector('.gospel-card-wrapper');
+  const gospelStatusEl = document.getElementById('gospelStatus');
+  const btnTodayGospel = document.getElementById('btnTodayGospel');
+  const btnNextReading = document.getElementById('btnNextReading');
 
-  const today = new Date();
-  const currentDayOfWeek = today.getDay(); // 0 a 6
+  const gospelMonthCache = new Map();
+  let todayIso = getDateInParishTimeZone(new Date());
+  let currentOffset = 0;
+  let currentDayData = null;
+  let requestToken = 0;
 
-  // Formato oficial hispano para la fecha actual
-  const fechaTexto = `${diasSemana[currentDayOfWeek]}, ${today.getDate()} de ${meses[today.getMonth()]} de ${today.getFullYear()}`;
-  if (parishDateEl) parishDateEl.textContent = fechaTexto;
+  if (parishDateEl) parishDateEl.textContent = formatLongDate(todayIso);
 
-  // Encontrar la lectura que corresponda al día de hoy según el día de la semana
-  let todayReading = lecturasLiturgicas.find(l => l.diaIndex === currentDayOfWeek) || lecturasLiturgicas[0];
-  let currentIndex = lecturasLiturgicas.indexOf(todayReading);
+  // --- Utilidades de fecha ---
+  function getDateInParishTimeZone(date) {
+    try {
+      const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone: PARISH_TIME_ZONE,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).formatToParts(date);
+      const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      return `${values.year}-${values.month}-${values.day}`;
+    } catch (error) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+  }
 
-  function renderLectura(lectura, esHoy = false) {
-    if (gospelCitationEl) gospelCitationEl.textContent = lectura.cita;
-    if (gospelVerseEl) gospelVerseEl.innerHTML = lectura.versiculo;
-    if (gospelReflectionEl) gospelReflectionEl.innerHTML = lectura.reflexion;
-    if (gospelSeasonEl) gospelSeasonEl.textContent = lectura.tiempo;
-    if (gospelTitleEl) gospelTitleEl.textContent = lectura.tituloLiturgico;
-    if (gospelAcclamationEl) gospelAcclamationEl.innerHTML = lectura.aclamacion;
-    
-    if (gospelDateFullEl) {
-      if (esHoy) {
-        gospelDateFullEl.innerHTML = `<i class="far fa-calendar-check" style="color:var(--color-gold);"></i> ${fechaTexto} (Hoy)`;
-      } else {
-        gospelDateFullEl.innerHTML = `<i class="far fa-calendar-alt"></i> Leccionario litúrgico de ${lectura.diaSemana}`;
+  function addDays(isoDate, days) {
+    const [year, month, day] = isoDate.split('-').map(Number);
+    const date = new Date(Date.UTC(year, month - 1, day + days, 12));
+    return date.toISOString().slice(0, 10);
+  }
+
+  function formatLongDate(isoDate) {
+    const [year, month, day] = isoDate.split('-').map(Number);
+    const date = new Date(Date.UTC(year, month - 1, day, 12));
+    return `${diasSemana[date.getUTCDay()]}, ${day} de ${meses[month - 1]} de ${year}`;
+  }
+
+  // --- Carga de los datos litúrgicos ---
+  function getMonthKey(isoDate) {
+    return isoDate.slice(0, 7);
+  }
+
+  async function loadMonth(monthKey) {
+    if (gospelMonthCache.has(monthKey)) return gospelMonthCache.get(monthKey);
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+
+    const request = fetch(`${GOSPEL_DATA_PATH}/${monthKey}.json`, {
+      signal: controller.signal,
+      headers: { Accept: 'application/json' }
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`No se encontró el archivo ${monthKey}.json (HTTP ${response.status}).`);
+        }
+        return response.json();
+      })
+      .then((payload) => {
+        if (!payload || !payload.days) {
+          throw new Error(`El archivo ${monthKey}.json no tiene el formato esperado.`);
+        }
+        return payload;
+      })
+      .catch((error) => {
+        gospelMonthCache.delete(monthKey);
+        throw error;
+      })
+      .finally(() => clearTimeout(timeout));
+
+    gospelMonthCache.set(monthKey, request);
+    return request;
+  }
+
+  async function loadDay(isoDate) {
+    try {
+      const month = await loadMonth(getMonthKey(isoDate));
+      const day = month.days?.[isoDate];
+      if (!day || !day.gospel?.text) {
+        throw new Error(`No hay datos locales para ${isoDate}.`);
+      }
+      writeCachedDay(isoDate, day);
+      return day;
+    } catch (localError) {
+      try {
+        const day = await loadDayFromApi(isoDate);
+        writeCachedDay(isoDate, day);
+        return day;
+      } catch (apiError) {
+        const cached = readCachedDay(isoDate);
+        if (cached) return cached;
+        throw new Error(
+          `No se pudo cargar ${isoDate}. Local: ${localError.message}. API: ${apiError.message}`
+        );
       }
     }
   }
 
-  // Renderizar de inmediato el evangelio de hoy
-  renderLectura(todayReading, true);
+  async function loadDayFromApi(isoDate) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 9000);
 
-  // Botón para volver al Evangelio de Hoy
-  const btnTodayGospel = document.getElementById('btnTodayGospel');
-  if (btnTodayGospel) {
-    btnTodayGospel.addEventListener('click', (e) => {
-      e.preventDefault();
-      currentIndex = lecturasLiturgicas.indexOf(todayReading);
-      animateTransition(() => renderLectura(todayReading, true));
+    try {
+      const response = await fetch(
+        `${GOSPEL_API_URL}?date=${encodeURIComponent(isoDate)}&locale=es`,
+        {
+          signal: controller.signal,
+          headers: { Accept: 'application/json' }
+        }
+      );
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const json = await response.json();
+      return normalizeApiDay(json, isoDate);
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  function normalizeApiDay(json, isoDate) {
+    const nom = json?.nom;
+    if (!nom) throw new Error('La API no devolvió datos litúrgicos.');
+
+    const mass = Array.isArray(nom.mass) ? nom.mass : [];
+    const gospel = mass.find((item) => item?.key === 'gospel' && item.text);
+    if (!gospel) throw new Error('La API no devolvió el Evangelio.');
+
+    const text = apiHtmlToText(gospel.text);
+    if (!text) throw new Error('El texto del Evangelio está vacío.');
+
+    const first = mass.find(
+      (item) => (item?.key === 'reading' || item?.key === 'first_reading') && item.ref
+    );
+    const psalm = mass.find((item) => item?.key === 'psalm' && item.ref);
+    const second = mass.find((item) => item?.key === 'second_reading' && item.ref);
+    const season = detectSeasonFromText(`${nom.name || ''} ${nom.line || ''}`);
+
+    return {
+      date: isoDate,
+      celebration: cleanInline(nom.name) || 'Calendario Litúrgico',
+      rank: '',
+      rankLabel: cleanInline(nom.rank),
+      season,
+      seasonLabel: '',
+      color: '',
+      cycle: '',
+      gospel: {
+        ref: cleanInline(gospel.ref),
+        title: '',
+        text
+      },
+      firstReading: cleanInline(first?.ref),
+      psalm: cleanInline(psalm?.ref),
+      secondReading: cleanInline(second?.ref),
+      acclamation: null,
+      comment: null
+    };
+  }
+
+  function apiHtmlToText(html) {
+    const doc = new DOMParser().parseFromString(String(html || ''), 'text/html');
+    doc.querySelectorAll('script,style').forEach((element) => element.remove());
+
+    const paragraphs = Array.from(doc.querySelectorAll('p'))
+      .map((paragraph) => {
+        const clone = paragraph.cloneNode(true);
+        clone.querySelectorAll('br').forEach((br) => br.replaceWith('\n'));
+        return clone.textContent
+          .replace(/\u00a0/g, ' ')
+          .split('\n')
+          .map((line) => line.replace(/\s+/g, ' ').trim())
+          .filter(Boolean)
+          .join('\n');
+      })
+      .filter(Boolean);
+
+    if (!paragraphs.length) {
+      return (doc.body?.textContent || '')
+        .replace(/\u00a0/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    const cleaned = [];
+    for (const paragraph of paragraphs) {
+      if (/^(?:o\s+)?lectura breve\b/i.test(paragraph)) break;
+      if (/^(?:[–—-]\s*)?(?:Palabra del Señor|¡?Aclamemos la Palabra de Dios!?)/i.test(paragraph)) break;
+      cleaned.push(paragraph);
+    }
+    return cleaned.join('\n\n').trim();
+  }
+
+  function detectSeasonFromText(text) {
+    const value = String(text || '').toLowerCase();
+    if (/adviento/.test(value)) return 'ADVENT';
+    if (/cuaresma|semana santa|miércoles de ceniza|domingo de ramos/.test(value)) return 'LENT';
+    if (/triduo pascual|jueves santo|viernes santo|vigilia pascual/.test(value)) return 'EASTER_TRIDUUM';
+    if (/pascua|pentecostés|ascensión/.test(value)) return 'EASTER_TIME';
+    if (/navidad|epifanía|bautismo del señor/.test(value)) return 'CHRISTMAS_TIME';
+    if (/tiempo ordinario|semana del tiempo ordinario/.test(value)) return 'ORDINARY_TIME';
+    return '';
+  }
+
+  function cleanInline(value) {
+    return String(value || '').replace(/\s+/g, ' ').trim();
+  }
+
+  // --- Caché local para consultas sin conexión ---
+  function readCachedDay(isoDate) {
+    try {
+      const raw = localStorage.getItem(`${GOSPEL_CACHE_PREFIX}${isoDate}`);
+      if (!raw) return null;
+
+      const entry = JSON.parse(raw);
+      if (!entry || !entry.data) return null;
+
+      if (Date.now() - Number(entry.savedAt || 0) > GOSPEL_CACHE_TTL) {
+        localStorage.removeItem(`${GOSPEL_CACHE_PREFIX}${isoDate}`);
+        return null;
+      }
+      return entry.data;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeCachedDay(isoDate, data) {
+    try {
+      localStorage.setItem(
+        `${GOSPEL_CACHE_PREFIX}${isoDate}`,
+        JSON.stringify({ savedAt: Date.now(), data })
+      );
+      pruneGospelCache();
+    } catch (error) {
+      // localStorage puede estar deshabilitado o lleno.
+    }
+  }
+
+  function pruneGospelCache() {
+    try {
+      const keys = [];
+      for (let index = 0; index < localStorage.length; index++) {
+        const key = localStorage.key(index);
+        if (key && key.startsWith(GOSPEL_CACHE_PREFIX)) keys.push(key);
+      }
+
+      const now = Date.now();
+      keys.forEach((key) => {
+        try {
+          const entry = JSON.parse(localStorage.getItem(key) || 'null');
+          if (!entry || now - Number(entry.savedAt || 0) > GOSPEL_CACHE_TTL) {
+            localStorage.removeItem(key);
+          }
+        } catch (error) {
+          localStorage.removeItem(key);
+        }
+      });
+    } catch (error) {
+      // Ignorar errores de almacenamiento.
+    }
+  }
+
+  // --- Formato del contenido ---
+  const HTML_ESCAPES = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  };
+
+  function escapeGospelHtml(value) {
+    return String(value ?? '').replace(/[&<>"']/g, (character) => HTML_ESCAPES[character]);
+  }
+
+  function formatGospelCitation(ref) {
+    const value = cleanInline(ref);
+    const match = value.match(/^(\S+)\s+(.+)$/);
+    if (!match) return 'Santo Evangelio del Día';
+
+    const bookKey = match[1].replace(/\.$/, '');
+    const book = GOSPEL_BOOKS[bookKey] || bookKey;
+    return `Santo Evangelio según ${book} (${match[2]})`;
+  }
+
+  function getSeasonLabel(season) {
+    return SEASON_LABELS[season] || 'Tiempo Litúrgico';
+  }
+
+  function getRankLabel(rank) {
+    return RANK_LABELS[rank] || '';
+  }
+
+  function getLiturgicalTitle(data) {
+    const seasonLabel = SEASON_LABELS[data.season] || '';
+    let celebration = cleanInline(data.celebration);
+
+    if (!celebration) {
+      celebration = seasonLabel ? `Feria de ${seasonLabel}` : 'Calendario Litúrgico';
+    } else if (/^\d{1,2} de [a-záéíóúñ]+$/i.test(celebration)) {
+      celebration = seasonLabel ? `Feria de ${seasonLabel}` : 'Feria del Tiempo Litúrgico';
+    }
+
+    const rankLabel = data.rankLabel || getRankLabel(data.rank);
+    const includeRank = data.rankLabel
+      ? !/^feria$/i.test(rankLabel)
+      : ['MEMORIAL', 'OPTIONAL_MEMORIAL', 'FEAST', 'SOLEMNITY'].includes(data.rank);
+
+    return [celebration, includeRank ? rankLabel : ''].filter(Boolean).join(' · ') || 'Calendario Litúrgico';
+  }
+
+  function getMeditation(season) {
+    return MEDITACIONES[season] || MEDITACIONES.ORDINARY_TIME;
+  }
+
+  function renderGospelText(text) {
+    const value = String(text || '').trim();
+    if (!value) return 'El texto del Evangelio no está disponible.';
+    return escapeGospelHtml(value).replace(/\n/g, '<br>');
+  }
+
+  function renderAcclamation(data) {
+    const parts = [];
+
+    if (data.acclamation?.text) {
+      const text = escapeGospelHtml(data.acclamation.text).replace(/\n/g, '<br>');
+      parts.push(`<span class="gospel-acclamation-text">&laquo;${text}&raquo;</span>`);
+    }
+
+    const references = [];
+    if (data.firstReading) references.push(`Primera lectura: ${escapeGospelHtml(data.firstReading)}`);
+    if (data.psalm) references.push(`Salmo: ${escapeGospelHtml(data.psalm)}`);
+    if (data.secondReading) references.push(`Segunda lectura: ${escapeGospelHtml(data.secondReading)}`);
+
+    if (references.length) {
+      parts.push(`<span class="gospel-readings-refs">${references.join(' &middot; ')}</span>`);
+    }
+
+    return parts.join('');
+  }
+
+  function renderReflection(data) {
+    if (data.comment?.text) {
+      const source = [data.comment.source, data.comment.title].filter(Boolean).join(': ');
+      const attribution = source
+        ? ` <span class="gospel-reflection-source">— ${escapeGospelHtml(source)}</span>`
+        : '';
+      const text = escapeGospelHtml(data.comment.text).replace(/\n/g, '<br>');
+      return `<strong>Palabra del Señor. &bull; Comentario de la Tradición:</strong> ${text}${attribution}`;
+    }
+
+    return `<strong>Palabra del Señor. &bull; Meditación Parroquial:</strong> ${escapeGospelHtml(getMeditation(data.season))}`;
+  }
+
+  // --- Renderizado del bloque ---
+  function renderLectura(data, esHoy, isoDate) {
+    if (gospelCitationEl) gospelCitationEl.textContent = formatGospelCitation(data.gospel?.ref);
+    if (gospelVerseEl) gospelVerseEl.innerHTML = renderGospelText(data.gospel?.text);
+    if (gospelReflectionEl) gospelReflectionEl.innerHTML = renderReflection(data);
+    if (gospelSeasonEl) gospelSeasonEl.textContent = getSeasonLabel(data.season);
+    if (gospelTitleEl) gospelTitleEl.textContent = getLiturgicalTitle(data);
+
+    if (gospelAcclamationEl) {
+      const acclamation = renderAcclamation(data);
+      gospelAcclamationEl.innerHTML = acclamation;
+      gospelAcclamationEl.style.display = acclamation ? '' : 'none';
+    }
+
+    if (gospelDateFullEl) {
+      const dateText = formatLongDate(isoDate);
+      gospelDateFullEl.innerHTML = esHoy
+        ? `<i class="far fa-calendar-check" style="color:var(--color-gold);"></i> ${dateText} (Hoy)`
+        : `<i class="far fa-calendar-alt"></i> ${dateText}`;
+    }
+
+    if (parishDateEl) parishDateEl.textContent = formatLongDate(todayIso);
+  }
+
+  function renderError(isoDate) {
+    if (gospelCitationEl) gospelCitationEl.textContent = 'Evangelio no disponible';
+    if (gospelVerseEl) {
+      gospelVerseEl.innerHTML = 'No fue posible cargar el Evangelio de este día. Revisa tu conexión y vuelve a intentarlo.';
+    }
+    if (gospelReflectionEl) gospelReflectionEl.innerHTML = '';
+    if (gospelTitleEl) gospelTitleEl.textContent = 'Calendario Litúrgico';
+    if (gospelSeasonEl) gospelSeasonEl.textContent = 'Tiempo Litúrgico';
+
+    if (gospelAcclamationEl) {
+      gospelAcclamationEl.innerHTML = '';
+      gospelAcclamationEl.style.display = 'none';
+    }
+
+    if (gospelDateFullEl) {
+      gospelDateFullEl.innerHTML = `<i class="far fa-calendar-alt"></i> ${formatLongDate(isoDate)}`;
+    }
+
+    setGospelStatus('No se pudo cargar el Evangelio. Comprueba tu conexión y vuelve a intentarlo.', true);
+  }
+
+  function setLoading(isLoading) {
+    if (gospelCardEl) {
+      gospelCardEl.classList.toggle('is-loading', isLoading);
+      gospelCardEl.setAttribute('aria-busy', isLoading ? 'true' : 'false');
+    }
+
+    [btnTodayGospel, btnNextReading].forEach((button) => {
+      if (button) button.disabled = isLoading;
     });
   }
 
-  // Botón para alternar a las lecturas siguientes del leccionario
-  const btnNextReading = document.getElementById('btnNextReading');
-  if (btnNextReading) {
-    btnNextReading.addEventListener('click', (e) => {
-      e.preventDefault();
-      currentIndex = (currentIndex + 1) % lecturasLiturgicas.length;
-      const lectura = lecturasLiturgicas[currentIndex];
-      const esHoy = lectura.diaIndex === currentDayOfWeek;
-      animateTransition(() => renderLectura(lectura, esHoy));
-    });
+  function setGospelStatus(message, isError = false) {
+    if (!gospelStatusEl) return;
+    gospelStatusEl.textContent = message || '';
+    gospelStatusEl.classList.toggle('is-error', Boolean(isError));
   }
 
   function animateTransition(callback) {
@@ -214,6 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
       callback();
       return;
     }
+
     gospelCard.style.opacity = '0.15';
     gospelCard.style.transition = 'opacity 0.22s ease';
     setTimeout(() => {
@@ -221,6 +576,72 @@ document.addEventListener('DOMContentLoaded', () => {
       gospelCard.style.opacity = '1';
     }, 220);
   }
+
+  async function showGospelDay(offset) {
+    const requestId = ++requestToken;
+    const isoDate = addDays(todayIso, offset);
+
+    setLoading(true);
+    setGospelStatus('Cargando el Evangelio…');
+
+    try {
+      const data = await loadDay(isoDate);
+      if (requestId !== requestToken) return;
+
+      currentOffset = offset;
+      currentDayData = data;
+
+      animateTransition(() => {
+        if (requestId !== requestToken) return;
+        renderLectura(data, offset === 0, isoDate);
+      });
+      setGospelStatus('');
+    } catch (error) {
+      if (requestId !== requestToken) return;
+      console.error('No se pudo cargar el Evangelio:', error);
+
+      if (currentDayData) {
+        setGospelStatus('No se pudo cargar el día solicitado. Inténtalo de nuevo.', true);
+      } else {
+        renderError(isoDate);
+      }
+    } finally {
+      if (requestId === requestToken) setLoading(false);
+    }
+  }
+
+  if (btnTodayGospel) {
+    btnTodayGospel.addEventListener('click', (event) => {
+      event.preventDefault();
+      if (currentOffset === 0 && currentDayData) {
+        animateTransition(() => renderLectura(currentDayData, true, todayIso));
+        return;
+      }
+      showGospelDay(0);
+    });
+  }
+
+  if (btnNextReading) {
+    btnNextReading.addEventListener('click', (event) => {
+      event.preventDefault();
+      const nextOffset = currentOffset >= MAX_NEXT_DAYS ? 0 : currentOffset + 1;
+      showGospelDay(nextOffset);
+    });
+  }
+
+  // Cargar automáticamente el Evangelio correspondiente a hoy.
+  showGospelDay(0);
+
+  // Si la página permanece abierta, actualizar al cambiar el día.
+  setInterval(() => {
+    const nowIso = getDateInParishTimeZone(new Date());
+    if (nowIso === todayIso) return;
+
+    todayIso = nowIso;
+    if (parishDateEl) parishDateEl.textContent = formatLongDate(todayIso);
+    if (currentOffset === 0) showGospelDay(0);
+  }, 60 * 1000);
+
 
   // 4. Modal de Intenciones y Ofrendas con gestión de foco
   const modal = document.getElementById('intentionModal');

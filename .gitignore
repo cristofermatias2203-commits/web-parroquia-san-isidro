@@ -8,6 +8,9 @@ desktop.ini
 !.vscode/launch.json
 *.code-workspace
 
+# Dependencias de Node (solo se usan para regenerar los datos del Evangelio)
+node_modules/
+
 # Temporales y registros
 *.log
 *.tmp

@@ -221,24 +221,17 @@
         <div class="gospel-body">
           <div class="gospel-icon"><i class="fas fa-bible"></i></div>
           <div style="font-family:var(--font-sans); font-size:0.82rem; letter-spacing:0.12em; color:var(--color-gold-dark); text-transform:uppercase; margin-bottom:6px;" id="gospelLiturgicalTitle">
-            Viernes de la XXXI Semana del Tiempo Ordinario
+            Calendario Litúrgico
           </div>
-          <h3 class="gospel-citation" id="gospelCitation">Santo Evangelio según San Lucas (16, 1-8)</h3>
-          
-          <div id="gospelAcclamation" style="font-family:var(--font-body); font-style:italic; font-size:1.05rem; color:var(--color-primary); margin-bottom:18px;">
-            &laquo;Quien guarda la palabra de Cristo, ciertamente el amor de Dios ha llegado en él a su plenitud.&raquo;
-          </div>
+          <h3 class="gospel-citation" id="gospelCitation">Santo Evangelio del Día</h3>
+
+          <div id="gospelAcclamation" style="font-family:var(--font-body); font-style:italic; font-size:1.05rem; color:var(--color-primary); margin-bottom:18px;"></div>
 
           <blockquote class="gospel-verse" id="gospelVerse" style="text-align:justify; font-size:1.15rem; line-height:1.9;">
-            En aquel tiempo, Jesús dijo a sus discípulos: «Había una vez un hombre rico que tenía un administrador, el cual fue acusado ante él de haberle malgastado sus bienes. Lo llamó y le dijo: "¿Qué es eso que me han dicho de ti? Dame cuenta de tu trabajo, porque en adelante ya no serás administrador."<br><br>
-            El administrador se puso a decir para sí: "¿Qué voy a hacer, pues mi señor me quita la administración? Para cavar no tengo fuerzas; mendigar me da vergüenza. Ya sé lo que voy a hacer para que, cuando me echen de la administración, encuentre quien me reciba en su casa."<br><br>
-            Entonces fue llamando uno por uno a los deudores de su amo. Al primero le preguntó: "¿Cuánto le debes a mi amo?" El hombre respondió: "Cien barriles de aceite." El administrador le dijo: "Toma tu recibo, date prisa y haz otro por cincuenta." Luego preguntó al siguiente: "Y tú, ¿cuánto debes?" Éste respondió: "Cien sacos de trigo." El administrador le dijo: "Toma tu recibo y haz otro por ochenta."<br><br>
-            El amo tuvo que reconocer que su mal administrador había procedido con habilidad. Pues los que pertenecen a este mundo son más hábiles en sus negocios que los que pertenecen a la luz».
+            El Evangelio del día se actualiza automáticamente.
           </blockquote>
 
-          <div class="gospel-reflection" id="gospelReflection">
-            <strong>Palabra del Señor. &bull; Meditación Parroquial:</strong> El Señor no alaba la falta de honradez del mayordomo, sino su sagacidad y prontitud para asegurar su porvenir. Con mayor fervor e ingenio, los discípulos de Cristo en Maimón estamos llamados a poner todas nuestras capacidades, trabajo y recursos al servicio del Reino de los Cielos y de los más necesitados.
-          </div>
+          <div class="gospel-reflection" id="gospelReflection"></div>
         </div>
 
         <div class="gospel-footer" style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
@@ -246,9 +239,11 @@
             <i class="fas fa-sun"></i> Evangelio de Hoy
           </button>
           <button class="btn btn-outline-light" id="btnNextReading" style="color:var(--color-primary); border-color:var(--color-border-gold); background:#f7fbfe;">
-            <i class="fas fa-arrows-rotate"></i> Lecturas de los Próximos Días
+            <i class="fas fa-arrows-rotate"></i> Próximos Días
           </button>
         </div>
+
+        <p class="gospel-status" id="gospelStatus" role="status" aria-live="polite"></p>
       </div>
     </div>
   </section>
