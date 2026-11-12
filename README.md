@@ -6,7 +6,8 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 
 - `index.html` — estructura y contenido del sitio.
 - `style.css` — estilos, paleta institucional y diseño adaptable.
-- `main.js` — interactividad (menú móvil, evangelio del día, galería, formularios y modales).
+- `i18n.js` — diccionarios de interfaz y metadatos para los nueve idiomas.
+- `main.js` — interactividad (menú móvil, evangelio del día, idiomas, galería, formularios y modales).
 - `manifest.webmanifest` — configuración de la aplicación web instalable (PWA).
 - `img/` — fotografías, logo parroquial, logo de Comunicaciones, favicon e iconos PWA.
 - `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.json`), generadas con anticipación.
@@ -26,6 +27,8 @@ fecha actual, según la zona horaria de República Dominicana.
 - Si no hay conexión y el día no está guardado, se muestra un aviso honesto en lugar de un
   texto inventado.
 - El botón «Próximos Días» recorre los siete días siguientes y vuelve a «Evangelio de Hoy».
+- Las lecturas completas (primera lectura, salmo y Evangelio) se muestran en bloques plegables.
+  En español se toman de Evangelizo y, si no responde, se conservan las referencias locales.
 
 Para regenerar los datos (por ejemplo, para ampliar los años cubiertos):
 
@@ -35,6 +38,26 @@ npm run generate:gospel -- --from=2026 --to=2040
 ```
 
 Los archivos se sobrescriben en `data/evangelio/` y deben publicarse junto con el sitio.
+
+## Idiomas
+
+El selector de la barra superior ofrece nueve idiomas: español, italiano, inglés, francés,
+alemán, portugués, polaco, árabe y chino. La preferencia se guarda en `localStorage`
+(`parroquia:idioma`); si no hay una guardada, se detecta el idioma del navegador.
+
+- La interfaz, los formularios, los avisos y los metadatos (`<title>` y descripción) se
+  traducen con los diccionarios de `i18n.js`. Los textos en español son la clave de cada
+  traducción.
+- El árabe activa automáticamente la dirección de lectura de derecha a izquierda (`dir="rtl"`)
+  y se aplican tipografías adecuadas para árabe y chino.
+- Las lecturas bíblicas de los ocho idiomas distintos del español se obtienen de
+  [Evangelizo Feed v2](https://feed.evangelizo.org/v2/reader.php) y se guardan en
+  `localStorage` (`parroquia:evangelio:v2:{idioma}:{fecha}`). El español sigue usando los
+  archivos locales como fuente principal.
+- Si Evangelizo no está disponible, se muestra el texto en español con un aviso en el idioma
+  elegido; el sitio nunca inventa una traducción.
+- Los valores enviados por los formularios se mantienen en español para que el despacho
+  parroquial reciba los correos en un formato uniforme.
 
 ## Accesibilidad y navegación
 

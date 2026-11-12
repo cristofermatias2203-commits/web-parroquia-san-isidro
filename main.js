@@ -39,6 +39,192 @@ document.addEventListener('DOMContentLoaded', () => {
     return `mailto:${PARISH_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  // 0. Selector de idiomas y traducción de la interfaz
+  const I18N = window.PARISH_I18N || null;
+  const I18N_LANGUAGES = I18N ? I18N.languages : [];
+  const LANG_BY_CODE = Object.fromEntries(I18N_LANGUAGES.map((language) => [language.code, language]));
+  const DEFAULT_LANGUAGE = (I18N && I18N.defaultLanguage) || 'es';
+  const LANGUAGE_STORAGE_KEY = 'parroquia:idioma';
+
+  const normalizeTranslatableText = (value) => String(value || '').replace(/\s+/g, ' ').trim();
+
+  const detectInitialLanguage = () => {
+    try {
+      const stored = localStorage.getItem(LANGUAGE_STORAGE_KEY);
+      if (stored && LANG_BY_CODE[stored]) return stored;
+    } catch (error) {
+      // localStorage puede estar deshabilitado.
+    }
+
+    const candidates = navigator.languages && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language || DEFAULT_LANGUAGE];
+
+    for (const candidate of candidates) {
+      const base = String(candidate).toLowerCase().split('-')[0];
+      if (LANG_BY_CODE[base]) return base;
+    }
+    return DEFAULT_LANGUAGE;
+  };
+
+  let currentLang = detectInitialLanguage();
+
+  const getCurrentLocale = () => (LANG_BY_CODE[currentLang] && LANG_BY_CODE[currentLang].locale) || 'es-DO';
+
+  // Devuelve la traducción de una cadena española para el idioma activo.
+  const lookupTranslation = (dictionary, source) => {
+    if (!dictionary) return source;
+    if (dictionary[source]) return dictionary[source];
+
+    // Algunas entidades HTML del origen no llegan al DOM como texto literal.
+    const alias = source.replace(/©/g, '&copy;').replace(/•/g, '&bull;');
+    return dictionary[alias] || source;
+  };
+
+  const t = (source) => {
+    if (!I18N || currentLang === DEFAULT_LANGUAGE) return source;
+    return lookupTranslation(I18N.ui && I18N.ui[currentLang], source);
+  };
+
+  // Nodos de texto y atributos que se traducen al cambiar de idioma.
+  const translatableTextNodes = [];
+  const translatableAttributes = [];
+  const SKIP_TRANSLATION_SELECTOR = [
+    '[data-i18n-skip]',
+    '#parishCurrentDate',
+    '#gospelDateFull',
+    '#gospelLiturgicalTitle',
+    '#gospelCitation',
+    '#gospelAcclamation',
+    '#gospelReadings',
+    '#gospelVerse',
+    '#gospelReflection',
+    '#gospelStatus',
+    '#formStatus',
+    '#intentionStatus',
+    '#lightboxCaption'
+  ].join(',');
+  const SKIP_TRANSLATION_TAGS = new Set(['SCRIPT', 'STYLE', 'NOSCRIPT', 'TEXTAREA']);
+
+  const registerTranslatableContent = () => {
+    if (!I18N) return;
+
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (!parent || SKIP_TRANSLATION_TAGS.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        if (parent.closest(SKIP_TRANSLATION_SELECTOR)) return NodeFilter.FILTER_REJECT;
+        if (!normalizeTranslatableText(node.nodeValue)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    let node;
+    while ((node = walker.nextNode())) {
+      translatableTextNodes.push({ node, source: normalizeTranslatableText(node.nodeValue) });
+    }
+
+    document.querySelectorAll('[placeholder], [title], [aria-label], [alt], [data-caption]').forEach((element) => {
+      if (element.closest(SKIP_TRANSLATION_SELECTOR)) return;
+      ['placeholder', 'title', 'aria-label', 'alt', 'data-caption'].forEach((name) => {
+        if (!element.hasAttribute(name)) return;
+        const source = normalizeTranslatableText(element.getAttribute(name));
+        if (source) translatableAttributes.push({ element, name, source });
+      });
+    });
+  };
+
+  const applyInterfaceLanguage = () => {
+    if (!I18N) return;
+    const dictionary = currentLang === DEFAULT_LANGUAGE ? null : (I18N.ui && I18N.ui[currentLang]);
+
+    translatableTextNodes.forEach(({ node, source }) => {
+      if (!node.isConnected) return;
+      const translated = lookupTranslation(dictionary, source);
+      const raw = node.nodeValue || '';
+      const leading = raw.match(/^\s*/)[0];
+      const trailing = raw.match(/\s*$/)[0];
+      const next = leading + translated + trailing;
+      if (node.nodeValue !== next) node.nodeValue = next;
+    });
+
+    translatableAttributes.forEach(({ element, name, source }) => {
+      if (!element.isConnected) return;
+      const translated = lookupTranslation(dictionary, source);
+      if (element.getAttribute(name) !== translated) element.setAttribute(name, translated);
+    });
+  };
+
+  const metaSelectors = {
+    description: 'meta[name="description"]',
+    ogTitle: 'meta[property="og:title"]',
+    ogDescription: 'meta[property="og:description"]',
+    twitterTitle: 'meta[name="twitter:title"]',
+    twitterDescription: 'meta[name="twitter:description"]'
+  };
+  const originalMeta = { title: document.title };
+  Object.entries(metaSelectors).forEach(([key, selector]) => {
+    const element = document.querySelector(selector);
+    originalMeta[key] = element ? element.getAttribute('content') : '';
+  });
+
+  const setMetaContent = (selector, value) => {
+    const element = document.querySelector(selector);
+    if (element && value) element.setAttribute('content', value);
+  };
+
+  const applyDocumentMeta = () => {
+    const meta = currentLang === DEFAULT_LANGUAGE ? null : (I18N && I18N.meta && I18N.meta[currentLang]);
+    document.title = (meta && meta.title) || originalMeta.title;
+    setMetaContent(metaSelectors.description, (meta && meta.description) || originalMeta.description);
+    setMetaContent(metaSelectors.ogTitle, (meta && meta.title) || originalMeta.ogTitle);
+    setMetaContent(metaSelectors.ogDescription, (meta && meta.description) || originalMeta.ogDescription);
+    setMetaContent(metaSelectors.twitterTitle, (meta && meta.title) || originalMeta.twitterTitle);
+    setMetaContent(metaSelectors.twitterDescription, (meta && meta.description) || originalMeta.twitterDescription);
+  };
+
+  const updateLanguageControls = () => {
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+      languageSelect.value = currentLang;
+      languageSelect.setAttribute('aria-label', t('Seleccionar idioma'));
+    }
+
+    const languageLabel = document.querySelector('label[for="languageSelect"]');
+    if (languageLabel) languageLabel.textContent = t('Idioma');
+
+    if (mobileMenuBtn && mainNav) {
+      mobileMenuBtn.setAttribute(
+        'aria-label',
+        mainNav.classList.contains('active') ? t('Cerrar menú de navegación') : t('Abrir menú de navegación')
+      );
+    }
+  };
+
+  const applyLanguage = (code, options = {}) => {
+    const next = LANG_BY_CODE[code] ? code : DEFAULT_LANGUAGE;
+    currentLang = next;
+
+    if (options.persist !== false) {
+      try {
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, next);
+      } catch (error) {
+        // Ignorar almacenamiento deshabilitado.
+      }
+    }
+
+    document.documentElement.lang = next === 'zh' ? 'zh-CN' : next;
+    document.documentElement.dir = (LANG_BY_CODE[next] && LANG_BY_CODE[next].dir) || 'ltr';
+
+    applyInterfaceLanguage();
+    applyDocumentMeta();
+    updateLanguageControls();
+
+    if (parishDateEl) parishDateEl.textContent = formatLongDate(todayIso);
+  };
+
+  registerTranslatableContent();
+
   // 1. Menú Móvil Hamburguesa accesible
   const mobileMenuBtn = document.getElementById('mobileMenuToggle');
   const mainNav = document.getElementById('mainNav');
@@ -49,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const setMenuState = (open) => {
       mainNav.classList.toggle('active', open);
       mobileMenuBtn.setAttribute('aria-expanded', String(open));
-      mobileMenuBtn.setAttribute('aria-label', open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+      mobileMenuBtn.setAttribute('aria-label', open ? t('Cerrar menú de navegación') : t('Abrir menú de navegación'));
       if (menuIcon) menuIcon.className = open ? 'fas fa-times' : 'fas fa-bars';
     };
 
@@ -93,6 +279,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const GOSPEL_DATA_PATH = 'data/evangelio';
   const GOSPEL_API_URL = 'https://categpt.chat/api/v1/feast';
   const GOSPEL_CACHE_PREFIX = 'parroquia:evangelio:v1:';
+  const TRANSLATED_CACHE_PREFIX = 'parroquia:evangelio:v2:';
+  const EVANGELIZO_URL = 'https://feed.evangelizo.org/v2/reader.php';
   const GOSPEL_CACHE_TTL = 1000 * 60 * 60 * 24 * 60; // 60 días
   const PARISH_TIME_ZONE = 'America/Santo_Domingo';
   const MAX_NEXT_DAYS = 7;
@@ -137,6 +325,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gospelSeasonEl = document.getElementById('liturgicalSeason');
   const gospelTitleEl = document.getElementById('gospelLiturgicalTitle');
   const gospelAcclamationEl = document.getElementById('gospelAcclamation');
+  const gospelReadingsEl = document.getElementById('gospelReadings');
   const gospelDateFullEl = document.getElementById('gospelDateFull');
   const parishDateEl = document.getElementById('parishCurrentDate');
   const gospelCardEl = document.querySelector('.gospel-card-wrapper');
@@ -180,7 +369,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function formatLongDate(isoDate) {
     const [year, month, day] = isoDate.split('-').map(Number);
     const date = new Date(Date.UTC(year, month - 1, day, 12));
-    return `${diasSemana[date.getUTCDay()]}, ${day} de ${meses[month - 1]} de ${year}`;
+
+    try {
+      const formatted = new Intl.DateTimeFormat(getCurrentLocale(), {
+        timeZone: 'UTC',
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+        numberingSystem: 'latn'
+      }).format(date);
+      return formatted.charAt(0).toLocaleUpperCase(getCurrentLocale()) + formatted.slice(1);
+    } catch (error) {
+      return `${diasSemana[date.getUTCDay()]}, ${day} de ${meses[month - 1]} de ${year}`;
+    }
   }
 
   // --- Carga de los datos litúrgicos ---
@@ -353,6 +555,142 @@ document.addEventListener('DOMContentLoaded', () => {
     return String(value || '').replace(/\s+/g, ' ').trim();
   }
 
+  // --- Lecturas bíblicas multiidioma (Evangelizo Feed v2) ---
+  function readTranslatedDay(isoDate, lang) {
+    try {
+      const raw = localStorage.getItem(`${TRANSLATED_CACHE_PREFIX}${lang}:${isoDate}`);
+      if (!raw) return null;
+
+      const entry = JSON.parse(raw);
+      if (!entry || !entry.data) return null;
+
+      if (Date.now() - Number(entry.savedAt || 0) > GOSPEL_CACHE_TTL) {
+        localStorage.removeItem(`${TRANSLATED_CACHE_PREFIX}${lang}:${isoDate}`);
+        return null;
+      }
+      return entry.data;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeTranslatedDay(isoDate, lang, data) {
+    try {
+      localStorage.setItem(
+        `${TRANSLATED_CACHE_PREFIX}${lang}:${isoDate}`,
+        JSON.stringify({ savedAt: Date.now(), data })
+      );
+      pruneGospelCache();
+    } catch (error) {
+      // localStorage puede estar deshabilitado o lleno.
+    }
+  }
+
+  async function loadEvangelizoDay(isoDate, lang) {
+    const language = LANG_BY_CODE[lang];
+    const evangelizoCode = language && language.evangelizo;
+    if (!evangelizoCode) throw new Error('No hay fuente bíblica para este idioma.');
+
+    const cached = readTranslatedDay(isoDate, lang);
+    if (cached) return cached;
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 9000);
+
+    try {
+      const compactDate = isoDate.replace(/-/g, '');
+      const response = await fetch(
+        `${EVANGELIZO_URL}?date=${compactDate}&type=xml&lang=${evangelizoCode}`,
+        {
+          signal: controller.signal,
+          headers: { Accept: 'application/xml, text/xml' }
+        }
+      );
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const xml = await response.text();
+      const doc = new DOMParser().parseFromString(xml, 'application/xml');
+      if (doc.querySelector('parsererror')) throw new Error('La respuesta XML no es válida.');
+
+      const field = (tag) => {
+        const node = doc.querySelector(tag);
+        if (!node) return '';
+        return String(node.textContent || '')
+          .replace(/\u00a0/g, ' ')
+          .replace(/\r\n?/g, '\n')
+          .replace(/\n{3,}/g, '\n\n')
+          .trim();
+      };
+
+      const gospelText = field('reading_gospel');
+      if (!gospelText) throw new Error('Evangelizo no devolvió el Evangelio.');
+
+      const readings = [
+        {
+          key: 'first',
+          label: 'Primera lectura',
+          ref: field('reading_text1_st'),
+          title: field('reading_text1_lt'),
+          text: field('reading_text1')
+        },
+        {
+          key: 'psalm',
+          label: 'Salmo',
+          ref: field('reading_text2_st'),
+          title: field('reading_text2_lt'),
+          text: field('reading_text2')
+        },
+        {
+          key: 'second',
+          label: 'Segunda lectura',
+          ref: field('reading_text3_st'),
+          title: field('reading_text3_lt'),
+          text: field('reading_text3')
+        }
+      ].filter((reading) => reading.text);
+
+      const commentText = field('comment');
+      const day = {
+        date: isoDate,
+        celebration: field('saint'),
+        liturgicalTitle: field('litugic_t'),
+        gospel: {
+          ref: field('reading_gospel_st'),
+          title: '',
+          longTitle: field('reading_gospel_lt'),
+          text: gospelText
+        },
+        readings,
+        acclamation: null,
+        comment: commentText
+          ? { text: commentText, title: field('comment_t'), source: field('comment_s') }
+          : null
+      };
+
+      writeTranslatedDay(isoDate, lang, day);
+      return day;
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  function mergeTranslatedDay(base, translated) {
+    return {
+      ...base,
+      celebration: translated.celebration || base.celebration,
+      liturgicalTitle: translated.liturgicalTitle || '',
+      gospel: {
+        ref: translated.gospel?.ref || base.gospel?.ref || '',
+        title: translated.gospel?.title || base.gospel?.title || '',
+        longTitle: translated.gospel?.longTitle || '',
+        text: translated.gospel?.text || base.gospel?.text || ''
+      },
+      readings: translated.readings || [],
+      acclamation: translated.acclamation || null,
+      comment: translated.comment || null
+    };
+  }
+
   // --- Caché local para consultas sin conexión ---
   function readCachedDay(isoDate) {
     try {
@@ -389,7 +727,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const keys = [];
       for (let index = 0; index < localStorage.length; index++) {
         const key = localStorage.key(index);
-        if (key && key.startsWith(GOSPEL_CACHE_PREFIX)) keys.push(key);
+        if (key && (key.startsWith(GOSPEL_CACHE_PREFIX) || key.startsWith(TRANSLATED_CACHE_PREFIX))) {
+          keys.push(key);
+        }
       }
 
       const now = Date.now();
@@ -424,29 +764,41 @@ document.addEventListener('DOMContentLoaded', () => {
   function formatGospelCitation(ref) {
     const value = cleanInline(ref);
     const match = value.match(/^(\S+)\s+(.+)$/);
-    if (!match) return 'Santo Evangelio del Día';
+    if (!match) return t('Santo Evangelio del Día');
 
     const bookKey = match[1].replace(/\.$/, '');
     const book = GOSPEL_BOOKS[bookKey] || bookKey;
     return `Santo Evangelio según ${book} (${match[2]})`;
   }
 
+  function getGospelCitation(data) {
+    const longTitle = cleanInline(data.gospel?.longTitle);
+    if (currentLang !== 'es') {
+      return longTitle ? longTitle.replace(/[\s.]+$/, '') : cleanInline(data.gospel?.ref);
+    }
+    return formatGospelCitation(data.gospel?.ref);
+  }
+
   function getSeasonLabel(season) {
-    return SEASON_LABELS[season] || 'Tiempo Litúrgico';
+    const seasons = I18N && I18N.seasons && I18N.seasons[currentLang];
+    return (seasons && seasons[season]) || SEASON_LABELS[season] || t('Tiempo Litúrgico');
   }
 
   function getRankLabel(rank) {
-    return RANK_LABELS[rank] || '';
+    const ranks = I18N && I18N.ranks && I18N.ranks[currentLang];
+    return (ranks && ranks[rank]) || RANK_LABELS[rank] || '';
   }
 
   function getLiturgicalTitle(data) {
-    const seasonLabel = SEASON_LABELS[data.season] || '';
+    if (currentLang !== 'es' && data.liturgicalTitle) return cleanInline(data.liturgicalTitle);
+
+    const seasonLabel = getSeasonLabel(data.season);
     let celebration = cleanInline(data.celebration);
 
     if (!celebration) {
-      celebration = seasonLabel ? `Feria de ${seasonLabel}` : 'Calendario Litúrgico';
+      celebration = seasonLabel ? `${t('Feria')} · ${seasonLabel}` : t('Calendario Litúrgico');
     } else if (/^\d{1,2} de [a-záéíóúñ]+$/i.test(celebration)) {
-      celebration = seasonLabel ? `Feria de ${seasonLabel}` : 'Feria del Tiempo Litúrgico';
+      celebration = seasonLabel ? `${t('Feria')} · ${seasonLabel}` : t('Tiempo Litúrgico');
     }
 
     const rankLabel = data.rankLabel || getRankLabel(data.rank);
@@ -454,17 +806,35 @@ document.addEventListener('DOMContentLoaded', () => {
       ? !/^feria$/i.test(rankLabel)
       : ['MEMORIAL', 'OPTIONAL_MEMORIAL', 'FEAST', 'SOLEMNITY'].includes(data.rank);
 
-    return [celebration, includeRank ? rankLabel : ''].filter(Boolean).join(' · ') || 'Calendario Litúrgico';
+    return [celebration, includeRank ? rankLabel : ''].filter(Boolean).join(' · ') || t('Calendario Litúrgico');
   }
 
   function getMeditation(season) {
-    return MEDITACIONES[season] || MEDITACIONES.ORDINARY_TIME;
+    const meditations = I18N && I18N.meditations && I18N.meditations[currentLang];
+    return (meditations && (meditations[season] || meditations.ORDINARY_TIME))
+      || MEDITACIONES[season]
+      || MEDITACIONES.ORDINARY_TIME;
   }
 
   function renderGospelText(text) {
     const value = String(text || '').trim();
-    if (!value) return 'El texto del Evangelio no está disponible.';
+    if (!value) return t('El texto del Evangelio no está disponible.');
     return escapeGospelHtml(value).replace(/\n/g, '<br>');
+  }
+
+  function renderReadings(readings) {
+    if (!Array.isArray(readings) || !readings.length) return '';
+
+    return readings.map((reading) => {
+      const label = escapeGospelHtml(t(reading.label));
+      const ref = cleanInline(reading.ref);
+      const refHtml = ref ? ` <span class="gospel-reading-ref">${escapeGospelHtml(ref)}</span>` : '';
+      const text = escapeGospelHtml(reading.text).replace(/\n/g, '<br>');
+      return `<details class="gospel-reading">
+        <summary><span class="gospel-reading-label">${label}</span>${refHtml}</summary>
+        <div class="gospel-reading-text">${text}</div>
+      </details>`;
+    }).join('');
   }
 
   function renderAcclamation(data) {
@@ -475,13 +845,16 @@ document.addEventListener('DOMContentLoaded', () => {
       parts.push(`<span class="gospel-acclamation-text">&laquo;${text}&raquo;</span>`);
     }
 
-    const references = [];
-    if (data.firstReading) references.push(`Primera lectura: ${escapeGospelHtml(data.firstReading)}`);
-    if (data.psalm) references.push(`Salmo: ${escapeGospelHtml(data.psalm)}`);
-    if (data.secondReading) references.push(`Segunda lectura: ${escapeGospelHtml(data.secondReading)}`);
+    // Si las lecturas completas no están disponibles, al menos mostramos sus referencias.
+    if (!Array.isArray(data.readings) || !data.readings.length) {
+      const references = [];
+      if (data.firstReading) references.push(`${t('Primera lectura')}: ${escapeGospelHtml(data.firstReading)}`);
+      if (data.psalm) references.push(`${t('Salmo')}: ${escapeGospelHtml(data.psalm)}`);
+      if (data.secondReading) references.push(`${t('Segunda lectura')}: ${escapeGospelHtml(data.secondReading)}`);
 
-    if (references.length) {
-      parts.push(`<span class="gospel-readings-refs">${references.join(' &middot; ')}</span>`);
+      if (references.length) {
+        parts.push(`<span class="gospel-readings-refs">${references.join(' &middot; ')}</span>`);
+      }
     }
 
     return parts.join('');
@@ -494,16 +867,17 @@ document.addEventListener('DOMContentLoaded', () => {
         ? ` <span class="gospel-reflection-source">— ${escapeGospelHtml(source)}</span>`
         : '';
       const text = escapeGospelHtml(data.comment.text).replace(/\n/g, '<br>');
-      return `<strong>Palabra del Señor. &bull; Comentario de la Tradición:</strong> ${text}${attribution}`;
+      return `<strong>${escapeGospelHtml(t('Palabra del Señor.'))} &bull; ${escapeGospelHtml(t('Comentario de la Tradición'))}:</strong> ${text}${attribution}`;
     }
 
-    return `<strong>Palabra del Señor. &bull; Meditación Parroquial:</strong> ${escapeGospelHtml(getMeditation(data.season))}`;
+    return `<strong>${escapeGospelHtml(t('Palabra del Señor.'))} &bull; ${escapeGospelHtml(t('Meditación Parroquial'))}:</strong> ${escapeGospelHtml(getMeditation(data.season))}`;
   }
 
   // --- Renderizado del bloque ---
   function renderLectura(data, esHoy, isoDate) {
-    if (gospelCitationEl) gospelCitationEl.textContent = formatGospelCitation(data.gospel?.ref);
+    if (gospelCitationEl) gospelCitationEl.textContent = getGospelCitation(data);
     if (gospelVerseEl) gospelVerseEl.innerHTML = renderGospelText(data.gospel?.text);
+    if (gospelReadingsEl) gospelReadingsEl.innerHTML = renderReadings(data.readings);
     if (gospelReflectionEl) gospelReflectionEl.innerHTML = renderReflection(data);
     if (gospelSeasonEl) gospelSeasonEl.textContent = getSeasonLabel(data.season);
     if (gospelTitleEl) gospelTitleEl.textContent = getLiturgicalTitle(data);
@@ -515,9 +889,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (gospelDateFullEl) {
-      const dateText = formatLongDate(isoDate);
+      const dateText = escapeGospelHtml(formatLongDate(isoDate));
       gospelDateFullEl.innerHTML = esHoy
-        ? `<i class="far fa-calendar-check" style="color:var(--color-gold);"></i> ${dateText} (Hoy)`
+        ? `<i class="far fa-calendar-check" style="color:var(--color-gold);"></i> ${dateText} (${escapeGospelHtml(t('Hoy'))})`
         : `<i class="far fa-calendar-alt"></i> ${dateText}`;
     }
 
@@ -525,13 +899,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderError(isoDate) {
-    if (gospelCitationEl) gospelCitationEl.textContent = 'Evangelio no disponible';
+    if (gospelCitationEl) gospelCitationEl.textContent = t('Evangelio no disponible');
     if (gospelVerseEl) {
-      gospelVerseEl.innerHTML = 'No fue posible cargar el Evangelio de este día. Revisa tu conexión y vuelve a intentarlo.';
+      gospelVerseEl.innerHTML = escapeGospelHtml(t('No fue posible cargar el Evangelio de este día. Revisa tu conexión y vuelve a intentarlo.'));
     }
+    if (gospelReadingsEl) gospelReadingsEl.innerHTML = '';
     if (gospelReflectionEl) gospelReflectionEl.innerHTML = '';
-    if (gospelTitleEl) gospelTitleEl.textContent = 'Calendario Litúrgico';
-    if (gospelSeasonEl) gospelSeasonEl.textContent = 'Tiempo Litúrgico';
+    if (gospelTitleEl) gospelTitleEl.textContent = t('Calendario Litúrgico');
+    if (gospelSeasonEl) gospelSeasonEl.textContent = t('Tiempo Litúrgico');
 
     if (gospelAcclamationEl) {
       gospelAcclamationEl.innerHTML = '';
@@ -539,10 +914,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (gospelDateFullEl) {
-      gospelDateFullEl.innerHTML = `<i class="far fa-calendar-alt"></i> ${formatLongDate(isoDate)}`;
+      gospelDateFullEl.innerHTML = `<i class="far fa-calendar-alt"></i> ${escapeGospelHtml(formatLongDate(isoDate))}`;
     }
 
-    setGospelStatus('No se pudo cargar el Evangelio. Comprueba tu conexión y vuelve a intentarlo.', true);
+    setGospelStatus(t('No se pudo cargar el Evangelio. Comprueba tu conexión y vuelve a intentarlo.'), true);
   }
 
   function setLoading(isLoading) {
@@ -582,26 +957,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const isoDate = addDays(todayIso, offset);
 
     setLoading(true);
-    setGospelStatus('Cargando el Evangelio…');
+    setGospelStatus(t('Cargando el Evangelio…'));
 
     try {
-      const data = await loadDay(isoDate);
+      const base = await loadDay(isoDate);
+      if (requestId !== requestToken) return;
+
+      let content = base;
+      let notice = '';
+
+      if (currentLang === 'es') {
+        // En español las lecturas completas se toman de Evangelizo; el
+        // Evangelio local sigue siendo la fuente principal.
+        try {
+          const spanishReadings = await loadEvangelizoDay(isoDate, 'es');
+          content = {
+            ...base,
+            readings: spanishReadings.readings,
+            comment: spanishReadings.comment || base.comment
+          };
+        } catch (error) {
+          // Sin conexión con Evangelizo se conservan las referencias locales.
+        }
+      } else {
+        try {
+          const translated = await loadEvangelizoDay(isoDate, currentLang);
+          content = mergeTranslatedDay(base, translated);
+        } catch (error) {
+          console.warn('No se pudo cargar la traducción de las lecturas:', error);
+          notice = t('La traducción no está disponible en este momento. Se muestra el texto en español.');
+        }
+      }
+
       if (requestId !== requestToken) return;
 
       currentOffset = offset;
-      currentDayData = data;
+      currentDayData = content;
 
       animateTransition(() => {
         if (requestId !== requestToken) return;
-        renderLectura(data, offset === 0, isoDate);
+        renderLectura(content, offset === 0, isoDate);
       });
-      setGospelStatus('');
+      setGospelStatus(notice);
     } catch (error) {
       if (requestId !== requestToken) return;
       console.error('No se pudo cargar el Evangelio:', error);
 
       if (currentDayData) {
-        setGospelStatus('No se pudo cargar el día solicitado. Inténtalo de nuevo.', true);
+        setGospelStatus(t('No se pudo cargar el día solicitado. Inténtalo de nuevo.'), true);
       } else {
         renderError(isoDate);
       }
@@ -626,6 +1029,19 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
       const nextOffset = currentOffset >= MAX_NEXT_DAYS ? 0 : currentOffset + 1;
       showGospelDay(nextOffset);
+    });
+  }
+
+  // Activar el idioma guardado o detectado y preparar el selector.
+  applyLanguage(currentLang, { persist: false });
+
+  const languageSelect = document.getElementById('languageSelect');
+  if (languageSelect) {
+    languageSelect.addEventListener('change', () => {
+      const next = languageSelect.value;
+      if (!LANG_BY_CODE[next] || next === currentLang) return;
+      applyLanguage(next);
+      showGospelDay(currentOffset);
     });
   }
 
@@ -722,11 +1138,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'Enviado desde el sitio web de la Parroquia San Isidro Labrador.'
       ];
 
-      setStatus(formStatus, 'Abriendo su aplicación de correo con el mensaje preparado…', 'info');
+      setStatus(formStatus, t('Abriendo su aplicación de correo con el mensaje preparado…'), 'info');
       window.location.href = buildMailto(subject, lines);
 
       window.setTimeout(() => {
-        setStatus(formStatus, `Si su aplicación de correo no se abrió, escriba directamente a ${PARISH_EMAIL}.`, 'info');
+        setStatus(formStatus, t('Si su aplicación de correo no se abrió, escriba directamente a {email}.').replace('{email}', PARISH_EMAIL), 'info');
       }, 1500);
     });
   }
@@ -757,11 +1173,11 @@ document.addEventListener('DOMContentLoaded', () => {
         'Enviado desde el sitio web de la Parroquia San Isidro Labrador.'
       ];
 
-      setStatus(intentionStatus, 'Abriendo su aplicación de correo con los datos de la intención…', 'info');
+      setStatus(intentionStatus, t('Abriendo su aplicación de correo con los datos de la intención…'), 'info');
       window.location.href = buildMailto(subject, lines);
 
       window.setTimeout(() => {
-        setStatus(intentionStatus, `Si su aplicación de correo no se abrió, escriba a ${PARISH_EMAIL}.`, 'info');
+        setStatus(intentionStatus, t('Si su aplicación de correo no se abrió, escriba a {email}.').replace('{email}', PARISH_EMAIL), 'info');
       }, 1500);
     });
   }

@@ -204,6 +204,56 @@ img {
   line-height: 1.5;
 }
 
+/* Selector de idioma en la barra institucional */
+.language-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.language-picker i {
+  font-size: 0.85rem;
+}
+
+.language-picker select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(255, 255, 255, 0.04);
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath fill='%23f0c010' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 7px center;
+  background-size: 8px 5px;
+  color: #e8f2f9;
+  border: 1px solid rgba(240, 192, 16, 0.55);
+  border-radius: 14px;
+  padding: 4px 24px 4px 10px;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.language-picker select:hover,
+.language-picker select:focus {
+  border-color: var(--color-gold);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.language-picker select option {
+  background: #ffffff;
+  color: #12303f;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 /* ==========================================================================
    CABECERA PRINCIPAL / ESCUDO
    ========================================================================== */
@@ -808,6 +858,61 @@ img {
   font-size: 0.85rem;
   letter-spacing: 0.03em;
   color: var(--color-text-muted);
+}
+
+/* Lecturas completas del día (plegables) */
+.gospel-readings {
+  max-width: 780px;
+  margin: 0 auto 18px auto;
+}
+
+.gospel-readings:empty {
+  display: none;
+}
+
+.gospel-reading {
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: #f7fbfe;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.gospel-reading summary {
+  cursor: pointer;
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  list-style-position: inside;
+}
+
+.gospel-reading summary::marker {
+  color: var(--color-gold-dark);
+}
+
+.gospel-reading[open] summary {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.gospel-reading-label {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.gospel-reading-ref {
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-left: 4px;
+}
+
+.gospel-reading-text {
+  padding: 12px 16px;
+  font-size: 1.02rem;
+  line-height: 1.75;
+  color: #34434f;
+  text-align: justify;
 }
 
 .gospel-reflection-source {
@@ -2031,6 +2136,79 @@ body.modal-open {
   .footer-vatican {
     padding-top: 40px;
   }
+}
+
+/* ==========================================================================
+   ADAPTACIÓN DE IDIOMAS: ÁRABE (RTL) Y CHINO
+   ========================================================================== */
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+html[dir="rtl"] .topbar-inner,
+html[dir="rtl"] .topbar-links,
+html[dir="rtl"] .nav-list,
+html[dir="rtl"] .gospel-readings-refs,
+html[dir="rtl"] .schedule-table,
+html[dir="rtl"] .footer-vatican {
+  text-align: right;
+}
+
+html[dir="rtl"] .gospel-verse,
+html[dir="rtl"] .gospel-reading-text,
+html[dir="rtl"] .patron-bio-p,
+html[dir="rtl"] .section-subtitle {
+  text-align: right;
+}
+
+html[dir="rtl"] .gospel-verse::before,
+html[dir="rtl"] .gospel-verse::after {
+  content: "";
+}
+
+html[dir="rtl"] .language-picker select {
+  background-position: left 7px center;
+  padding: 4px 10px 4px 24px;
+}
+
+html[dir="rtl"] .gospel-reading-ref {
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+/* El árabe y el chino necesitan tipografías propias; se excluyen los iconos. */
+html[lang="ar"] body,
+html[lang="ar"] body *:not(i):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular) {
+  font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", "Amiri", "Geeza Pro", sans-serif;
+}
+
+html[lang="ar"] .gospel-verse,
+html[lang="ar"] .patron-quote {
+  font-style: normal;
+}
+
+html[lang="ar"] .topbar-institutional,
+html[lang="ar"] .nav-link,
+html[lang="ar"] .section-eyebrow,
+html[lang="ar"] .gospel-liturgical-tag,
+html[lang="ar"] .language-picker select {
+  letter-spacing: 0;
+}
+
+html[lang="zh-CN"] body,
+html[lang="zh-CN"] body *:not(i):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular) {
+  font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+}
+
+html[lang="zh-CN"] .gospel-verse {
+  font-style: normal;
+}
+
+html[lang="zh-CN"] .topbar-institutional,
+html[lang="zh-CN"] .nav-link,
+html[lang="zh-CN"] .section-eyebrow,
+html[lang="zh-CN"] .gospel-liturgical-tag {
+  letter-spacing: 0.02em;
 }
 
 /* ==========================================================================

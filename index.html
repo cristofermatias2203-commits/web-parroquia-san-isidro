@@ -70,6 +70,23 @@
 
   <!-- Estilos Vatican Style -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Idioma inicial: preferencia guardada o idioma del navegador -->
+  <script>
+    (function () {
+      try {
+        var supported = ['es', 'it', 'en', 'fr', 'de', 'pt', 'pl', 'ar', 'zh'];
+        var stored = localStorage.getItem('parroquia:idioma');
+        var browser = (navigator.languages && navigator.languages[0]) || navigator.language || 'es';
+        var base = String(browser).toLowerCase().split('-')[0];
+        var lang = stored && supported.indexOf(stored) !== -1
+          ? stored
+          : (supported.indexOf(base) !== -1 ? base : 'es');
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      } catch (error) {}
+    })();
+  </script>
 </head>
 <body>
 
@@ -83,6 +100,21 @@
         <span>Diócesis de La Vega &bull; República Dominicana</span>
       </div>
       <div class="topbar-links">
+        <div class="language-picker" data-i18n-skip>
+          <i class="fas fa-globe" aria-hidden="true"></i>
+          <label class="sr-only" for="languageSelect">Idioma</label>
+          <select id="languageSelect" aria-label="Seleccionar idioma">
+            <option value="es" lang="es">Español</option>
+            <option value="it" lang="it">Italiano</option>
+            <option value="en" lang="en">English</option>
+            <option value="fr" lang="fr">Français</option>
+            <option value="de" lang="de">Deutsch</option>
+            <option value="pt" lang="pt">Português</option>
+            <option value="pl" lang="pl">Polski</option>
+            <option value="ar" lang="ar">العربية</option>
+            <option value="zh" lang="zh-CN">中文</option>
+          </select>
+        </div>
         <span class="topbar-date"><i class="fas fa-calendar-day"></i> <span id="parishCurrentDate">Viernes, 6 de Noviembre de 2026</span></span>
       </div>
     </div>
@@ -226,6 +258,8 @@
           <h3 class="gospel-citation" id="gospelCitation">Santo Evangelio del Día</h3>
 
           <div id="gospelAcclamation" style="font-family:var(--font-body); font-style:italic; font-size:1.05rem; color:var(--color-primary); margin-bottom:18px;"></div>
+
+          <div class="gospel-readings" id="gospelReadings"></div>
 
           <blockquote class="gospel-verse" id="gospelVerse" style="text-align:justify; font-size:1.15rem; line-height:1.9;">
             El Evangelio del día se actualiza automáticamente.
@@ -873,6 +907,7 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="i18n.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
