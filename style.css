@@ -1175,6 +1175,13 @@ img {
   background: var(--color-primary);
 }
 
+/* Símbolo del Matrimonio (anillos entrelazados) */
+.sacrament-icon .marriage-icon {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
 .sacrament-item:hover .sacrament-icon {
   background: var(--color-primary);
   color: var(--color-gold-light);
