@@ -1158,20 +1158,21 @@ img {
   color: var(--color-gold-light);
 }
 
-/* Símbolo de la Confirmación (paloma, cruz y fuente bautismal) */
-.sacrament-item .sacrament-icon--confirmacion {
+/* Medallón oscuro para símbolos con detalles blancos (Bautismo y Confirmación) */
+.sacrament-item .sacrament-icon--dark {
   background: #062c47;
   border-color: var(--color-gold);
   padding: 4px;
 }
 
-.sacrament-icon .confirmation-icon {
+.sacrament-icon .confirmation-icon,
+.sacrament-icon .baptism-icon {
   width: 50px;
   height: 50px;
   object-fit: contain;
 }
 
-.sacrament-item:hover .sacrament-icon--confirmacion {
+.sacrament-item:hover .sacrament-icon--dark {
   background: var(--color-primary);
 }
 
