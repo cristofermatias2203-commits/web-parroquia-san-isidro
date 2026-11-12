@@ -48,6 +48,12 @@ html {
   text-size-adjust: 100%;
 }
 
+/* Los navegadores integrados (WhatsApp, Facebook, Instagram) se bloquean con
+   desplazamientos suaves muy largos: allí el salto debe ser inmediato. */
+html.is-in-app {
+  scroll-behavior: auto;
+}
+
 body {
   background-color: var(--color-bg-ivory);
   color: var(--color-text-main);

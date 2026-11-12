@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const PARISH_EMAIL = 'parroquiasanisidromaimon@diocesisdelavega.do';
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Navegadores integrados (WhatsApp, Facebook, Instagram…): el desplazamiento
+  // suave sobre páginas largas los deja bloqueados, así que se salta directo.
+  const IN_APP_BROWSER = /(FBAN|FBAV|FB_IAB|Instagram|Line\/|WhatsApp|MicroMessenger|Snapchat|; wv\))/i.test(navigator.userAgent || '');
+  if (IN_APP_BROWSER) document.documentElement.classList.add('is-in-app');
+
   const getFocusable = (container) => Array.from(
     container.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')
   ).filter(el => el.offsetParent !== null || el === document.activeElement);
@@ -37,6 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const buildMailto = (subject, lines) => {
     const body = lines.join('\r\n');
     return `mailto:${PARISH_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  // Abre el correo del feligrés. En navegadores integrados, mailto deja una
+  // página en blanco: allí se usa la composición web de Gmail.
+  const openEmailComposer = (subject, lines) => {
+    if (IN_APP_BROWSER) {
+      const webCompose = 'https://mail.google.com/mail/?view=cm&fs=1'
+        + `&to=${encodeURIComponent(PARISH_EMAIL)}`
+        + `&su=${encodeURIComponent(subject)}`
+        + `&body=${encodeURIComponent(lines.join('\r\n'))}`;
+      try {
+        const opened = window.open(webCompose, '_blank', 'noopener');
+        if (opened) return;
+      } catch (error) {
+        // Si la ventana emergente se bloquea, se intenta el correo del sistema.
+      }
+    }
+    window.location.href = buildMailto(subject, lines);
   };
 
   // 0. Selector de idiomas y traducción de la interfaz
@@ -228,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Menú Móvil Hamburguesa accesible
   const mobileMenuBtn = document.getElementById('mobileMenuToggle');
   const mainNav = document.getElementById('mainNav');
+  let closeMobileMenu = () => {};
 
   if (mobileMenuBtn && mainNav) {
     const menuIcon = mobileMenuBtn.querySelector('i');
@@ -237,6 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
       mobileMenuBtn.setAttribute('aria-expanded', String(open));
       mobileMenuBtn.setAttribute('aria-label', open ? t('Cerrar menú de navegación') : t('Abrir menú de navegación'));
       if (menuIcon) menuIcon.className = open ? 'fas fa-times' : 'fas fa-bars';
+    };
+
+    closeMobileMenu = () => {
+      if (mainNav.classList.contains('active')) setMenuState(false);
     };
 
     mobileMenuBtn.addEventListener('click', () => {
@@ -269,6 +297,51 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.innerWidth > 768) setMenuState(false);
     });
   }
+
+  // 2. Navegación interna fiable (también en WhatsApp, Facebook o Instagram)
+  const scrollToSection = (hash) => {
+    if (!hash || hash === '#') return false;
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return false;
+
+    target.scrollIntoView({
+      behavior: (IN_APP_BROWSER || prefersReducedMotion) ? 'auto' : 'smooth',
+      block: 'start'
+    });
+
+    try {
+      if (window.history && history.replaceState) history.replaceState(null, '', hash);
+    } catch (error) {
+      // Algunos navegadores integrados no permiten cambiar la URL.
+    }
+    return true;
+  };
+
+  document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || event.defaultPrevented) return;
+    if (link.classList.contains('open-modal-intention')) return;
+
+    const hash = link.getAttribute('href');
+    if (!hash || hash === '#') return;
+
+    event.preventDefault();
+    closeMobileMenu();
+    scrollToSection(hash);
+  });
+
+  // En navegadores integrados, mailto deja la pantalla en blanco: el correo
+  // se abre en Gmail web.
+  document.addEventListener('click', (event) => {
+    if (!IN_APP_BROWSER) return;
+    const link = event.target.closest('a[href^="mailto:"]');
+    if (!link || event.defaultPrevented) return;
+
+    event.preventDefault();
+    const address = link.getAttribute('href').replace(/^mailto:/, '').split('?')[0];
+    const webCompose = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(address)}`;
+    window.open(webCompose, '_blank', 'noopener');
+  });
 
   // 3. Calendario Litúrgico y Evangelio del Día
   // Los textos se generan con Breviarium Core (breviarium.es) en data/evangelio/.
@@ -1139,7 +1212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
 
       setStatus(formStatus, t('Abriendo su aplicación de correo con el mensaje preparado…'), 'info');
-      window.location.href = buildMailto(subject, lines);
+      openEmailComposer(subject, lines);
 
       window.setTimeout(() => {
         setStatus(formStatus, t('Si su aplicación de correo no se abrió, escriba directamente a {email}.').replace('{email}', PARISH_EMAIL), 'info');
@@ -1174,7 +1247,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ];
 
       setStatus(intentionStatus, t('Abriendo su aplicación de correo con los datos de la intención…'), 'info');
-      window.location.href = buildMailto(subject, lines);
+      openEmailComposer(subject, lines);
 
       window.setTimeout(() => {
         setStatus(intentionStatus, t('Si su aplicación de correo no se abrió, escriba a {email}.').replace('{email}', PARISH_EMAIL), 'info');

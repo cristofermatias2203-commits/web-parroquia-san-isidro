@@ -69,6 +69,15 @@ alemán, portugués, polaco, árabe y chino. La preferencia se guarda en `localS
 
 Los formularios de contacto y de intenciones de misa preparan un correo dirigido al despacho parroquial con los datos ingresados. Al enviarlos, se abre la aplicación de correo del usuario para completar el envío; el sitio no almacena datos en un servidor.
 
+## Navegadores integrados
+
+El sitio se comparte con frecuencia por WhatsApp, Facebook o Instagram, cuyos navegadores
+integrados se bloquean con desplazamientos suaves de miles de píxeles y dejan una página en
+blanco al abrir enlaces `mailto:`. Por eso:
+
+- En esos navegadores los enlaces internos saltan de inmediato, sin animación.
+- El correo se abre en la composición web de Gmail en lugar de `mailto:`.
+
 ## Ejecutar localmente
 
 Puedes abrir `index.html` directamente en el navegador o levantar un servidor local:
