@@ -371,7 +371,6 @@ window.PARISH_I18N = {
       "Comunicados": "News",
       "Despacho": "Parish Office",
       "Intenciones": "Mass Intentions",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "House of communion, altar of Eucharistic sacrifice and spiritual lighthouse of the town of Maimón.",
       "Horarios Litúrgicos": "Liturgical Schedule",
       "Evangelio y Meditación": "Gospel & Meditation",
@@ -598,7 +597,8 @@ window.PARISH_I18N = {
       "Seleccionar idioma": "Select language",
       "8:30 AM - 12:00 M": "8:30 AM - 12:00 PM",
       "9:00 AM - 12:00 M": "9:00 AM - 12:00 PM",
-      "© 2026 Parroquia San Isidro Labrador de Maimón. Diócesis de La Vega. Todos los derechos canónicos reservados.": "© 2026 Parish of San Isidro Labrador, Maimón. Diocese of La Vega. All canonical rights reserved."
+      "© 2026 Parroquia San Isidro Labrador de Maimón. Diócesis de La Vega. Todos los derechos canónicos reservados.": "© 2026 Parish of San Isidro Labrador, Maimón. Diocese of La Vega. All canonical rights reserved.",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "HOLY SEE • COMMUNITY OF MAIMÓN"
     },
     "it": {
       "Saltar al contenido principal": "Passa al contenuto principale",
@@ -617,7 +617,6 @@ window.PARISH_I18N = {
       "Comunicados": "Comunicati",
       "Despacho": "Ufficio parrocchiale",
       "Intenciones": "Intenzioni di Messa",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "Casa di comunione, altare del sacrificio eucaristico e faro spirituale del comune di Maimón.",
       "Horarios Litúrgicos": "Orari liturgici",
       "Evangelio y Meditación": "Vangelo e Meditazione",
@@ -844,7 +843,8 @@ window.PARISH_I18N = {
       "Seleccionar idioma": "Seleziona la lingua",
       "8:30 AM - 12:00 M": "8:30 - 12:00",
       "9:00 AM - 12:00 M": "9:00 - 12:00",
-      "2:00 PM - 5:00 PM": "14:00 - 17:00"
+      "2:00 PM - 5:00 PM": "14:00 - 17:00",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "SANTA SEDE • COMUNITÀ DI MAIMÓN"
     },
     "fr": {
       "Saltar al contenido principal": "Passer au contenu principal",
@@ -863,7 +863,6 @@ window.PARISH_I18N = {
       "Comunicados": "Actualités",
       "Despacho": "Secrétariat paroissial",
       "Intenciones": "Intentions de messe",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "Maison de communion, autel du sacrifice eucharistique et phare spirituel de la ville de Maimón.",
       "Horarios Litúrgicos": "Horaires liturgiques",
       "Evangelio y Meditación": "Évangile et méditation",
@@ -1087,7 +1086,8 @@ window.PARISH_I18N = {
       "Hoy": "Aujourd'hui",
       "La traducción no está disponible en este momento. Se muestra el texto en español.": "La traduction n’est pas disponible pour le moment. Le texte en espagnol s'affiche.",
       "Idioma": "Langue",
-      "Seleccionar idioma": "Choisir la langue"
+      "Seleccionar idioma": "Choisir la langue",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "SAINT-SIÈGE • COMMUNAUTÉ DE MAIMÓN"
     },
     "de": {
       "Saltar al contenido principal": "Zum Hauptinhalt springen",
@@ -1106,7 +1106,6 @@ window.PARISH_I18N = {
       "Comunicados": "Mitteilungen",
       "Despacho": "Pfarrbüro",
       "Intenciones": "Messintentionen",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "Haus der Kommunion, Altar des eucharistischen Opfers und spiritueller Leuchtturm der Stadt Maimón.",
       "Horarios Litúrgicos": "Gottesdienstzeiten",
       "Evangelio y Meditación": "Evangelium und Meditation",
@@ -1330,7 +1329,8 @@ window.PARISH_I18N = {
       "Hoy": "Heute",
       "La traducción no está disponible en este momento. Se muestra el texto en español.": "Eine Übersetzung ist derzeit nicht verfügbar. Der Text wird auf Spanisch angezeigt.",
       "Idioma": "Sprache",
-      "Seleccionar idioma": "Sprache auswählen"
+      "Seleccionar idioma": "Sprache auswählen",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "HEILIGER STUHL • GEMEINDE MAIMÓN"
     },
     "pt": {
       "Saltar al contenido principal": "Pular para o conteúdo principal",
@@ -1349,7 +1349,6 @@ window.PARISH_I18N = {
       "Comunicados": "Comunicados",
       "Despacho": "Secretaria paroquial",
       "Intenciones": "Intenções de Missa",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "Casa de comunhão, altar de sacrifício eucarístico e farol espiritual da cidade de Maimón.",
       "Horarios Litúrgicos": "Horários litúrgicos",
       "Evangelio y Meditación": "Evangelho e Meditação",
@@ -1573,7 +1572,8 @@ window.PARISH_I18N = {
       "Hoy": "Hoje",
       "La traducción no está disponible en este momento. Se muestra el texto en español.": "A tradução não está disponível neste momento. O texto em espanhol é exibido.",
       "Idioma": "Idioma",
-      "Seleccionar idioma": "Selecionar idioma"
+      "Seleccionar idioma": "Selecionar idioma",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "SANTA SÉ • COMUNIDADE DE MAIMÓN"
     },
     "pl": {
       "Saltar al contenido principal": "Przejdź do głównej treści",
@@ -1592,7 +1592,6 @@ window.PARISH_I18N = {
       "Comunicados": "Ogłoszenia",
       "Despacho": "Kancelaria parafialna",
       "Intenciones": "Intencje mszalne",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "Dom komunii, ołtarz ofiary eucharystycznej i duchowa latarnia morska miasta Maimón.",
       "Horarios Litúrgicos": "Harmonogram liturgiczny",
       "Evangelio y Meditación": "Ewangelia i medytacja",
@@ -1816,7 +1815,8 @@ window.PARISH_I18N = {
       "Hoy": "Dzisiaj",
       "La traducción no está disponible en este momento. Se muestra el texto en español.": "Tłumaczenie nie jest obecnie dostępne. Wyświetlany jest tekst w języku hiszpańskim.",
       "Idioma": "Język",
-      "Seleccionar idioma": "Wybierz język"
+      "Seleccionar idioma": "Wybierz język",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "STOLICA APOSTOLSKA • WSPÓLNOTA MAIMÓNU"
     },
     "ar": {
       "Saltar al contenido principal": "انتقل إلى المحتوى الرئيسي",
@@ -1835,7 +1835,6 @@ window.PARISH_I18N = {
       "Comunicados": "إعلانات الرعية",
       "Despacho": "مكتب الرعية",
       "Intenciones": "نوايا القداس",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "بيت الشركة، مذبح الذبيحة الإفخارستية والمنارة الروحية لمدينة ميمون.",
       "Horarios Litúrgicos": "أوقات الصلوات الليتورجية",
       "Evangelio y Meditación": "الإنجيل والتأمل",
@@ -2059,7 +2058,8 @@ window.PARISH_I18N = {
       "Hoy": "اليوم",
       "La traducción no está disponible en este momento. Se muestra el texto en español.": "الترجمة غير متوفرة في هذا الوقت. يتم عرض النص باللغة الإسبانية.",
       "Idioma": "اللغة",
-      "Seleccionar idioma": "اختر اللغة"
+      "Seleccionar idioma": "اختر اللغة",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "الكرسي الرسولي • رعية ميمون"
     },
     "zh": {
       "Saltar al contenido principal": "跳至主要内容",
@@ -2078,7 +2078,6 @@ window.PARISH_I18N = {
       "Comunicados": "堂区公告",
       "Despacho": "堂区办公室",
       "Intenciones": "弥撒意向",
-      "SANCTA SEDES • COMMUNITAS MAIMONENSIS": "SANCTA SEDES • COMMUNITAS MAIMONENSIS",
       "Casa de comunión, altar del sacrificio eucarístico y faro espiritual del pueblo de Maimón.": "共融之家、圣体祭献的祭台，以及迈蒙人民的精神灯塔。",
       "Horarios Litúrgicos": "礼仪时间",
       "Evangelio y Meditación": "福音与默想",
@@ -2302,7 +2301,8 @@ window.PARISH_I18N = {
       "Hoy": "今天",
       "La traducción no está disponible en este momento. Se muestra el texto en español.": "目前无法提供翻译。显示西班牙语文本。",
       "Idioma": "语言",
-      "Seleccionar idioma": "选择语言"
+      "Seleccionar idioma": "选择语言",
+      "SANTA SEDE • COMUNIDAD DE MAIMÓN": "圣座 • 迈蒙堂区"
     }
   }
 };

@@ -2191,6 +2191,7 @@ html[lang="ar"] .topbar-institutional,
 html[lang="ar"] .nav-link,
 html[lang="ar"] .section-eyebrow,
 html[lang="ar"] .gospel-liturgical-tag,
+html[lang="ar"] .latin-motto,
 html[lang="ar"] .language-picker select {
   letter-spacing: 0;
 }
@@ -2207,6 +2208,7 @@ html[lang="zh-CN"] .gospel-verse {
 html[lang="zh-CN"] .topbar-institutional,
 html[lang="zh-CN"] .nav-link,
 html[lang="zh-CN"] .section-eyebrow,
+html[lang="zh-CN"] .latin-motto,
 html[lang="zh-CN"] .gospel-liturgical-tag {
   letter-spacing: 0.02em;
 }
