@@ -8,8 +8,8 @@
  * Uso:
  *   npm run generate:gospel -- --from=2026 --to=2040
  *
- * Los archivos se escriben en data/evangelio/YYYY-MM.json y contienen un
- * objeto "days" con la información de cada día del mes.
+ * Los archivos se escriben en data/evangelio/YYYY-MM.js y registran el mes en
+ * window.PARISH_GOSPEL_MONTHS, con la información de cada día.
  */
 
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -201,14 +201,17 @@ async function generateMonth(year, month, skipped) {
     days
   };
 
-  const fileName = `${monthKey}.json`;
+  const fileName = `${monthKey}.js`;
   const json = JSON.stringify(payload);
-  await writeFile(path.join(outputDir, fileName), json, 'utf8');
+  // Se usa un script en lugar de JSON para que el sitio funcione incluso al
+  // abrir index.html desde el disco (file://), donde fetch está bloqueado.
+  const script = `window.PARISH_GOSPEL_MONTHS = window.PARISH_GOSPEL_MONTHS || {};\nwindow.PARISH_GOSPEL_MONTHS[${JSON.stringify(monthKey)}] = ${json};\n`;
+  await writeFile(path.join(outputDir, fileName), script, 'utf8');
 
   return {
     monthKey,
     days: Object.keys(days).length,
-    bytes: Buffer.byteLength(json)
+    bytes: Buffer.byteLength(script)
   };
 }
 

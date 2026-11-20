@@ -10,18 +10,20 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 - `main.js` — interactividad (menú móvil, evangelio del día, idiomas, galería, formularios y modales).
 - `manifest.webmanifest` — configuración de la aplicación web instalable (PWA).
 - `img/` — fotografías, logo parroquial, logo de Comunicaciones, favicon e iconos PWA.
-- `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.json`), generadas con anticipación.
+- `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.js`), generadas con anticipación.
 - `scripts/generate-gospel.mjs` — genera los archivos de `data/evangelio/`.
 
 ## Evangelio del día
 
 El bloque del Evangelio no usa textos escritos a mano: carga el archivo del mes en curso
-(`data/evangelio/YYYY-MM.json`) y muestra automáticamente la lectura correspondiente a la
+(`data/evangelio/YYYY-MM.js`) y muestra automáticamente la lectura correspondiente a la
 fecha actual, según la zona horaria de República Dominicana.
 
 - Los textos provienen de [Breviarium Core](https://breviarium.es), una librería de código
   abierto (licencia MIT) con el calendario litúrgico y las lecturas completas en español.
 - El calendario generado cubre de 2026 a 2040; no hace falta editar nada cada día.
+- Los meses se cargan como scripts (`YYYY-MM.js`) y no con `fetch`, para que el Evangelio
+  también aparezca al abrir `index.html` directamente desde el disco.
 - Si un día no estuviera en los archivos locales, el sitio consulta una API litúrgica de
   respaldo y guarda el resultado en `localStorage` para consultas posteriores sin conexión.
 - Si no hay conexión y el día no está guardado, se muestra un aviso honesto en lugar de un

@@ -466,33 +466,56 @@ document.addEventListener('DOMContentLoaded', () => {
   async function loadMonth(monthKey) {
     if (gospelMonthCache.has(monthKey)) return gospelMonthCache.get(monthKey);
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-
-    const request = fetch(`${GOSPEL_DATA_PATH}/${monthKey}.json`, {
-      signal: controller.signal,
-      headers: { Accept: 'application/json' }
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`No se encontró el archivo ${monthKey}.json (HTTP ${response.status}).`);
-        }
-        return response.json();
-      })
-      .then((payload) => {
-        if (!payload || !payload.days) {
-          throw new Error(`El archivo ${monthKey}.json no tiene el formato esperado.`);
-        }
-        return payload;
-      })
-      .catch((error) => {
-        gospelMonthCache.delete(monthKey);
-        throw error;
-      })
-      .finally(() => clearTimeout(timeout));
+    const request = loadMonthFromScript(monthKey).catch((error) => {
+      gospelMonthCache.delete(monthKey);
+      throw error;
+    });
 
     gospelMonthCache.set(monthKey, request);
     return request;
+  }
+
+  // Los datos se cargan como script y no con fetch: así el Evangelio también
+  // funciona al abrir index.html directamente desde el disco (file://), donde
+  // el navegador bloquea las peticiones fetch por seguridad.
+  function loadMonthFromScript(monthKey) {
+    return new Promise((resolve, reject) => {
+      const existing = window.PARISH_GOSPEL_MONTHS?.[monthKey];
+      if (existing?.days) {
+        resolve(existing);
+        return;
+      }
+
+      const script = document.createElement('script');
+      let settled = false;
+
+      const finish = (error) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+
+        if (error) {
+          script.remove();
+          reject(error);
+          return;
+        }
+
+        const payload = window.PARISH_GOSPEL_MONTHS?.[monthKey];
+        if (payload?.days) resolve(payload);
+        else reject(new Error(`El archivo ${monthKey}.js no tiene el formato esperado.`));
+      };
+
+      const timer = setTimeout(
+        () => finish(new Error(`Tiempo de espera agotado al cargar ${monthKey}.js.`)),
+        8000
+      );
+
+      script.src = `${GOSPEL_DATA_PATH}/${monthKey}.js`;
+      script.async = true;
+      script.onload = () => finish();
+      script.onerror = () => finish(new Error(`No se encontró el archivo ${monthKey}.js.`));
+      document.head.appendChild(script);
+    });
   }
 
   async function loadDay(isoDate) {
