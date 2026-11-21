@@ -1,0 +1,48 @@
+---
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+
+const {
+  title,
+  description,
+  lang = 'es',
+  dir = lang === 'ar' ? 'rtl' : 'ltr',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#06466f" />
+    <link rel="icon" type="image/png" href="/img/favicon-parroquia.png" />
+    <link rel="apple-touch-icon" href="/img/favicon-parroquia.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <link rel="preload" href="/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <slot name="head" />
+  </head>
+  <body>
+    <!-- El texto se traducirá en F3, cuando exista el diccionario i18n. -->
+    <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+
+    <slot name="header" />
+
+    <main id="contenido" tabindex="-1">
+      <slot />
+    </main>
+
+    <slot name="footer" />
+  </body>
+</html>

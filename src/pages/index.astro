@@ -1,16 +1,30 @@
 ---
-// Placeholder del andamiaje. F2 migrará aquí todo el contenido de index.html.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+
+const title = 'Parroquia San Isidro Labrador | Maimón - Diócesis de La Vega';
+const description =
+  'Sitio oficial de la Parroquia San Isidro Labrador, Maimón, Provincia Monseñor Nouel, República Dominicana.';
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Parroquia San Isidro Labrador</title>
-  </head>
-  <body>
-    <h1>Parroquia San Isidro Labrador</h1>
+<BaseLayout {title} {description}>
+  <div class="container">
+    <h1><Icon name="fas-cross" /> Parroquia San Isidro Labrador</h1>
     <p>Sitio en migración a Astro + TypeScript.</p>
-  </body>
-</html>
+  </div>
+</BaseLayout>
+
+<style>
+  h1 {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35em;
+    font-family: var(--font-serif);
+    color: var(--color-primary-dark);
+  }
+
+  h1 :global(svg) {
+    font-size: 0.8em;
+    color: var(--color-gold-dark);
+  }
+</style>

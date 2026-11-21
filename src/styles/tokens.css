@@ -1,0 +1,45 @@
+/* Tokens de diseño extraídos de style.css. Se conservan los valores originales
+   para que la migración no altere la apariencia de la versión estática. */
+
+:root {
+  /* Paleta institucional */
+  --color-primary: #0a6ba8;
+  --color-primary-dark: #06466f;
+  --color-primary-light: #1689c9;
+  --color-logo-blue: #085ba6;
+  --color-gold: #f0c010;
+  --color-gold-light: #ffdb54;
+  --color-gold-dark: #a87a00;
+  --color-accent-amber: #f7a11a;
+  --color-clay: #b06a45;
+  --color-bg-ivory: #fbfdff;
+  --color-bg-card: #ffffff;
+  --color-bg-subtle: #eef4f8;
+  --color-text-main: #1e2a33;
+  --color-text-muted: #5c6b77;
+  --color-border: #dbe5ec;
+  --color-border-gold: #ecd488;
+
+  /* Tipografía */
+  --font-serif: 'Cinzel Variable', 'Times New Roman', Times, serif;
+  --font-body: 'Cormorant Garamond Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Montserrat Variable', system-ui, -apple-system, sans-serif;
+  --font-size-body: 1.15rem;
+  --line-height-body: 1.65;
+
+  /* Elevación y movimiento */
+  --shadow-sm: 0 2px 6px rgba(6, 70, 111, 0.06);
+  --shadow-md: 0 6px 18px rgba(6, 70, 111, 0.1);
+  --shadow-lg: 0 12px 30px rgba(6, 70, 111, 0.16);
+  --transition: all 0.28s ease;
+
+  /* Estructura */
+  --container-max: 1320px;
+  --container-gutter: 24px;
+  --scroll-offset: 84px;
+}
+
+/* Breakpoints (no se pueden expresar como custom properties en media queries):
+   - 992px: reajuste de columnas
+   - 768px: tablet y móvil ancho
+   - 480px: móvil estrecho */
