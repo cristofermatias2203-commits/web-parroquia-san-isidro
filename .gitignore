@@ -11,6 +11,9 @@ desktop.ini
 # Dependencias de Node (solo se usan para regenerar los datos del Evangelio)
 node_modules/
 
+# Nix / direnv
+.direnv/
+
 # Temporales y registros
 *.log
 *.tmp
