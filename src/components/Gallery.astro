@@ -1,0 +1,126 @@
+---
+import Icon from './Icon.astro';
+
+const photos: { src: string; alt: string; caption: string; title: string; shape: string }[] = [
+  {
+    src: '/img/templo-atardecer.jpg',
+    alt: 'Templo parroquial de San Isidro Labrador al atardecer',
+    caption: 'Templo Parroquial al atardecer • Maimón',
+    title: 'Templo al atardecer',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/interior-templo.jpg',
+    alt: 'Interior del templo iluminado durante una celebración',
+    caption: 'Interior del templo durante la oración comunitaria',
+    title: 'Interior del templo',
+    shape: 'landscape',
+  },
+  {
+    src: '/img/vigilia-cirios.jpg',
+    alt: 'Feligreses reunidos en vigilia con cirios encendidos',
+    caption: 'Vigilia de luz y oración de la comunidad parroquial',
+    title: 'Vigilia de luz y oración',
+    shape: 'landscape',
+  },
+  {
+    src: '/img/adoracion-santisimo.jpg',
+    alt: 'Custodia dorada en la adoración al Santísimo',
+    caption: 'Adoración al Santísimo Sacramento del Altar',
+    title: 'Adoración al Santísimo',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/custodia-atardecer.jpg',
+    alt: 'Sacerdote sosteniendo la custodia eucarística al atardecer',
+    caption: 'La custodia eucarística bajo la luz del atardecer',
+    title: 'Custodia al atardecer',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/eucaristia.jpg',
+    alt: 'Sacerdote elevando la hostia durante la consagración',
+    caption: 'Celebración de la Santa Eucaristía en Maimón',
+    title: 'Santa Eucaristía',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/templo-dia.jpg',
+    alt: 'Fachada del templo parroquial durante el día',
+    caption: 'El templo parroquial a plena luz del día',
+    title: 'El templo a plena luz',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/templo-jardin.jpg',
+    alt: 'Templo parroquial rodeado de sus jardines',
+    caption: 'Jardines y entorno del templo parroquial',
+    title: 'Jardines parroquiales',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/virgen-dolorosa.jpg',
+    alt: 'Imagen de la Virgen Dolorosa en el templo',
+    caption: 'Nuestra Señora de los Dolores • Templo de Maimón',
+    title: 'Nuestra Señora de los Dolores',
+    shape: 'portrait',
+  },
+  {
+    src: '/img/templo-fachada.jpg',
+    alt: 'Fachada principal del templo parroquial',
+    caption: 'Fachada del templo de San Isidro Labrador • Maimón',
+    title: 'Fachada del templo',
+    shape: 'portrait',
+  },
+];
+---
+
+<section class="section section-bg-white" id="galeria">
+  <div class="container">
+    <div class="section-header-vatican">
+      <span class="section-eyebrow">Memoria Photographica</span>
+      <h2 class="section-title">Nuestra Vida en Imágenes</h2>
+      <div class="section-title-ornament">
+        <span class="line"></span>
+        <Icon name="fas-camera-retro" />
+        <span class="line"></span>
+      </div>
+      <p class="section-subtitle">
+        El templo, la liturgia y la comunidad de Maimón reunidos en un mismo corazón.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+      {photos.map((photo) => (
+        <button
+          type="button"
+          class:list={['gallery-item', photo.shape]}
+          data-full={photo.src}
+          data-caption={photo.caption}
+        >
+          <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" />
+          <span class="gallery-overlay">
+            <span class="gallery-zoom"><Icon name="fas-expand" /></span>
+            <span class="gallery-title">{photo.title}</span>
+          </span>
+        </button>
+      ))}
+    </div>
+
+    <div class="gallery-credit-bar">
+      <img
+        src="/img/logo-comunicaciones.png"
+        alt="Comunicaciones de la Parroquia San Isidro Labrador"
+        class="pc-logo-small"
+        width="520"
+        height="240"
+        loading="lazy"
+        decoding="async"
+      />
+      <p>
+        Registro fotográfico y comunicación parroquial a cargo de la
+        <strong>Pastoral de Comunicación</strong> de la Parroquia San Isidro Labrador.
+      </p>
+    </div>
+  </div>
+</section>

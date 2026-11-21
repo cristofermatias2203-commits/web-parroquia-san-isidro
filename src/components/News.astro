@@ -1,0 +1,95 @@
+---
+import Icon from './Icon.astro';
+
+const news: {
+  category: string;
+  image: string;
+  alt: string;
+  date: string;
+  author: string;
+  title: string;
+  excerpt: string;
+  link: string;
+  label: string;
+  intention?: boolean;
+}[] = [
+  {
+    category: 'Pastoral',
+    image: '/img/eucaristia.jpg',
+    alt: 'Celebración de la Santa Eucaristía en la parroquia',
+    date: '2 de Noviembre, 2026',
+    author: 'Despacho',
+    title: 'Apertura del Año de Catequesis Parroquial para Niños y Jóvenes',
+    excerpt:
+      'Se convoca a las familias del municipio de Maimón a inscribir a sus hijos en los programas de Primera Comunión y Confirmación en el templo sede.',
+    link: '#despacho',
+    label: 'Más información',
+  },
+  {
+    category: 'Liturgia',
+    image: '/img/templo-jardin.jpg',
+    alt: 'Templo y jardines de la Parroquia San Isidro Labrador',
+    date: '28 de Octubre, 2026',
+    author: 'Pastoral Social',
+    title: 'Jornada de Bendición de los Campos y Agricultores de Maimón',
+    excerpt:
+      'Encomendamos el trabajo de los hombres y mujeres que labran la tierra, pidiendo a San Isidro abundancia de lluvias y cosechas sanas.',
+    link: '#patron',
+    label: 'Ver programa',
+  },
+  {
+    category: 'Caritas',
+    image: '/img/vigilia-cirios.jpg',
+    alt: 'Vigilia de oración con cirios en el templo parroquial',
+    date: '20 de Octubre, 2026',
+    author: 'Caritas',
+    title: 'Campaña de Solidaridad y Canasta Fraterna para las Familias',
+    excerpt:
+      'Invitamos a depositar alimentos no perecederos al pie del presbiterio durante las misas dominicales para asistir a nuestros hermanos enfermos.',
+    link: '#despacho',
+    label: 'Cómo apoyar',
+    intention: true,
+  },
+];
+---
+
+<section class="section section-bg-white" id="noticias">
+  <div class="container">
+    <div class="section-header-vatican">
+      <span class="section-eyebrow">Acta Paroeciae</span>
+      <h2 class="section-title">Comunicados & Vida Comunitaria</h2>
+      <div class="section-title-ornament">
+        <span class="line"></span>
+        <Icon name="fas-bullhorn" />
+        <span class="line"></span>
+      </div>
+      <p class="section-subtitle">
+        Avisos oficiales del párroco y eventos de la comunidad eclesial de Maimón.
+      </p>
+    </div>
+
+    <div class="news-grid">
+      {news.map((item) => (
+        <article class="news-card">
+          <div class="news-thumb">
+            <span class="news-category-badge">{item.category}</span>
+            <img src={item.image} alt={item.alt} loading="lazy" decoding="async" />
+          </div>
+          <div class="news-body">
+            <div class="news-meta">
+              <Icon name="far-calendar" /> {item.date} &bull; {item.author}
+            </div>
+            <h3 class="news-title">{item.title}</h3>
+            <p class="news-excerpt">{item.excerpt}</p>
+            <a
+              href={item.link}
+              class:list={['news-link', { 'open-modal-intention': item.intention }]}
+            >
+              {item.label} <Icon name="fas-arrow-right" />
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

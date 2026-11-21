@@ -1,161 +1,4 @@
 /* ==========================================================================
-   ESTILOS GENERALES Y VARIABLES
-   Paleta institucional inspirada en el logo de la Parroquia San Isidro Labrador:
-   Azul #085BA6, Dorado #DEA619, blanco marfil y acentos de cielo.
-   ========================================================================== */
-
-:root {
-  --color-primary: #0a6ba8;        /* Azul Pastoral de Comunicación */
-  --color-primary-dark: #06466f;
-  --color-primary-light: #1689c9;
-  --color-logo-blue: #085ba6;      /* Azul exacto del logo parroquial */
-  --color-gold: #f0c010;           /* Dorado institucional */
-  --color-gold-light: #ffdb54;
-  --color-gold-dark: #a87a00;
-  --color-accent-amber: #f7a11a;
-  --color-clay: #b06a45;           /* Terracota del techo del templo */
-  --color-bg-ivory: #fbfdff;       /* Blanco cielo cálido */
-  --color-bg-card: #ffffff;
-  --color-bg-subtle: #eef4f8;
-  --color-text-main: #1e2a33;      /* Azul carbón cálido */
-  --color-text-muted: #5c6b77;
-  --color-border: #dbe5ec;
-  --color-border-gold: #ecd488;
-
-  --font-serif: 'Cinzel', 'Times New Roman', Times, serif;
-  --font-body: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
-
-  --shadow-sm: 0 2px 6px rgba(6, 70, 111, 0.06);
-  --shadow-md: 0 6px 18px rgba(6, 70, 111, 0.10);
-  --shadow-lg: 0 12px 30px rgba(6, 70, 111, 0.16);
-  --transition: all 0.28s ease;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  /* Compensa la navegación fija al saltar a una sección */
-  scroll-padding-top: 84px;
-  /* Se respeta el tamaño de texto configurado por el usuario en su navegador */
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-/* Los navegadores integrados (WhatsApp, Facebook, Instagram) se bloquean con
-   desplazamientos suaves muy largos: allí el salto debe ser inmediato. */
-html.is-in-app {
-  scroll-behavior: auto;
-}
-
-body {
-  background-color: var(--color-bg-ivory);
-  color: var(--color-text-main);
-  font-family: var(--font-body);
-  font-size: 1.15rem;
-  line-height: 1.65;
-  -webkit-font-smoothing: antialiased;
-  /* Permite partir palabras largas (correos, nombres) sin desbordar
-     el ancho disponible, incluso con el texto ampliado por el usuario. */
-  overflow-wrap: anywhere;
-  word-wrap: break-word;
-}
-
-/* Enlaces y utilidades */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-a:hover {
-  color: var(--color-gold-dark);
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Accesibilidad: enlace para saltar al contenido y foco visible */
-.skip-link {
-  position: fixed;
-  top: -80px;
-  left: 16px;
-  z-index: 20000;
-  background: var(--color-primary-dark);
-  color: #fff;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 12px 20px;
-  border: 2px solid var(--color-gold);
-  border-radius: 0 0 4px 4px;
-  transition: top 0.2s ease;
-}
-
-.skip-link:focus {
-  top: 0;
-  color: #fff;
-  outline: 3px solid var(--color-gold);
-  outline-offset: 2px;
-}
-
-#contenido:focus {
-  outline: none;
-}
-
-:focus-visible {
-  outline: 3px solid var(--color-gold);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.container {
-  width: calc(100% - 48px);
-  max-width: 1320px;
-  margin: 0 auto;
-}
-
-/* Márgenes laterales ajustados en pantallas estrechas para dar más
-   espacio al texto y evitar que las letras se corten. */
-@media (max-width: 768px) {
-  .container {
-    width: calc(100% - 32px);
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    width: calc(100% - 22px);
-  }
-}
-
-/* ==========================================================================
    BARRA SUPERIOR INSTITUCIONAL (ESTILO SANTA SEDE)
    ========================================================================== */
 .topbar-institutional {
@@ -183,7 +26,8 @@ img {
   gap: 8px;
 }
 
-.diocesis-badge i {
+.diocesis-badge i,
+.diocesis-badge svg {
   color: var(--color-gold);
 }
 
@@ -201,7 +45,8 @@ img {
   overflow-wrap: break-word;
 }
 
-.topbar-links span i {
+.topbar-links span i,
+.topbar-links span svg {
   color: var(--color-gold);
   margin-right: 4px;
 }
@@ -220,7 +65,8 @@ img {
   line-height: 1;
 }
 
-.language-picker i {
+.language-picker i,
+.language-picker svg {
   font-size: 0.85rem;
 }
 
@@ -418,7 +264,8 @@ img {
   color: var(--color-gold-light);
 }
 
-.nav-link i {
+.nav-link i,
+.nav-link svg {
   font-size: 0.8rem;
   color: var(--color-gold-light);
 }
@@ -445,7 +292,7 @@ img {
   background-image: 
     radial-gradient(circle at 50% 30%, rgba(240, 192, 16, 0.20) 0%, transparent 58%),
     linear-gradient(120deg, rgba(3, 47, 77, 0.92) 0%, rgba(6, 70, 111, 0.74) 48%, rgba(1, 26, 43, 0.58) 100%),
-    url('img/templo-atardecer.jpg');
+    url('/img/templo-atardecer.jpg');
   background-size: cover;
   background-position: center top, center, center 60%;
   opacity: 0.95;
@@ -631,7 +478,7 @@ img {
   border-color: var(--color-primary);
 }
 
-.strip-text h4 {
+.strip-text h3 {
   font-family: var(--font-serif);
   font-size: 1rem;
   letter-spacing: 0.03em;
@@ -704,7 +551,8 @@ img {
   background-color: var(--color-gold);
 }
 
-.section-title-ornament i {
+.section-title-ornament i,
+.section-title-ornament svg {
   color: var(--color-gold);
   font-size: 0.85rem;
 }
@@ -975,7 +823,8 @@ img {
   padding-bottom: 12px;
 }
 
-.schedule-card-title i {
+.schedule-card-title i,
+.schedule-card-title svg {
   color: var(--color-gold);
 }
 
@@ -1029,7 +878,7 @@ img {
   border-radius: 2px;
 }
 
-.confession-box h5 {
+.confession-box h4 {
   font-family: var(--font-sans);
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -1141,7 +990,8 @@ img {
   min-width: 0;
 }
 
-.attribute-card i {
+.attribute-card i,
+.attribute-card svg {
   color: var(--color-gold);
   font-size: 1.4rem;
   margin-bottom: 6px;
@@ -1232,7 +1082,8 @@ img {
   gap: 8px;
 }
 
-.news-meta i {
+.news-meta i,
+.news-meta svg {
   color: var(--color-gold);
 }
 
@@ -1349,7 +1200,7 @@ img {
   color: var(--color-gold-light);
 }
 
-.sacrament-item h4 {
+.sacrament-item h3 {
   font-family: var(--font-serif);
   font-size: 1.25rem;
   color: var(--color-primary-dark);
@@ -1406,7 +1257,8 @@ img {
   min-width: 0;
 }
 
-.contact-info-list i {
+.contact-info-list i,
+.contact-info-list svg {
   color: var(--color-gold-dark);
   font-size: 1.25rem;
   margin-top: 4px;
@@ -1533,7 +1385,7 @@ textarea.form-control {
   border-bottom: 1px solid #0d3f60;
 }
 
-.footer-col h4 {
+.footer-col h2 {
   font-family: var(--font-serif);
   font-size: 1.15rem;
   color: var(--color-gold);
@@ -1544,7 +1396,7 @@ textarea.form-control {
   padding-bottom: 8px;
 }
 
-.footer-col h4::after {
+.footer-col h2::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -1601,7 +1453,8 @@ textarea.form-control {
   padding-left: 4px;
 }
 
-.footer-links a i {
+.footer-links a i,
+.footer-links a svg {
   color: var(--color-gold);
   font-size: 0.75rem;
 }
@@ -2184,7 +2037,7 @@ html[dir="rtl"] .gospel-reading-ref {
 
 /* El árabe y el chino necesitan tipografías propias; se excluyen los iconos. */
 html[lang="ar"] body,
-html[lang="ar"] body *:not(i):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular) {
+html[lang="ar"] body *:not(i):not(svg):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular) {
   font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", "Amiri", "Geeza Pro", sans-serif;
 }
 
@@ -2203,7 +2056,7 @@ html[lang="ar"] .language-picker select {
 }
 
 html[lang="zh-CN"] body,
-html[lang="zh-CN"] body *:not(i):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular) {
+html[lang="zh-CN"] body *:not(i):not(svg):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular) {
   font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
 }
 

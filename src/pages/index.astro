@@ -1,30 +1,35 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Icon from '../components/Icon.astro';
-
-const title = 'Parroquia San Isidro Labrador | Maimón - Diócesis de La Vega';
-const description =
-  'Sitio oficial de la Parroquia San Isidro Labrador, Maimón, Provincia Monseñor Nouel, República Dominicana.';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Hero from '../components/Hero.astro';
+import QuickStrip from '../components/QuickStrip.astro';
+import GospelSection from '../components/GospelSection.astro';
+import Schedules from '../components/Schedules.astro';
+import Patron from '../components/Patron.astro';
+import Sacraments from '../components/Sacraments.astro';
+import News from '../components/News.astro';
+import Gallery from '../components/Gallery.astro';
+import Contact from '../components/Contact.astro';
+import Modals from '../components/Modals.astro';
+import { site } from '../data/site';
 ---
 
-<BaseLayout {title} {description}>
-  <div class="container">
-    <h1><Icon name="fas-cross" /> Parroquia San Isidro Labrador</h1>
-    <p>Sitio en migración a Astro + TypeScript.</p>
-  </div>
+<BaseLayout title={site.title} description={site.description}>
+  <SiteHeader slot="header" />
+
+  <Hero />
+  <QuickStrip />
+  <GospelSection />
+  <Schedules />
+  <Patron />
+  <Sacraments />
+  <News />
+  <Gallery />
+  <Contact />
+
+  <fragment slot="footer">
+    <Modals />
+    <SiteFooter />
+  </fragment>
 </BaseLayout>
-
-<style>
-  h1 {
-    display: flex;
-    align-items: baseline;
-    gap: 0.35em;
-    font-family: var(--font-serif);
-    color: var(--color-primary-dark);
-  }
-
-  h1 :global(svg) {
-    font-size: 0.8em;
-    color: var(--color-gold-dark);
-  }
-</style>

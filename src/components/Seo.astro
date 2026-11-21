@@ -1,0 +1,60 @@
+---
+import { absoluteUrl, ogLocales, site, type LanguageCode } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  lang?: LanguageCode;
+  image?: string;
+}
+
+const { title, description, lang = 'es', image = site.image } = Astro.props;
+const imageUrl = absoluteUrl(image);
+const canonical = absoluteUrl('');
+const locale = ogLocales[lang];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Church',
+  name: site.name,
+  alternateName: site.alternateName,
+  description: site.description,
+  url: canonical,
+  email: site.email,
+  image: imageUrl,
+  logo: imageUrl,
+  address: { '@type': 'PostalAddress', ...site.address },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:30',
+      closes: '17:00',
+    },
+  ],
+  parentOrganization: { '@type': 'Organization', name: site.parentOrganization },
+};
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={site.keywords} />
+<meta name="author" content={site.author} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.alternateName} />
+<meta property="og:locale" content={locale} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:alt" content={`Logo de ${site.name}`} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />

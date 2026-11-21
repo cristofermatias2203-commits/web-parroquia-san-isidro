@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cristofermatias2203-commits.github.io/web-parroquia-san-isidro/sitemap.xml

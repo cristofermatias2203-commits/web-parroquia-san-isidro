@@ -1,0 +1,47 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from '../icons/generated';
+
+const links: { href: string; icon: IconName; title: string; text: string }[] = [
+  {
+    href: '#horarios',
+    icon: 'fas-bell',
+    title: 'Sagradas Eucaristías',
+    text: 'Horarios semanales y dominicales',
+  },
+  {
+    href: '#sacramentos',
+    icon: 'fas-water',
+    title: 'Bautismos y Bodas',
+    text: 'Requisitos de la pastoral de iniciación',
+  },
+  {
+    href: '#patron',
+    icon: 'fas-wheat-awn',
+    title: 'Nuestro Santo Patrón',
+    text: 'Vida, milagros y devoción a San Isidro',
+  },
+  {
+    href: '#despacho',
+    icon: 'fas-landmark',
+    title: 'Oficina Parroquial',
+    text: 'Atención, certificados y consultas',
+  },
+];
+---
+
+<div class="container">
+  <div class="vatican-quick-strip">
+    <div class="strip-grid">
+      {links.map((link) => (
+        <a href={link.href} class="strip-item">
+          <div class="strip-icon"><Icon name={link.icon} /></div>
+          <div class="strip-text">
+            <h3>{link.title}</h3>
+            <p>{link.text}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
