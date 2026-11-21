@@ -5,9 +5,17 @@
   "type": "module",
   "description": "Sitio web de la Parroquia San Isidro Labrador de Maimón",
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
     "generate:gospel": "node scripts/generate-gospel.mjs"
   },
   "devDependencies": {
-    "breviarium": "3.1.8"
+    "@astrojs/check": "^0.9.12",
+    "@types/node": "^26.6.6",
+    "astro": "^7.4.13",
+    "breviarium": "3.1.8",
+    "typescript": "^6.0.3"
   }
 }

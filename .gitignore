@@ -14,6 +14,10 @@ node_modules/
 # Nix / direnv
 .direnv/
 
+# Astro: tipos generados y salida del build
+.astro/
+dist/
+
 # Temporales y registros
 *.log
 *.tmp
