@@ -1,0 +1,127 @@
+---
+import Icon from './Icon.astro';
+
+const masses: { day: string; details: string; time: string }[] = [
+  {
+    day: 'Domingos (Día del Señor)',
+    details: 'Misa de la Mañana & Misa Mayor',
+    time: '8:30 AM • 6:30 PM',
+  },
+  { day: 'Martes a Viernes', details: 'Misa Comunitaria y Vísperas', time: '6:30 PM' },
+  { day: 'Sábados', details: 'Misa Vespertina del Precepto', time: '7:00 PM' },
+  {
+    day: 'Primer Viernes de Mes',
+    details: 'Hora Santa al Sagrado Corazón de Jesús',
+    time: '5:30 PM',
+  },
+  {
+    day: '15 de Mayo',
+    details: 'Fiesta Patronal Solemne de San Isidro',
+    time: '10:00 AM • 6:00 PM',
+  },
+];
+
+const confessions: { day: string; details: string; time: string; secondary?: string }[] = [
+  {
+    day: 'Confesiones Penitenciales',
+    details: 'Media hora antes de cada Misa vespertina',
+    time: '6:00 PM - 6:30 PM',
+  },
+  {
+    day: 'Jueves Eucarísticos',
+    details: 'Exposición del Santísimo Sacramento',
+    time: '5:00 PM - 6:30 PM',
+  },
+  {
+    day: 'Despacho Parroquial',
+    details: 'Lunes a Viernes (Atención al feligrés)',
+    time: '8:30 AM - 12:00 M',
+    secondary: '2:00 PM - 5:00 PM',
+  },
+  {
+    day: 'Sábados Parroquiales',
+    details: 'Catequesis y trámites sacramentales',
+    time: '9:00 AM - 12:00 M',
+  },
+];
+---
+
+<section class="section section-bg-white" id="horarios">
+  <div class="container">
+    <div class="section-header-vatican">
+      <span class="section-eyebrow">Ordo Celebrationum</span>
+      <h2 class="section-title">Horarios de Santa Misa & Confesiones</h2>
+      <div class="section-title-ornament">
+        <span class="line"></span>
+        <Icon name="fas-church" />
+        <span class="line"></span>
+      </div>
+      <p class="section-subtitle">
+        Participa en el Santo Sacrificio del Altar en el Templo Parroquial de Maimón.
+      </p>
+    </div>
+
+    <div class="schedules-grid">
+      <div class="schedule-card">
+        <h3 class="schedule-card-title">
+          <Icon name="fas-calendar-days" /> Santas Misas en el Templo
+        </h3>
+        <table class="schedule-table">
+          <tbody>
+            {masses.map((row) => (
+              <tr>
+                <td class="day">
+                  {row.day}
+                  <span class="details">{row.details}</span>
+                </td>
+                <td class="time">{row.time}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="schedule-card">
+        <h3 class="schedule-card-title">
+          <Icon name="fas-key" /> Sacramento del Perdón y Atención
+        </h3>
+        <table class="schedule-table">
+          <tbody>
+            {confessions.map((row) => (
+              <tr>
+                <td class="day">
+                  {row.day}
+                  <span class="details">{row.details}</span>
+                </td>
+                <td class="time">
+                  {row.time}
+                  {row.secondary && (
+                    <>
+                      <br />
+                      <span class="time-secondary">{row.secondary}</span>
+                    </>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <div class="confession-box">
+          <h4><Icon name="fas-crosshairs" /> Unción de los Enfermos y Urgencias</h4>
+          <p>
+            Para atender enfermos en hogares u hospitales del municipio de Maimón, favor contactar
+            a la oficina parroquial de inmediato.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .time-secondary {
+    font-size: 0.9rem;
+    font-weight: normal;
+  }
+</style>

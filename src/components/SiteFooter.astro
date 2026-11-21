@@ -1,0 +1,154 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from '../icons/generated';
+import { site } from '../data/site';
+
+const navigation: { href: string; label: string }[] = [
+  { href: '#inicio', label: 'Inicio' },
+  { href: '#evangelio', label: 'Evangelio del Día' },
+  { href: '#horarios', label: 'Misas y Confesiones' },
+  { href: '#patron', label: 'San Isidro Patrón' },
+  { href: '#sacramentos', label: 'Vida Sacramental' },
+  { href: '#galeria', label: 'Galería de Fotos' },
+];
+
+const communion: { href: string; icon: IconName; label: string; external?: boolean }[] = [
+  {
+    href: 'https://www.vatican.va',
+    icon: 'fas-external-link-alt',
+    label: 'La Santa Sede (Vatican.va)',
+    external: true,
+  },
+  {
+    href: 'https://www.vaticannews.va/es.html',
+    icon: 'fas-external-link-alt',
+    label: 'Vatican News en Español',
+    external: true,
+  },
+  {
+    href: 'https://www.ced.org.do/',
+    icon: 'fas-external-link-alt',
+    label: 'Conferencia del Episcopado Dominicano',
+    external: true,
+  },
+  {
+    href: 'https://es.wikipedia.org/wiki/Di%C3%B3cesis_de_La_Vega',
+    icon: 'fas-external-link-alt',
+    label: 'Diócesis de La Vega',
+    external: true,
+  },
+  { href: '#despacho', icon: 'fas-angle-right', label: 'Horarios de Atención' },
+];
+---
+
+<footer class="footer-vatican">
+  <div class="container footer-top">
+    <div class="footer-col">
+      <div class="footer-brand">
+        <img
+          src="/img/logo-parroquia.png"
+          alt="Logo de la Parroquia San Isidro Labrador"
+          class="footer-logo"
+          width="480"
+          height="325"
+          loading="lazy"
+          decoding="async"
+        />
+        <span class="footer-brand-location">Maimón &bull; República Dominicana</span>
+      </div>
+      <p class="footer-intro">
+        Templo consagrado para la adoración de Dios Uno y Trino, bajo el patronazgo celestial de San
+        Isidro Labrador, al servicio del pueblo creyente de Maimón.
+      </p>
+      <div class="prayer-intention-box">
+        <p>&ldquo;San Isidro bendito, ruega por nuestros campos y familias.&rdquo;</p>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h2>Navegación</h2>
+      <ul class="footer-links">
+        {navigation.map((item) => (
+          <li>
+            <a href={item.href}><Icon name="fas-angle-right" /> {item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h2>Comunión Eclesial</h2>
+      <ul class="footer-links">
+        {communion.map((item) => (
+          <li>
+            <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener' : undefined}>
+              <Icon name={item.icon} /> {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h2>Lema y Consagración</h2>
+      <p class="footer-motto">
+        <em>Ad maiorem Dei gloriam</em>. En comunión fraterna con el Santo Padre y la Cátedra de San
+        Pedro en Roma.
+      </p>
+      <p class="footer-email">
+        <Icon name="fas-envelope" />
+        <a href={`mailto:${site.email}`}>Despacho Parroquial de Maimón</a>
+      </p>
+
+      <div class="footer-pc-credit">
+        <img
+          src="/img/logo-comunicaciones.png"
+          alt="Comunicaciones de la Parroquia San Isidro Labrador"
+          class="footer-pc-logo"
+          width="520"
+          height="240"
+          loading="lazy"
+          decoding="async"
+        />
+        <p>Comunicación parroquial al servicio del Evangelio y de nuestra comunidad.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <div>
+      &copy; 2026 Parroquia San Isidro Labrador de Maimón. Diócesis de La Vega. Todos los derechos
+      canónicos reservados.
+    </div>
+    <div>
+      Fotografías y comunicación: <strong class="footer-credit-highlight">Pastoral de Comunicación</strong>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-intro {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .footer-motto {
+    font-size: 0.92rem;
+    margin-bottom: 12px;
+  }
+
+  .footer-email {
+    font-size: 0.92rem;
+    color: var(--color-gold);
+  }
+
+  .footer-email a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .footer-credit-highlight {
+    color: var(--color-gold);
+  }
+</style>

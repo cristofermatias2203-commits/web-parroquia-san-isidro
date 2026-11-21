@@ -40,7 +40,7 @@
         shellHook = ''
           echo "Devshell listo · bun $(bun --version) · node $(node --version)"
           echo "  bun install              instalar dependencias"
-          echo "  nix run .#dev            servir en http://localhost:8080"
+          echo "  nix run .#dev            servir en http://localhost:4321"
           echo "  nix run .#generate       regenerar el Evangelio"
           if [ ! -d node_modules ]; then
             echo "Aviso: falta node_modules. Ejecuta 'bun install'."
@@ -50,11 +50,12 @@
     });
 
     apps = forEachSystem (pkgs: {
-      # Servidor estático para desarrollo.
+      # Servidor de desarrollo de Astro. Se ejecuta en el directorio actual
+      # para que la generación de assets escriba en el árbol de trabajo.
       dev = {
         type = "app";
-        program = "${pkgs.writeShellScript "serve-parroquia" ''
-          exec ${pkgs.python3}/bin/python3 -m http.server "''${PORT:-8080}"
+        program = "${pkgs.writeShellScript "dev-parroquia" ''
+          exec ${pkgs.bun}/bin/bun run dev -- --host 0.0.0.0
         ''}";
       };
 

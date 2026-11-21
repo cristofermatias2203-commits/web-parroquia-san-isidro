@@ -1,0 +1,122 @@
+---
+import Icon from './Icon.astro';
+
+const intentionTypes = [
+  'Por el Eterno Descanso de un Fiel Difunto',
+  'Acción de Gracias (Cumpleaños, Aniversario, Salud)',
+  'Por la Salud y Sanación de un Enfermo',
+  'Intención Especial y Petición al Señor',
+];
+---
+
+<div
+  class="modal"
+  id="intentionModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="intentionModalTitle"
+  aria-hidden="true"
+>
+  <div class="modal-content" tabindex="-1">
+    <button type="button" class="modal-close" id="closeModal" aria-label="Cerrar formulario">
+      &times;
+    </button>
+    <h3 id="intentionModalTitle" class="modal-title">
+      <Icon name="fas-hands-praying" /> Registro de Intención para la Santa Misa
+    </h3>
+    <p class="modal-intro">
+      Ofrezca la Santa Eucaristía en sufragio por los fieles difuntos, en acción de gracias o por la
+      salud de los enfermos.
+    </p>
+
+    <form id="modalIntentionForm">
+      <div class="form-group">
+        <label for="intentionType">Tipo de Intención</label>
+        <select id="intentionType" name="tipo" class="form-control" required>
+          {intentionTypes.map((type) => <option value={type}>{type}</option>)}
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="intentionNames">Nombre(s) por quien(es) se ofrece</label>
+        <input
+          type="text"
+          id="intentionNames"
+          name="por_quien"
+          class="form-control"
+          placeholder="Ej. Almas del purgatorio / Familia Gómez"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="intentionDate">Fecha Deseada para la Eucaristía</label>
+        <input type="date" id="intentionDate" name="fecha" class="form-control" required />
+      </div>
+
+      <div class="form-group">
+        <label for="intentionRequester">Nombre y Teléfono del Solicitante</label>
+        <input
+          type="text"
+          id="intentionRequester"
+          name="solicitante"
+          class="form-control"
+          placeholder="Para confirmación de la secretaría"
+          autocomplete="name"
+          required
+        />
+      </div>
+
+      <div id="intentionStatus" class="form-status" role="status" aria-live="polite" hidden></div>
+
+      <button type="submit" class="btn btn-gold btn-block-modal">
+        <Icon name="fas-bookmark" /> Enviar Intención al Despacho
+      </button>
+      <p class="form-note">
+        Al enviar, se abrirá su aplicación de correo con los datos de la intención para remitirlos al
+        despacho parroquial.
+      </p>
+    </form>
+  </div>
+</div>
+
+<div
+  class="lightbox"
+  id="photoLightbox"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Galería fotográfica parroquial"
+  aria-hidden="true"
+>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar galería">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Fotografía anterior">
+    <Icon name="fas-chevron-left" />
+  </button>
+  <figure class="lightbox-figure">
+    <img id="lightboxImage" src="" alt="" />
+    <figcaption id="lightboxCaption"></figcaption>
+  </figure>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Fotografía siguiente">
+    <Icon name="fas-chevron-right" />
+  </button>
+</div>
+
+<style>
+  .modal-title {
+    font-family: var(--font-serif);
+    color: var(--color-primary);
+    margin-bottom: 10px;
+  }
+
+  .modal-intro {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 18px;
+  }
+
+  .btn-block-modal {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+  }
+</style>

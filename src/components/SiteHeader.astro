@@ -1,0 +1,112 @@
+---
+import Icon from './Icon.astro';
+import type { IconName } from '../icons/generated';
+import { languageCodes } from '../data/site';
+
+const navItems: { href: string; icon: IconName; label: string; intention?: boolean }[] = [
+  { href: '#inicio', icon: 'fas-church', label: 'Inicio' },
+  { href: '#evangelio', icon: 'fas-book-bible', label: 'Evangelio' },
+  { href: '#horarios', icon: 'fas-clock', label: 'Santa Misa' },
+  { href: '#patron', icon: 'fas-seedling', label: 'San Isidro' },
+  { href: '#sacramentos', icon: 'fas-hands-praying', label: 'Sacramentos' },
+  { href: '#galeria', icon: 'fas-images', label: 'Galería' },
+  { href: '#noticias', icon: 'fas-newspaper', label: 'Comunicados' },
+  { href: '#despacho', icon: 'fas-envelope-open-text', label: 'Despacho' },
+  { href: '#despacho', icon: 'fas-hand-holding-heart', label: 'Intenciones', intention: true },
+];
+
+const languageNames: Record<(typeof languageCodes)[number], string> = {
+  es: 'Español',
+  it: 'Italiano',
+  en: 'English',
+  fr: 'Français',
+  de: 'Deutsch',
+  pt: 'Português',
+  pl: 'Polski',
+  ar: 'العربية',
+  zh: '中文',
+};
+---
+
+<div class="topbar-institutional">
+  <div class="container topbar-inner">
+    <div class="diocesis-badge">
+      <Icon name="fas-cross" />
+      <span>Diócesis de La Vega &bull; República Dominicana</span>
+    </div>
+    <div class="topbar-links">
+      <div class="language-picker" data-i18n-skip>
+        <Icon name="fas-globe" />
+        <label class="sr-only" for="languageSelect">Idioma</label>
+        <select id="languageSelect" aria-label="Seleccionar idioma">
+          {languageCodes.map((code) => (
+            <option value={code} lang={code === 'zh' ? 'zh-CN' : code}>
+              {languageNames[code]}
+            </option>
+          ))}
+        </select>
+      </div>
+      <span class="topbar-date">
+        <Icon name="fas-calendar-day" />
+        <span id="parishCurrentDate">Viernes, 6 de Noviembre de 2026</span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<header class="main-header">
+  <div class="container header-content">
+    <div class="brand-wrapper">
+      <a href="#inicio" class="parish-logo" title="Parroquia San Isidro Labrador" aria-label="Ir al inicio">
+        <img
+          src="/img/logo-parroquia.png"
+          alt="Logo de la Parroquia San Isidro Labrador"
+          class="parish-logo-img"
+          width="480"
+          height="325"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </a>
+      <div class="brand-text">
+        <h1>Parroquia San Isidro Labrador</h1>
+        <div class="subtext">Municipio de Maimón &bull; Provincia Monseñor Nouel</div>
+        <span class="diocese-subtext">&ldquo;Labrando la Fe, Cosechando la Esperanza&rdquo;</span>
+      </div>
+    </div>
+
+    <div class="header-decor-right">
+      <div class="liturgical-time-pill">
+        <span class="liturgical-dot"></span>
+        <span id="liturgicalSeason">Tiempo Ordinario</span>
+      </div>
+      <button
+        class="mobile-menu-btn"
+        id="mobileMenuToggle"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mainNav"
+      >
+        <Icon name="fas-bars" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+  <div class="container">
+    <ul class="nav-list">
+      {navItems.map((item, index) => (
+        <li class="nav-item">
+          <a
+            href={item.href}
+            class:list={['nav-link', { active: index === 0, 'open-modal-intention': item.intention }]}
+            style={item.intention ? 'color:var(--color-gold-light);' : undefined}
+          >
+            <Icon name={item.icon} /> {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>

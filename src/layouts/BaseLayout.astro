@@ -1,36 +1,31 @@
 ---
+import Seo from '../components/Seo.astro';
+import type { LanguageCode } from '../data/site';
 import '../styles/fonts.css';
 import '../styles/global.css';
+import '../styles/site.css';
 
 interface Props {
   title: string;
   description: string;
-  lang?: string;
+  lang?: LanguageCode;
   dir?: 'ltr' | 'rtl';
 }
 
-const {
-  title,
-  description,
-  lang = 'es',
-  dir = lang === 'ar' ? 'rtl' : 'ltr',
-} = Astro.props;
+const { title, description, lang = 'es', dir = lang === 'ar' ? 'rtl' : 'ltr' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang} dir={dir}>
+<html lang={lang === 'zh' ? 'zh-CN' : lang} dir={dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <Seo {title} {description} {lang} />
     <meta name="theme-color" content="#06466f" />
     <link rel="icon" type="image/png" href="/img/favicon-parroquia.png" />
     <link rel="apple-touch-icon" href="/img/favicon-parroquia.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-
     <link rel="preload" href="/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin />
-
     <slot name="head" />
   </head>
   <body>
