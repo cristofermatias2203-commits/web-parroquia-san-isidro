@@ -1,0 +1,7 @@
+Iconos: Font Awesome Free 6.4.0 by @fontawesome
+https://fontawesome.com
+Licencia: https://fontawesome.com/license/free
+Iconos bajo CC BY 4.0 — https://creativecommons.org/licenses/by/4.0/
+
+Se incluye únicamente el subconjunto de iconos usado por el sitio, generado
+por scripts/build-icon-sprite.mjs. No se carga CSS ni JavaScript desde CDN.

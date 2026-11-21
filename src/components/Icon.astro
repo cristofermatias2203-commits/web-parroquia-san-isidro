@@ -1,0 +1,32 @@
+---
+import type { IconName } from '../icons/generated';
+
+interface Props {
+  name: IconName;
+  class?: string;
+  /** Si se indica, el icono pasa a tener nombre accesible en lugar de ser decorativo. */
+  title?: string;
+}
+
+const { name, class: className, title } = Astro.props;
+---
+
+<svg
+  class={className}
+  role={title ? 'img' : undefined}
+  aria-hidden={title ? undefined : 'true'}
+  aria-label={title}
+  focusable="false"
+>
+  {title && <title>{title}</title>}
+  <use href={`/icons/sprite.svg#${name}`}></use>
+</svg>
+
+<style>
+  svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    flex: none;
+  }
+</style>
