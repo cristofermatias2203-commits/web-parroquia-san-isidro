@@ -90,6 +90,21 @@ python -m http.server 8080
 
 Luego visita `http://localhost:8080`.
 
+### Desarrollo con Nix
+
+El repositorio incluye un `flake.nix` con un entorno reproducible. En NixOS, con Flakes
+habilitados:
+
+```bash
+nix develop          # entra al shell con bun, node, python, git, gh, jq y ripgrep
+bun install          # instala las dependencias del generador
+nix run .#dev        # sirve el sitio en http://localhost:8080
+nix run .#generate -- --from=2026 --to=2040
+```
+
+También puedes usar direnv: permite `.envrc` una vez con `direnv allow` y el entorno se
+activará automáticamente al entrar al directorio.
+
 ## Publicación
 
 El sitio es estático (HTML, CSS y JavaScript), por lo que puede publicarse en cualquier servicio de hosting estático, por ejemplo GitHub Pages, Netlify o Vercel.
