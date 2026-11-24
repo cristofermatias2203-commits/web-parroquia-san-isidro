@@ -10,11 +10,13 @@
   "scripts": {
     "dev": "bun run build:assets && astro dev",
     "build:assets": "bun run scripts/copy-fonts.mjs && bun run scripts/build-icon-sprite.mjs && bun run scripts/copy-gospel-data.mjs",
-    "build": "bun run build:assets && astro build",
+    "build": "bun run build:assets && astro build && bun run build:sw",
+    "build:sw": "node scripts/build-sw.mjs",
     "preview": "astro preview",
-    "check": "astro check && bun run check:i18n && bun run check:gospel-data",
+    "check": "astro check && bun run check:i18n && bun run check:gospel-data && bun run check:pwa",
     "check:i18n": "bun run scripts/check-i18n.mjs",
     "check:gospel-data": "node scripts/check-gospel-data.mjs",
+    "check:pwa": "node scripts/check-pwa.mjs",
     "generate:gospel": "node scripts/generate-gospel.mjs"
   },
   "devDependencies": {

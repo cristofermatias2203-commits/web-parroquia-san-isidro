@@ -6,6 +6,7 @@ import { detectInitialLanguage, getLanguage, isLanguageCode, t } from '../i18n/t
 import { StatusController } from '../ui/status';
 import { trapFocus } from '../ui/focus';
 import { applyLanguage, currentLanguage, registerTranslatableContent } from '../ui/i18n-dom';
+import { registerServiceWorker } from '../pwa/register';
 
 const PARISH_EMAIL = site.email;
 const IN_APP_BROWSER = /(FBAN|FBAV|FB_IAB|Instagram|Line\/|WhatsApp|MicroMessenger|Snapchat|; wv\))/i.test(navigator.userAgent || '');
@@ -14,6 +15,7 @@ const mobileQuery = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
 
 if (IN_APP_BROWSER) document.documentElement.classList.add('is-in-app');
 pruneGospelCache();
+registerServiceWorker();
 
 // --- Traducción de la interfaz -------------------------------------------------
 const initialLanguage = detectInitialLanguage();

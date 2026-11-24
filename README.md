@@ -11,7 +11,10 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 - `src/data/site.ts` — metadatos y URL canónica, usados por SEO y JSON-LD.
 - `src/icons/generated.ts` y `public/icons/sprite.svg` — sprite de iconos auto-hospedado.
 - `public/fonts/` — fuentes variables auto-hospedadas.
-- `public/img/` — fotografías, logos, favicon e iconos PWA.
+- `public/img/` — fotografías, logos, favicon e iconos PWA (incluido `icon-512-maskable.png`).
+- `public/manifest.webmanifest` — manifiesto de instalación (`dir: auto`, `id: "/"` e icono maskable).
+- `scripts/build-sw.mjs` — genera `dist/sw.js` con el precaché real del build.
+- `scripts/check-pwa.mjs` — valida manifiesto, iconos y service worker (`bun run check:pwa`).
 - `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.json`), con `manifest.json` y
   `exceptions.json` como fuentes de verdad de la cobertura.
 - `scripts/generate-gospel.mjs` — genera los archivos de `data/evangelio/`.
@@ -42,6 +45,30 @@ a la fecha actual, según la zona horaria de República Dominicana.
 - Las lecturas completas (primera lectura, salmo y Evangelio) se muestran en bloques plegables.
   En español se toman de Evangelizo y, si no responde, se conservan las referencias locales.
   Evangelizo recibe la fecha y el idioma solicitado; no se envían datos personales.
+
+## PWA y funcionamiento sin conexión
+
+El sitio es instalable como aplicación (manifiesto con `dir: auto`, `id` estable, iconos
+`any` y `any maskable` de 512×512). En producción se registra un service worker solo en
+contexto seguro (HTTPS o localhost); en desarrollo no se registra para no interferir con la
+recarga en caliente. `bun run build` genera `dist/sw.js` automáticamente después de Astro,
+con una versión de caché derivada de los nombres de los assets con hash.
+
+- **Precaché del shell:** HTML, CSS, JS, fuentes, sprite de iconos, favicon, iconos PWA,
+  manifiesto, `robots.txt` y `sitemap.xml`. Con eso la interfaz y la navegación entre
+  secciones abren sin red.
+- **Datos del Evangelio (`data/evangelio/*.json`):** se cachean en cuanto se consultan por
+  primera vez (cache-first con revalidación en segundo plano). Los meses ya vistos quedan
+  disponibles offline; los 180 meses no se descargan de golpe.
+- **Imágenes y fuentes nuevas:** se guardan en caché al cargarse (stale-while-revalidate).
+- **Evangelizo y categpt.chat:** network-first; solo se sirve la última respuesta guardada
+  si no hay conexión. Son necesarias para las traducciones, los 38 días sin texto local y
+  las fechas fuera de 2026–2040.
+- Los formularios siguen dependiendo de la aplicación de correo del usuario; el service
+  worker no sustituye al envío de correo.
+
+`bun run check:pwa` valida el manifiesto, el icono maskable y, si existe, el service worker
+generado. `bun run check` lo incluye junto al resto de validaciones.
 
 El entorno de desarrollo se obtiene con `nix develop` (Bun, Node >= 22.23.4 y el resto de
 herramientas). `bun.lock` es el lockfile canónico; `breviarium` y `he` son dependencias de

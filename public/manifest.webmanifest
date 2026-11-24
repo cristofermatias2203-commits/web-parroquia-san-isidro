@@ -3,12 +3,14 @@
   "short_name": "Parroquia San Isidro",
   "description": "Sitio oficial de la Parroquia San Isidro Labrador de Maimón, Diócesis de La Vega, República Dominicana.",
   "lang": "es-DO",
-  "dir": "ltr",
+  "dir": "auto",
+  "id": "/",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#fbfdff",
   "theme_color": "#06466f",
+  "categories": ["lifestyle", "education"],
   "icons": [
     {
       "src": "img/icon-192.png",
@@ -21,6 +23,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
+    },
+    {
+      "src": "img/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
