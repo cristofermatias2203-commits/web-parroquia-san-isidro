@@ -4,13 +4,17 @@
   "private": true,
   "type": "module",
   "description": "Sitio web de la Parroquia San Isidro Labrador de Maimón",
+  "engines": {
+    "node": ">=22.23.4"
+  },
   "scripts": {
     "dev": "bun run build:assets && astro dev",
     "build:assets": "bun run scripts/copy-fonts.mjs && bun run scripts/build-icon-sprite.mjs && bun run scripts/copy-gospel-data.mjs",
     "build": "bun run build:assets && astro build",
     "preview": "astro preview",
-    "check": "astro check && bun run check:i18n",
+    "check": "astro check && bun run check:i18n && bun run check:gospel-data",
     "check:i18n": "bun run scripts/check-i18n.mjs",
+    "check:gospel-data": "node scripts/check-gospel-data.mjs",
     "generate:gospel": "node scripts/generate-gospel.mjs"
   },
   "devDependencies": {
@@ -22,6 +26,7 @@
     "@types/node": "^26.6.6",
     "astro": "^7.4.13",
     "breviarium": "3.1.8",
+    "he": "1.2.0",
     "typescript": "^6.0.3"
   }
 }

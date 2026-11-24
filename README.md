@@ -12,36 +12,54 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 - `src/icons/generated.ts` y `public/icons/sprite.svg` — sprite de iconos auto-hospedado.
 - `public/fonts/` — fuentes variables auto-hospedadas.
 - `public/img/` — fotografías, logos, favicon e iconos PWA.
-- `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.js`), pendientes de migrar a JSON en F4.
+- `data/evangelio/` — lecturas de la Misa por mes (`YYYY-MM.json`), con `manifest.json` y
+  `exceptions.json` como fuentes de verdad de la cobertura.
 - `scripts/generate-gospel.mjs` — genera los archivos de `data/evangelio/`.
+- `scripts/check-gospel-data.mjs` — valida esquema, fechas, manifest y excepciones (`bun run check:gospel-data`).
 
 ## Evangelio del día
 
-El bloque del Evangelio no usa textos escritos a mano: carga el archivo del mes en curso
-(`data/evangelio/YYYY-MM.js`) y muestra automáticamente la lectura correspondiente a la
-fecha actual, según la zona horaria de República Dominicana.
+El bloque del Evangelio no usa textos escritos a mano: carga el archivo JSON del mes en
+curso (`data/evangelio/YYYY-MM.json`) y muestra automáticamente la lectura correspondiente
+a la fecha actual, según la zona horaria de República Dominicana.
 
 - Los textos provienen de [Breviarium Core](https://breviarium.es), una librería de código
   abierto (licencia MIT) con el calendario litúrgico y las lecturas completas en español.
-- El calendario generado cubre de 2026 a 2040; no hace falta editar nada cada día.
+- La cobertura local es de **2026 a 2040**: 5.441 días con Evangelio y **38 excepciones**
+  documentadas en `data/evangelio/exceptions.json` (origen, diagnóstico y solución de cada
+  una). El manifest es la fuente de verdad: `bun run check:gospel-data` falla si aparece
+  un día nuevo sin datos o si el manifest deja de coincidir con los archivos.
 - En la versión estática los meses se cargaban como scripts (`YYYY-MM.js`) para funcionar
-  desde `file://`; en la reescritura se migrarán a JSON validado (F4).
-- Si un día no estuviera en los archivos locales, el sitio consulta una API litúrgica de
-  respaldo y guarda el resultado en `localStorage` para consultas posteriores sin conexión.
+  desde `file://`. La reescritura usa JSON validado, así que el sitio debe servirse por HTTP
+  (`bun run dev`, `bun run preview` o GitHub Pages).
+- En esos 38 días, y a partir del 1 de enero de 2041, no hay archivo local. El sitio intenta
+  la [API de respaldo categpt.chat](https://categpt.chat/api/v1/feast), a la que envía solo
+  la fecha y el locale `es`, y guarda el resultado en `localStorage`. Esa API solo responde
+  para fechas cercanas, por lo que conviene ampliar el rango local antes de necesitarlas.
 - Si no hay conexión y el día no está guardado, se muestra un aviso honesto en lugar de un
   texto inventado.
 - El botón «Próximos Días» recorre los siete días siguientes y vuelve a «Evangelio de Hoy».
 - Las lecturas completas (primera lectura, salmo y Evangelio) se muestran en bloques plegables.
   En español se toman de Evangelizo y, si no responde, se conservan las referencias locales.
+  Evangelizo recibe la fecha y el idioma solicitado; no se envían datos personales.
 
-Para regenerar los datos (por ejemplo, para ampliar los años cubiertos):
+El entorno de desarrollo se obtiene con `nix develop` (Bun, Node >= 22.23.4 y el resto de
+herramientas). `bun.lock` es el lockfile canónico; `breviarium` y `he` son dependencias de
+desarrollo que solo se necesitan para regenerar los datos, no para servir el sitio.
+
+Para regenerar o ampliar los datos (el rango se fusiona con el manifest existente):
 
 ```bash
-bun install
-bun run generate:gospel -- --from=2026 --to=2040
+nix develop --command bun install
+nix develop --command bun run generate:gospel -- --from=2026 --to=2040
+nix develop --command bun run generate:gospel -- --from 2041 --to 2045
 ```
 
-Los archivos se sobrescriben en `data/evangelio/` y deben publicarse junto con el sitio.
+La generación usa fechas UTC, es independiente de la zona horaria local y falla antes de
+escribir nada si aparece un día sin datos no documentado (por ejemplo, los tres huecos que
+Breviarium ya tiene en 2041). En ese caso, el error enumera las fechas: corregí la fuente o
+añadí una excepción justificada a `exceptions.json` antes de publicar. Los meses se publican
+en `public/data/evangelio/` al ejecutar `bun run build:assets`.
 
 ## Idiomas
 

@@ -1,0 +1,310 @@
+{
+  "source": "Breviarium Core (breviarium.es), verificado el 2026-11-23",
+  "note": "Días sin Evangelio local. El generador los acepta como excepciones documentadas; cualquier otro día omitido hace fallar la generación.",
+  "entries": [
+    {
+      "date": "2026-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2026-05-17",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2027-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2027-04-07",
+      "celebration": "San Juan Bautista de la Salle, presbítero",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2027-05-09",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2028-02-23",
+      "celebration": "San Policarpo, obispo y mártir",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2028-05-28",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2029-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2029-04-11",
+      "celebration": "San Estanislao de Cracovia, obispo y mártir",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2029-05-13",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2030-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2030-02-23",
+      "celebration": "San Policarpo, obispo y mártir",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2030-06-02",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2031-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2031-05-25",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2032-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2032-04-07",
+      "celebration": "San Juan Bautista de la Salle, presbítero",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2032-05-09",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2033-02-23",
+      "celebration": "San Policarpo, obispo y mártir",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2033-05-29",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2034-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2034-05-21",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2035-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2035-04-07",
+      "celebration": "San Juan Bautista de la Salle, presbítero",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2035-04-11",
+      "celebration": "San Estanislao de Cracovia, obispo y mártir",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2035-05-06",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2036-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2036-02-23",
+      "celebration": "San Policarpo, obispo y mártir",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2036-05-25",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2037-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2037-05-17",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2038-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2038-02-23",
+      "celebration": "San Policarpo, obispo y mártir",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2038-06-06",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2039-05-22",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2040-01-02",
+      "celebration": "San Basilio Magno y San Gregorio Nacianceno, obispos y doctores de la Iglesia",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2040-04-11",
+      "celebration": "San Estanislao de Cracovia, obispo y mártir",
+      "cause": "empty-gospel-in-source",
+      "diagnostic": "Breviarium devuelve una lectura GOSPEL con ref y texto vacíos para esta celebración.",
+      "origin": "Breviarium Core 3.1.8: entrada incompleta en el catálogo de lecturas.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    },
+    {
+      "date": "2040-05-13",
+      "celebration": "7º domingo de Pascua",
+      "cause": "missing-lecture-set-in-source",
+      "diagnostic": "TypeError \"Cannot read properties of undefined (reading 'id')\" en mapper_evangelium: no existe ningún conjunto de lecturas con el id del día litúrgico.",
+      "origin": "Breviarium Core 3.1.8 + romcal 3.0.0-dev.119: el calendario genera el día pero el catálogo de lecturas no incluye su id.",
+      "solution": "Sustituir la entrada por una revisada de una fuente alternativa (categpt.chat o leccionario oficial) y eliminar la excepción del listado."
+    }
+  ]
+}
