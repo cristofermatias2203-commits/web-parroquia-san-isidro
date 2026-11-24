@@ -20,6 +20,34 @@ const { title, description, lang = 'es', dir = lang === 'ar' ? 'rtl' : 'ltr' } =
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Idioma y dirección antes del primer pintado: evita el destello del
+      // idioma por defecto. El entry client vuelve a aplicarlos con el mismo
+      // valor (config.ts comparte la clave de almacenamiento).
+      (() => {
+        const codes = ['es', 'it', 'en', 'fr', 'de', 'pt', 'pl', 'ar', 'zh'];
+        let lang = 'es';
+        try {
+          const stored = localStorage.getItem('parroquia:idioma');
+          if (codes.includes(stored)) {
+            lang = stored;
+          } else {
+            const candidates = navigator.languages?.length
+              ? navigator.languages
+              : [navigator.language];
+            for (const candidate of candidates) {
+              const base = String(candidate).toLowerCase().split('-')[0];
+              if (codes.includes(base)) {
+                lang = base;
+                break;
+              }
+            }
+          }
+        } catch { /* Almacenamiento o navegador sinidioma */ }
+        document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+        document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+      })();
+    </script>
     <Seo {title} {description} {lang} />
     <meta name="theme-color" content="#06466f" />
     <link rel="icon" type="image/png" href="/img/favicon-parroquia.png" />
@@ -29,7 +57,6 @@ const { title, description, lang = 'es', dir = lang === 'ar' ? 'rtl' : 'ltr' } =
     <slot name="head" />
   </head>
   <body>
-    <!-- El texto se traducirá en F3, cuando exista el diccionario i18n. -->
     <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
 
     <slot name="header" />
@@ -39,5 +66,9 @@ const { title, description, lang = 'es', dir = lang === 'ar' ? 'rtl' : 'ltr' } =
     </main>
 
     <slot name="footer" />
+
+    <script>
+      import '../scripts/main';
+    </script>
   </body>
 </html>

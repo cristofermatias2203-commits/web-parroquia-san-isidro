@@ -2073,6 +2073,68 @@ html[lang="zh-CN"] .gospel-liturgical-tag {
 }
 
 /* ==========================================================================
+   ELEMENTOS INYECTADOS POR LA LÓGICA DE CLIENTE (F3)
+   ========================================================================== */
+
+/* renderDateLabel() inserta los SVG del sprite directamente en el DOM. */
+.gospel-date svg {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  flex: none;
+  vertical-align: -0.12em;
+}
+
+/* Enlace visible cuando el navegador no abre la aplicación de correo. */
+.status-mailto-link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gospel-reading {
+  margin: 0 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  text-align: left;
+}
+
+.gospel-reading summary {
+  cursor: pointer;
+  padding: 10px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}
+
+.gospel-reading-text {
+  padding: 0 12px 12px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.gospel-reading-ref,
+.gospel-readings-refs {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  font-weight: 400;
+}
+
+.gospel-readings-refs {
+  display: block;
+  font-style: italic;
+}
+
+.gospel-reflection-source {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ==========================================================================
    PREFERENCIA DE MOVIMIENTO REDUCIDO
    Respeta a quienes eligen menos animaciones en su sistema operativo.
    ========================================================================== */

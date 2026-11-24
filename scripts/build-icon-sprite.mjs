@@ -34,6 +34,7 @@ const aliases = new Map([
 const icons = [
   ['far', 'calendar'],
   ['far', 'calendar-alt'],
+  ['far', 'calendar-check'],
   ['fas', 'angle-right'],
   ['fas', 'arrow-right'],
   ['fas', 'arrows-rotate'],
@@ -73,6 +74,7 @@ const icons = [
   ['fas', 'sun'],
   ['fas', 'water'],
   ['fas', 'wheat-awn'],
+  ['fas', 'xmark'],
 ];
 
 const symbols = [];

@@ -2,6 +2,7 @@
 export const iconNames = [
   'far-calendar',
   'far-calendar-alt',
+  'far-calendar-check',
   'fas-angle-right',
   'fas-arrow-right',
   'fas-arrows-rotate',
@@ -41,6 +42,7 @@ export const iconNames = [
   'fas-sun',
   'fas-water',
   'fas-wheat-awn',
+  'fas-xmark',
 ] as const;
 
 export type IconName = (typeof iconNames)[number];
