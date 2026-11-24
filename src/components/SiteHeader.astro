@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import type { IconName } from '../icons/generated';
+import { publicPath } from '../paths';
 import { languageCodes } from '../data/site';
 
 const navItems: { href: string; icon: IconName; label: string; intention?: boolean }[] = [
@@ -59,7 +60,7 @@ const languageNames: Record<(typeof languageCodes)[number], string> = {
     <div class="brand-wrapper">
       <a href="#inicio" class="parish-logo" title="Parroquia San Isidro Labrador" aria-label="Ir al inicio">
         <img
-          src="/img/logo-parroquia.png"
+          src={publicPath('/img/logo-parroquia.png')}
           alt="Logo de la Parroquia San Isidro Labrador"
           class="parish-logo-img"
           width="480"

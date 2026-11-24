@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import type { IconName } from '../icons/generated';
+import { publicPath } from '../paths';
 import { site } from '../data/site';
 
 const navigation: { href: string; label: string }[] = [
@@ -46,7 +47,7 @@ const communion: { href: string; icon: IconName; label: string; external?: boole
     <div class="footer-col">
       <div class="footer-brand">
         <img
-          src="/img/logo-parroquia.png"
+          src={publicPath('/img/logo-parroquia.png')}
           alt="Logo de la Parroquia San Isidro Labrador"
           class="footer-logo"
           width="480"
@@ -102,7 +103,7 @@ const communion: { href: string; icon: IconName; label: string; external?: boole
 
       <div class="footer-pc-credit">
         <img
-          src="/img/logo-comunicaciones.png"
+          src={publicPath('/img/logo-comunicaciones.png')}
           alt="Comunicaciones de la Parroquia San Isidro Labrador"
           class="footer-pc-logo"
           width="520"

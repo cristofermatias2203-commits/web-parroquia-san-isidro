@@ -1,5 +1,6 @@
 ---
 import type { IconName } from '../icons/generated';
+import { publicPath } from '../paths';
 
 interface Props {
   name: IconName;
@@ -19,7 +20,7 @@ const { name, class: className, title } = Astro.props;
   focusable="false"
 >
   {title && <title>{title}</title>}
-  <use href={`/icons/sprite.svg#${name}`}></use>
+  <use href={`${publicPath('/icons/sprite.svg')}#${name}`}></use>
 </svg>
 
 <style>

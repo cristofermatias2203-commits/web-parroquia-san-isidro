@@ -1,5 +1,6 @@
 import type { LanguageCode } from '../data/site';
 import { PARISH_TIME_ZONE } from '../config';
+import { publicPath } from '../paths';
 import { getLocale } from '../i18n/translate';
 import { cleanInline } from './api';
 import {
@@ -130,9 +131,9 @@ export function renderReflection(data: GospelDay, lang: LanguageCode): string {
 export function renderDateLabel(isoDate: string, isToday: boolean, lang: LanguageCode): string {
   const dateText = escapeHtml(formatLongDate(isoDate, lang));
   if (!isToday) {
-    return `<svg aria-hidden="true"><use href="/icons/sprite.svg#far-calendar-alt"></use></svg> ${dateText}`;
+    return `<svg aria-hidden="true"><use href="${publicPath('/icons/sprite.svg')}#far-calendar-alt"></use></svg> ${dateText}`;
   }
-  return `<svg aria-hidden="true" style="color:var(--color-gold)"><use href="/icons/sprite.svg#far-calendar-check"></use></svg> ${dateText} (${escapeHtml(t('Hoy', lang))})`;
+  return `<svg aria-hidden="true" style="color:var(--color-gold)"><use href="${publicPath('/icons/sprite.svg')}#far-calendar-check"></use></svg> ${dateText} (${escapeHtml(t('Hoy', lang))})`;
 }
 
 const WEEKDAYS_ES = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];

@@ -6,6 +6,7 @@ import { detectInitialLanguage, getLanguage, isLanguageCode, t } from '../i18n/t
 import { StatusController } from '../ui/status';
 import { trapFocus } from '../ui/focus';
 import { applyLanguage, currentLanguage, registerTranslatableContent } from '../ui/i18n-dom';
+import { publicPath } from '../paths';
 
 const PARISH_EMAIL = site.email;
 const IN_APP_BROWSER = /(FBAN|FBAV|FB_IAB|Instagram|Line\/|WhatsApp|MicroMessenger|Snapchat|; wv\))/i.test(navigator.userAgent || '');
@@ -39,7 +40,7 @@ function setMenuState(open: boolean): void {
     'aria-label',
     t(open ? 'Cerrar menú de navegación' : 'Abrir menú de navegación')
   );
-  menuIconUse?.setAttribute('href', `/icons/sprite.svg#${open ? 'fas-xmark' : 'fas-bars'}`);
+  menuIconUse?.setAttribute('href', `${publicPath('/icons/sprite.svg')}#${open ? 'fas-xmark' : 'fas-bars'}`);
 }
 
 function closeMobileMenu(): void {

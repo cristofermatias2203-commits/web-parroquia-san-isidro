@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { publicPath } from '../paths';
 ---
 
 <section class="section section-bg-ivory" id="sacramentos">
@@ -21,7 +22,7 @@ import Icon from './Icon.astro';
       <div class="sacrament-item">
         <div class="sacrament-icon sacrament-icon--dark">
           <img
-            src="/img/bautismo.png"
+            src={publicPath('/img/bautismo.png')}
             alt="Símbolo del sacramento del Bautismo: paloma, cruz, fuente bautismal y cirio"
             class="baptism-icon"
             width="156"
@@ -72,7 +73,7 @@ import Icon from './Icon.astro';
       <div class="sacrament-item">
         <div class="sacrament-icon sacrament-icon--dark">
           <img
-            src="/img/confirmacion.png"
+            src={publicPath('/img/confirmacion.png')}
             alt="Símbolo del sacramento de la Confirmación: paloma, cruz y fuente bautismal"
             class="confirmation-icon"
             width="200"
@@ -91,7 +92,7 @@ import Icon from './Icon.astro';
       <div class="sacrament-item">
         <div class="sacrament-icon">
           <img
-            src="/img/matrimonio.png"
+            src={publicPath('/img/matrimonio.png')}
             alt="Símbolo del sacramento del Matrimonio: dos anillos entrelazados"
             class="marriage-icon"
             width="200"

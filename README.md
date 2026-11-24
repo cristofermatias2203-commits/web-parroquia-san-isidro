@@ -8,7 +8,8 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
 - `src/layouts/BaseLayout.astro` y `src/components/` — cabecera, secciones, modales y pie.
 - `src/styles/tokens.css` — paleta y tipografías institucionales.
 - `src/styles/global.css` y `src/styles/site.css` — estilos base y de sección.
-- `src/data/site.ts` — metadatos y URL canónica, usados por SEO y JSON-LD.
+- `src/data/site.ts` — metadatos y URL canónica, usados por SEO, JSON-LD y la config de Astro.
+- `src/paths.ts` y `src/config.ts` — rutas de `public/` y de datos respetando el `base` de Astro.
 - `src/icons/generated.ts` y `public/icons/sprite.svg` — sprite de iconos auto-hospedado.
 - `public/fonts/` — fuentes variables auto-hospedadas.
 - `public/img/` — fotografías, logos, favicon e iconos PWA.
@@ -16,6 +17,7 @@ Sitio web oficial de la **Parroquia San Isidro Labrador**, Maimón, Provincia Mo
   `exceptions.json` como fuentes de verdad de la cobertura.
 - `scripts/generate-gospel.mjs` — genera los archivos de `data/evangelio/`.
 - `scripts/check-gospel-data.mjs` — valida esquema, fechas, manifest y excepciones (`bun run check:gospel-data`).
+- `.github/workflows/ci.yml` — comprobaciones multiplataforma, build y publicación en GitHub Pages.
 
 ## Evangelio del día
 
@@ -106,9 +108,14 @@ El sitio se genera con Astro; ya no se puede abrir `index.html` desde disco:
 
 ```bash
 bun install
-bun run dev          # http://localhost:4321
+bun run dev          # http://localhost:4321/web-parroquia-san-isidro/
 bun run build        # genera el sitio estático en dist/
 ```
+
+El sitio se publica bajo el subdirectorio `/web-parroquia-san-isidro/`, así que `dev` y
+`preview` también sirven en esa ruta (la raíz del servidor devuelve 404). Las URLs canónicas,
+el sitemap y los `href`/`src` ya incluyen ese prefijo; `src/paths.ts` se encarga de los
+recursos de `public/`.
 
 `bun run build:assets` regenera las fuentes y el sprite de iconos; `dev` y `build` lo ejecutan
 automáticamente.
@@ -121,7 +128,7 @@ habilitados:
 ```bash
 nix develop          # entra al shell con bun, node, python, git, gh, jq y ripgrep
 bun install          # instala las dependencias
-nix run .#dev        # astro dev en http://localhost:4321
+nix run .#dev        # astro dev en http://localhost:4321/web-parroquia-san-isidro/
 nix run .#generate -- --from=2026 --to=2040
 ```
 
@@ -130,4 +137,24 @@ activará automáticamente al entrar al directorio.
 
 ## Publicación
 
-El sitio es estático (HTML, CSS y JavaScript), por lo que puede publicarse en cualquier servicio de hosting estático, por ejemplo GitHub Pages, Netlify o Vercel.
+El sitio es estático (HTML, CSS y JavaScript). La URL definitiva es
+`https://cristofermatias2203-commits.github.io/web-parroquia-san-isidro/`: está declarada en
+`src/data/site.ts` y de ahí salen el `<link rel="canonical">`, los metadatos Open Graph, el
+JSON-LD, `sitemap.xml`, `robots.txt` y el `base` de Astro. Si mañana se contrata un dominio
+propio, basta con cambiar `SITE_URL` en ese único archivo (y añadir el `CNAME` en `public/`).
+
+### CI y GitHub Pages
+
+`.github/workflows/ci.yml` hace tres cosas:
+
+1. En cada PR y push a `main` o `rewrite/astro-typescript`, ejecuta `bun run check` en Linux,
+   macOS y Windows con `bun install --frozen-lockfile`. Eso cubre tipos, paridad de los 9
+   idiomas, integridad de los 180 meses del Evangelio, manifiesto PWA y el aviso de cobertura
+   cuando falte menos de un año para 2040.
+2. Genera `dist/` con `bun run build` y lo empaqueta como artefacto de Pages.
+3. Cuando el push es a `rewrite/astro-typescript`, publica ese artefacto en GitHub Pages
+   mediante la acción oficial de Pages (HTTPS incluido).
+
+**Requisito manual único:** en *Settings → Pages*, seleccionar *Source: GitHub Actions*. No se
+usa `CNAME` porque se ha elegido la URL de proyecto de GitHub Pages. El despliegue solo se
+dispara desde la rama de reescritura; `main` se mantiene como versión estática de rollback.
