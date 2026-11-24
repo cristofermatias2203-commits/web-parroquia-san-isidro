@@ -1,6 +1,7 @@
 ---
 import Seo from '../components/Seo.astro';
 import type { LanguageCode } from '../data/site';
+import { publicPath } from '../paths';
 import '../styles/fonts.css';
 import '../styles/global.css';
 import '../styles/site.css';
@@ -50,10 +51,10 @@ const { title, description, lang = 'es', dir = lang === 'ar' ? 'rtl' : 'ltr' } =
     </script>
     <Seo {title} {description} {lang} />
     <meta name="theme-color" content="#06466f" />
-    <link rel="icon" type="image/png" href="/img/favicon-parroquia.png" />
-    <link rel="apple-touch-icon" href="/img/favicon-parroquia.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <link rel="preload" href="/fonts/cinzel-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" type="image/png" href={publicPath('/img/favicon-parroquia.png')} />
+    <link rel="apple-touch-icon" href={publicPath('/img/favicon-parroquia.png')} />
+    <link rel="manifest" href={publicPath('/manifest.webmanifest')} />
+    <link rel="preload" href={publicPath('/fonts/cinzel-latin.woff2')} as="font" type="font/woff2" crossorigin />
     <slot name="head" />
   </head>
   <body>

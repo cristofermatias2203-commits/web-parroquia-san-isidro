@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import { publicPath } from '../paths';
 ---
 
 <section class="section patron-section" id="patron">
@@ -8,7 +9,7 @@ import Icon from './Icon.astro';
       <div class="patron-visual">
         <div class="patron-image-frame">
           <img
-            src="/img/san-isidro-labrador.jpg"
+            src={publicPath('/img/san-isidro-labrador.jpg')}
             alt="Venerada imagen de San Isidro Labrador en la Parroquia de Maimón"
             loading="lazy"
             decoding="async"

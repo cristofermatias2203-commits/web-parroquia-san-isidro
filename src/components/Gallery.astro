@@ -1,72 +1,73 @@
 ---
 import Icon from './Icon.astro';
+import { publicPath } from '../paths';
 
 const photos: { src: string; alt: string; caption: string; title: string; shape: string }[] = [
   {
-    src: '/img/templo-atardecer.jpg',
+    src: publicPath('/img/templo-atardecer.jpg'),
     alt: 'Templo parroquial de San Isidro Labrador al atardecer',
     caption: 'Templo Parroquial al atardecer • Maimón',
     title: 'Templo al atardecer',
     shape: 'portrait',
   },
   {
-    src: '/img/interior-templo.jpg',
+    src: publicPath('/img/interior-templo.jpg'),
     alt: 'Interior del templo iluminado durante una celebración',
     caption: 'Interior del templo durante la oración comunitaria',
     title: 'Interior del templo',
     shape: 'landscape',
   },
   {
-    src: '/img/vigilia-cirios.jpg',
+    src: publicPath('/img/vigilia-cirios.jpg'),
     alt: 'Feligreses reunidos en vigilia con cirios encendidos',
     caption: 'Vigilia de luz y oración de la comunidad parroquial',
     title: 'Vigilia de luz y oración',
     shape: 'landscape',
   },
   {
-    src: '/img/adoracion-santisimo.jpg',
+    src: publicPath('/img/adoracion-santisimo.jpg'),
     alt: 'Custodia dorada en la adoración al Santísimo',
     caption: 'Adoración al Santísimo Sacramento del Altar',
     title: 'Adoración al Santísimo',
     shape: 'portrait',
   },
   {
-    src: '/img/custodia-atardecer.jpg',
+    src: publicPath('/img/custodia-atardecer.jpg'),
     alt: 'Sacerdote sosteniendo la custodia eucarística al atardecer',
     caption: 'La custodia eucarística bajo la luz del atardecer',
     title: 'Custodia al atardecer',
     shape: 'portrait',
   },
   {
-    src: '/img/eucaristia.jpg',
+    src: publicPath('/img/eucaristia.jpg'),
     alt: 'Sacerdote elevando la hostia durante la consagración',
     caption: 'Celebración de la Santa Eucaristía en Maimón',
     title: 'Santa Eucaristía',
     shape: 'portrait',
   },
   {
-    src: '/img/templo-dia.jpg',
+    src: publicPath('/img/templo-dia.jpg'),
     alt: 'Fachada del templo parroquial durante el día',
     caption: 'El templo parroquial a plena luz del día',
     title: 'El templo a plena luz',
     shape: 'portrait',
   },
   {
-    src: '/img/templo-jardin.jpg',
+    src: publicPath('/img/templo-jardin.jpg'),
     alt: 'Templo parroquial rodeado de sus jardines',
     caption: 'Jardines y entorno del templo parroquial',
     title: 'Jardines parroquiales',
     shape: 'portrait',
   },
   {
-    src: '/img/virgen-dolorosa.jpg',
+    src: publicPath('/img/virgen-dolorosa.jpg'),
     alt: 'Imagen de la Virgen Dolorosa en el templo',
     caption: 'Nuestra Señora de los Dolores • Templo de Maimón',
     title: 'Nuestra Señora de los Dolores',
     shape: 'portrait',
   },
   {
-    src: '/img/templo-fachada.jpg',
+    src: publicPath('/img/templo-fachada.jpg'),
     alt: 'Fachada principal del templo parroquial',
     caption: 'Fachada del templo de San Isidro Labrador • Maimón',
     title: 'Fachada del templo',
@@ -109,7 +110,7 @@ const photos: { src: string; alt: string; caption: string; title: string; shape:
 
     <div class="gallery-credit-bar">
       <img
-        src="/img/logo-comunicaciones.png"
+        src={publicPath('/img/logo-comunicaciones.png')}
         alt="Comunicaciones de la Parroquia San Isidro Labrador"
         class="pc-logo-small"
         width="520"

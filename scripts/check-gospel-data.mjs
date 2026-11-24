@@ -124,6 +124,14 @@ for (const date of exceptionDates) {
   }
 }
 
+// Aviso de caducidad (issue #2): el sitio pasa a depender de la API de respaldo
+// cuando se agota el rango local, así que conviene ampliarlo con antelación.
+const currentYear = new Date().getUTCFullYear();
+const remainingYears = manifest.to - currentYear;
+if (remainingYears <= 1) {
+  console.warn(`AVISO: solo quedan ${remainingYears} años de cobertura local (hasta ${manifest.to}). Amplía el rango con bun run generate:gospel -- --from=${manifest.to + 1} --to=${manifest.to + 5}.`);
+}
+
 if (errors.length) {
   console.error(`Datos del Evangelio inválidos (${errors.length} errores):`);
   errors.forEach((error) => console.error(`  - ${error}`));
