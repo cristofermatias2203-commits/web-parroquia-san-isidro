@@ -10,8 +10,11 @@ export function registerServiceWorker(): void {
   if (!('serviceWorker' in navigator)) return;
   if (!window.isSecureContext && !['localhost', '127.0.0.1'].includes(window.location.hostname)) return;
 
-  const swUrl = `${import.meta.env.BASE_URL}sw.js`;
-  const scope = import.meta.env.BASE_URL || '/';
+  // Astro 7 emite BASE_URL sin barra final cuando hay `base` configurado.
+  const rawBase = import.meta.env.BASE_URL;
+  const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
+  const swUrl = `${base}sw.js`;
+  const scope = base || '/';
 
   window.addEventListener('load', () => {
     navigator.serviceWorker.register(swUrl, { scope }).catch((error: unknown) => {

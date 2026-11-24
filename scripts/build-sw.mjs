@@ -20,6 +20,14 @@ const distDir = path.join(projectRoot, 'dist');
 async function resolveBaseUrl() {
   const fromEnv = process.env.BASE_URL || process.env.PUBLIC_BASE_URL;
   if (fromEnv) return fromEnv.startsWith('/') ? fromEnv : `/${fromEnv}`;
+  // La URL canónica vive en site.ts y F6 deriva el `base` de Astro de ella.
+  try {
+    const siteFile = await readFile(path.join(projectRoot, 'src', 'data', 'site.ts'), 'utf8');
+    const match = siteFile.match(/export const SITE_URL\s*=\s*['"`]([^'"`]+)['"`]/);
+    if (match) return new URL(match[1]).pathname;
+  } catch {
+    // Sin SITE_URL se intenta la configuración de Astro directamente.
+  }
   try {
     const astroConfig = await readFile(path.join(projectRoot, 'astro.config.mjs'), 'utf8');
     const match = astroConfig.match(/\bbase\s*:\s*['"`]([^'"`]+)['"`]/);
