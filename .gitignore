@@ -18,6 +18,9 @@ node_modules/
 .astro/
 dist/
 
+# Datos del Evangelio publicados desde data/evangelio (generados en build:assets)
+public/data/evangelio/
+
 # Temporales y registros
 *.log
 *.tmp
