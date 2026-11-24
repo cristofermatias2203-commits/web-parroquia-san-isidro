@@ -10,22 +10,14 @@ function monthKeyOf(isoDate: string): string {
 }
 
 /**
- * Los archivos generados siguen siendo scripts de la versión estática. Se
- * descargan como texto y se parsea el objeto JSON que contienen: ni etiquetas
- * <script> huérfanas ni window.PARISH_GOSPEL_MONTHS (#63). F4 los convertirá a
- * JSON y bastará con cambiar la extensión en GOSPEL_DATA_PATH.
+ * Los archivos generados son JSON válido (F4): se descargan y se parsean
+ * directamente, sin wrapper de script ni window.PARISH_GOSPEL_MONTHS (#63).
  */
-async function parseMonthFile(monthKey: string, text: string): Promise<GospelMonth> {
-  const marker = `window.PARISH_GOSPEL_MONTHS["${monthKey}"] =`;
-  const assignment = text.indexOf(marker);
-  if (assignment < 0) throw new Error(`El archivo ${monthKey} no tiene el formato esperado.`);
-
-  const start = text.indexOf('{', assignment + marker.length);
-  const end = text.lastIndexOf('}');
-  if (start < 0 || end < start) throw new Error(`El archivo ${monthKey} no contiene un objeto JSON.`);
-
-  const month = JSON.parse(text.slice(start, end + 1)) as GospelMonth;
-  if (!month.days) throw new Error(`El archivo ${monthKey} no contiene días.`);
+async function parseMonthFile(monthKey: string, response: Response): Promise<GospelMonth> {
+  const month = (await response.json()) as GospelMonth;
+  if (month?.month !== monthKey || !month.days) {
+    throw new Error(`El archivo ${monthKey} no contiene los datos esperados.`);
+  }
   return month;
 }
 
@@ -35,12 +27,11 @@ function loadMonth(monthKey: string): Promise<GospelMonth> {
 
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), SCRIPT_TIMEOUT_MS);
-  const request = fetch(`${GOSPEL_DATA_PATH}/${monthKey}.js`, { signal: controller.signal })
+  const request = fetch(`${GOSPEL_DATA_PATH}/${monthKey}.json`, { signal: controller.signal })
     .then((response) => {
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      return response.text();
+      return parseMonthFile(monthKey, response);
     })
-    .then((text) => parseMonthFile(monthKey, text))
     .finally(() => window.clearTimeout(timeout))
     .catch((error: unknown) => {
       monthRequests.delete(monthKey);

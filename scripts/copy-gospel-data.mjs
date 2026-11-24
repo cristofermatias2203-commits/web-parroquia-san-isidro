@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Publica los meses del Evangelio generados por `generate:gospel` en `public/`.
- * F3 los lee como texto y extrae el objeto JSON; F4 cambiará la extensión a
- * .json sin tocar la lógica de carga.
+ * Los archivos son JSON válido; también se publican el manifest y el listado
+ * de excepciones para que la cobertura sea auditable desde el sitio.
  */
 
 import { mkdir, readdir, rm, stat, copyFile } from 'node:fs/promises';
@@ -13,16 +13,23 @@ const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 const sourceDir = path.join(projectRoot, 'data', 'evangelio');
 const targetDir = path.join(projectRoot, 'public', 'data', 'evangelio');
 
-const sourceFiles = (await readdir(sourceDir)).filter((name) => /^\d{4}-\d{2}\.js$/.test(name));
-if (!sourceFiles.length) throw new Error(`No hay archivos de Evangelio en ${sourceDir}`);
+const monthPattern = /^\d{4}-\d{2}\.json$/;
+const extraFiles = ['manifest.json', 'exceptions.json'];
+const sourceFiles = (await readdir(sourceDir)).filter(
+  (name) => monthPattern.test(name) || extraFiles.includes(name)
+);
+if (!sourceFiles.some((name) => monthPattern.test(name))) {
+  throw new Error(`No hay archivos de Evangelio en ${sourceDir}`);
+}
 
 await mkdir(targetDir, { recursive: true });
 
-// Se retiran los meses que ya no existen en la fuente.
+// Se retiran los meses y archivos de apoyo que ya no existen en la fuente,
+// incluidos los .js heredados de la versión estática.
 const targetFiles = await readdir(targetDir);
 await Promise.all(
   targetFiles
-    .filter((name) => name.endsWith('.js') && !sourceFiles.includes(name))
+    .filter((name) => (monthPattern.test(name) || extraFiles.includes(name) || /^\d{4}-\d{2}\.js$/.test(name)) && !sourceFiles.includes(name))
     .map((name) => rm(path.join(targetDir, name)))
 );
 

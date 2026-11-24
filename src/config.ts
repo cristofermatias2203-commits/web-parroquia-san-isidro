@@ -17,5 +17,5 @@ export const TRANSLATED_CACHE_PREFIX = 'parroquia:evangelio:v2:';
 
 export const GOSPEL_API_URL = 'https://categpt.chat/api/v1/feast';
 export const EVANGELIZO_URL = 'https://feed.evangelizo.org/v2/reader.php';
-// F4 sustituirá estos archivos por JSON; la ruta se calcula en un único sitio.
+// Los meses generados son JSON; la ruta se calcula en un único sitio.
 export const GOSPEL_DATA_PATH = `${import.meta.env.BASE_URL}data/evangelio`;
